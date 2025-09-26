@@ -18,7 +18,15 @@ El código fuente está disponible en gitlab.
 	
 	https://gitlab.com/genomorro/registro-io.git
 	
+Sympony se instaló con el siguiente comando:
 
+	symfony new public_html --version=lts --webapp
+	
+Para iniciar el web server de desarrollo:
+
+	symfony server:start
+	
+Estará disponible por medio del [navegador web](http://localhost:8000)
 
 ## Getting started
 
