@@ -1,0 +1,47 @@
+@startuml
+object paciente {
+paciente : número de expediente
+--
+paciente : nombre
+paciente : discapacitado
+}
+
+object asistencia {
+paciente : número de expediente
+--
+asistencia : entrada
+asistencia : salida
+}
+
+object vis2pac {
+paciente : número de expediente
+visitante : gafete
+}
+
+object visitante {
+visitante : gafete
+visitante : nombre
+visitante : parentesco
+visitante : teléfono
+visitante : tipo de identificación
+visitante : entrada
+visitante : salida
+--
+visitante : destino (cama)
+}
+
+object cita {
+cita : folio de cita
+--
+paciente : número de expediente
+--
+cita : fecha y hora
+cita : lugar
+cita : tipo
+}
+
+paciente --|{ cita
+paciente }|-- vis2pac
+vis2pac --o{ visitante
+paciente --o| asistencia
+@enduml

@@ -4,6 +4,29 @@ Sistema de registro de entrada y salida para los pacientes del INER y sus famili
 
 ## Requisitos
 
+Al consultar se debe mostrar todo aquello agendado para el día actual únicamente.
+
+Se debe registrar cuando un familiar pasa al instituto, por lo que se debe ligar con el paciente, y cada paciente debe tener dos posibles familiares asociados a la vez.
+
+Cada familiar debe tener un número de gafete, será posible buscar al familiar por número de gafete, cada familiar debe tener:
+
+- Nombre del familiar
+- Número de gafete
+- Destino
+- Hora de entrada
+- Hora de salida
+
+## Datos requeridos del ECE
+
+1. Número de expediente
+2. Nombre del paciente
+3. Fecha y hora de la cita
+4. Especialidad de la cita
+5. Si la cita es por consulta, estudios o procedimiento
+6. Lugar de realización
+
+Con esto se permitirá el ingreso al instituto.
+
 ## Development
 
 El sistema esta elaborado en Sympony 6.4 LTS:
