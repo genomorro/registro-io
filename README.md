@@ -51,6 +51,45 @@ Para iniciar el web server de desarrollo:
 	
 Estará disponible por medio del [navegador web](http://localhost:8000)
 
+Se crearon las entidades con 
+
+	php bin/console make:entity
+	
+Para incorporrar cambios en la base de datos:
+
+	php bin/console make:migration  --formatted
+	php bin/console doctrine:migrations:migrate
+
+Luego el CRUD, el cual si crea archivos adicionales:
+
+	php bin/console make:crud
+
+	The class name of the entity to create CRUD (e.g. TinyGnome):
+	> Paciente
+	
+	Choose a name for your controller class (e.g. PacienteController) [PacienteController]:
+	> 
+	
+	Do you want to generate PHPUnit tests? [Experimental] (yes/no) [no]:
+	> 
+		
+	created: src/Controller/PacienteController.php
+	created: src/Form/PacienteType.php
+	created: templates/paciente/_delete_form.html.twig
+	created: templates/paciente/_form.html.twig
+	created: templates/paciente/edit.html.twig
+	created: templates/paciente/index.html.twig
+	created: templates/paciente/new.html.twig
+	created: templates/paciente/show.html.twig
+	
+	
+	Success! 
+	
+	
+	Next: Check your new CRUD by going to /paciente/
+
+
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
