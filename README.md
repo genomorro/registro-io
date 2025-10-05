@@ -2,6 +2,19 @@
 
 Sistema de registro de entrada y salida para los pacientes del INER y sus familiares, ya sean acompañantes o visitas.
 
+## Git
+
+Clonar el proyecto de manera habitual, luego cargar el submódulo:
+
+	git submodule init
+	git submodule update
+	
+Si se trabaja desde Gitlab, funcionará el espejo hacia Github. Pero si se decide trabajar desde Github, es necesario agregar Gitlab como origen y posteriormente sincronizar de forma manual:
+
+	git remote add origin https://gitlab.com/genomorro/registro-io.git
+	git branch -M main
+	git push -uf origin main
+
 ## Requisitos
 
 Al consultar se debe mostrar todo aquello agendado para el día actual únicamente.
