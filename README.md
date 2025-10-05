@@ -104,6 +104,9 @@ Luego el CRUD, el cual si crea archivos adicionales:
 
 # Instalación
 <!--  TODO:  -->
+Al descargar los repositorios, lo primero es entrar en _public_html_ y ejecutar:
+
+	composer install
 
 ## Soporte
 
