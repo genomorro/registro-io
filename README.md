@@ -10,10 +10,12 @@ Clonar el proyecto de manera habitual, luego cargar el submódulo:
 	
 Si se trabaja desde Gitlab, funcionará el espejo hacia Github. Pero si se decide trabajar desde Github, es necesario agregar Gitlab como origen y posteriormente sincronizar de forma manual:
 
-	git remote add origin https://gitlab.com/genomorro/registro-io.git
+	git remote add origin2 https://gitlab.com/genomorro/registro-io.git
 	git branch -M main
 	git remote -v
 	git push -uf origin2 main
+
+No olvidar que Github maneja como rama principal _master_ y Gitlab es _main_.
 
 ## Requisitos
 Al consultar se debe mostrar todo aquello agendado para el día actual únicamente.
