@@ -1,0 +1,2 @@
+DATABASE_URL="mysql://registro-io:registro-io.passwd@127.0.0.1:3306/registro-io?serverVersion=11.8.3-MariaDB"
+MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0

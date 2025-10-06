@@ -1,0 +1,13 @@
+services:
+  database:
+    image: mariadb:11.8.3
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-registro-io}
+      MARIADB_USER: ${MARIADB_USER:-registro-io}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-registro-io.passwd}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-registro-io.passwd}
+    volumes:
+      - database_data:/var/lib/mysql:rw
+
+volumes:
+  database_data:
