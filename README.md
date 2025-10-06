@@ -129,11 +129,13 @@ Luego, se accede por medio de la dirección http://localhost:8000
 
 Los controladores de cada entidad se encuentran en src/Controller/, ellos envían la información con la cual se forman los templates. Los formularios se crean según los archivos localizados en src/Form/ 
 
-Actualmente existen dos entidades, Patient y Date, cada una tiene sus templates CRUD creados.
+Actualmente existen dos entidades, Patient y Appointment, cada una tiene sus templates CRUD creados.
 
-Modifica esos templates, para que en templates/patient/index.html.twig aparezcan solo los registros que tengan al menos una Date con la propiedad "time" para el día actual, es decir, para hoy.
+Modifica esos templates, para que en templates/patient/index.html.twig aparezcan solo los registros que tengan al menos una Appointment con la propiedad "Date_at" para el día actual, es decir, para hoy.
 
-En templates/patient/show.html.twig debe aparecer la información del Patient solicitado, luego una lista de Date que tenga para el día de hoy, finalmente, debe aparecer una lista con las Date que no sean del día de hoy.
+En templates/patient/show.html.twig debe aparecer la información del Patient solicitado, luego una lista de Appointment que tenga para el día de hoy, finalmente, debe aparecer una lista con las Appointment que no sean del día de hoy.
+
+En templates/appointment/index.html.twig debe aparecer también la propiedad name de la entidad Patient.
 
 ## Contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio `registro-io` para cualquier tipo de documentación, usa `registro-io-code` para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en `registro-io-code`.
