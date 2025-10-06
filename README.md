@@ -111,6 +111,29 @@ Al descargar los repositorios, lo primero es entrar en _public_html_ y ejecutar:
 ## Soporte
 
 ## Roadmap
+Este es un proyecto de Synfony 6.4, requiere instalar PHP 8.4 y MariaDB. Los datos de conexión a la base de datos puedes colocarlos en el archivo .env agregando una línea como:
+
+	DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
+
+Ejemplo:
+
+	DATABASE_URL="mysql://registro-io:registro-io.passwd@127.0.0.1:3306/registro-io?serverVersion=11.8.3-MariaDB-0+deb13u1+from+Debian"
+
+Todas las consultas a la base de datos deben ser creadas con DQL, pues el proyecto usa Doctrine, y deben ser declaradas en los archivos que se encuentran el el directorio src/Repository/
+
+Se puede iniciar un servidor de prueba con la instrucción:
+
+	symfony server:start
+
+Luego, se accede por medio de la dirección http://localhost:8000
+
+Los controladores de cada entidad se encuentran en src/Controller/, ellos envían la información con la cual se forman los templates. Los formularios se crean según los archivos localizados en src/Form/ 
+
+Actualmente existen dos entidades, Patient y Date, cada una tiene sus templates CRUD creados.
+
+Modifica esos templates, para que en templates/patient/index.html.twig aparezcan solo los registros que tengan al menos una Date con la propiedad "time" para el día actual, es decir, para hoy.
+
+En templates/patient/show.html.twig debe aparecer la información del Patient solicitado, luego una lista de Date que tenga para el día de hoy, finalmente, debe aparecer una lista con las Date que no sean del día de hoy.
 
 ## Contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio `registro-io` para cualquier tipo de documentación, usa `registro-io-code` para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en `registro-io-code`.
