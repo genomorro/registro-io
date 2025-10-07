@@ -148,10 +148,15 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [X] En el index de Attendance debe actualizarse el checkout_at por medio de un botón
 - [X] En el show de Attendance debe actualizarse el checkout_at por medio de un botón
 - [X] En el show de Attendance debe aparecer el nombre y número de expediente del paciente 
-- [ ] Crear la entidad Visitor
-- [ ] En el index de Visitor debe aparecer el nombre del paciente relacionado
-- [ ] En el show de Patient debe aparecer la lista de visitantes, en la parte superior el visitante más reciente
-- [ ] En el index de Visitor debe actualizarse el checkout_at por medio de un botón
+- [X] Crear la entidad Visitor
+- [X] En el index de Visitor debe aparecer el nombre del paciente relacionado
+- [X] En el show de Patient debe aparecer la lista de visitantes, en la parte superior el visitante más reciente
+- [X] En el index de Visitor debe actualizarse el checkout_at por medio de un botón
+- [ ] El día y la hora predeterminada de los formularios con CheckIn, Attendance y Visitor, deben ser la fecha y hora actuales
+- [ ] En los formularios de edición, la fecha y hora de CheckOut debe ser la fecha y hora actuales
+- [ ] Cada Attendance debe tener una propiedad tag
+- [ ] Búsqueda de Patient por número de expediente
+- [ ] Búsqueda de Visitor y Patient por tag
 
 ## Contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio `registro-io` para cualquier tipo de documentación, usa `registro-io-code` para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en `registro-io-code`.
