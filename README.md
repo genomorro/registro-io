@@ -139,15 +139,15 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [X] En el index de Patient solo deben aparecer los pacientes con cita el día de hoy 
 - [X] En el show de Patient debe aparecer la lista de citas, dividida en dos, las citas del día de hoy y otras citas
 - [X] En el index de Appointment debe aparecer el nombre del paciente
-- [ ] En show de Appointment debe aparecer el nombre y número de expediente del paciente
+- [X] En show de Appointment debe aparecer el nombre y número de expediente del paciente
 - [X] Crear la entidad Attendance
 - [X] En el index de Patient debe aparecer la información de Attendance
 - [X] En el index de Patient se creará/actualizará el Attendance por medio de botones
 - [X] En el show de Patient debe aparecer la información del Attendance del día de hoy
 - [X] En el index de Attendance debe aparecer el nombre del paciente
 - [X] En el index de Attendance debe actualizarse el checkout_at por medio de un botón
-- [ ] En el show de Attendance debe actualizarse el checkout_at por medio de un botón
-- [ ] En el show de Attendance debe aparecer el nombre y número de expediente del paciente 
+- [X] En el show de Attendance debe actualizarse el checkout_at por medio de un botón
+- [X] En el show de Attendance debe aparecer el nombre y número de expediente del paciente 
 - [ ] Crear la entidad Visitor
 - [ ] En el index de Visitor debe aparecer el nombre del paciente relacionado
 - [ ] En el show de Patient debe aparecer la lista de visitantes, en la parte superior el visitante más reciente
