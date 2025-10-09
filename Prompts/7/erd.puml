@@ -1,0 +1,51 @@
+@startuml
+!theme plain
+hide circle
+skinparam linetype ortho
+
+' Entities
+entity "patient" {
+  * id : int <<PK>>
+  --
+  file : varchar(12)
+  name : varchar(255)
+  disability : boolean
+}
+
+entity "visitor" {
+  * id : int <<PK>>
+  --
+  name : varchar(255)
+  phone : varchar(255)
+  dni : varchar(255)
+  tag : int
+  destination : varchar(255)
+  check_in_at : datetime
+  check_out_at : datetime
+  relationship : varchar(255)
+}
+
+entity "appointment" {
+  * id : int <<PK>>
+  --
+  # patient_id : int <<FK>>
+  place : varchar(255)
+  date_at : datetime
+  type : varchar(255)
+}
+
+entity "attendance" {
+  * id : int <<PK>>
+  --
+  # patient_id : int <<FK>>
+  check_in_at : datetime
+  check_out_at : datetime
+  tag : int
+}
+
+' Relationships
+patient ||--o{ appointment : "has"
+patient ||--o{ attendance : "has"
+patient }o--o{ visitor : "has many"
+
+@enduml
