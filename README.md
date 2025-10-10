@@ -40,6 +40,10 @@ Cada familiar debe tener un número de gafete, será posible buscar al familiar 
 
 Con esto se permitirá el ingreso al instituto.
 
+## Diagrama entidad-relación
+
+![Diagrama entidad-relación](DER.png)
+
 ## Development
 El sistema esta elaborado en Symfony 6.4 LTS:
 
@@ -51,7 +55,7 @@ El sistema esta elaborado en Symfony 6.4 LTS:
 
 El código fuente está disponible en Gitlab.
 	
-	https://gitlab.com/genomorro/registro-io.git
+	https://gitlab.com/genomorro/registro-io-code.git
 	
 Symfony se instaló con el siguiente comando:
 
@@ -100,6 +104,10 @@ Luego el CRUD, el cual si crea archivos adicionales:
 	
 	Next: Check your new CRUD by going to /paciente/
 
+Existe un generador de datos de prueba para [MySQL/MariaDB](Prompts/7/data.sql) y [SQLite3](Prompts/7/data.sqlite.sql). Es posible ejecutarlo como normalmente se hace con cualquier archivo SQL:
+
+	sqlite3 Test.db ".read insert_data.sql"
+
 ***
 
 # Instalación
@@ -108,13 +116,17 @@ Al descargar los repositorios, lo primero es entrar en _public_html_ y ejecutar:
 
 	composer install
 
-Este es un proyecto de Synfony 6.4, requiere instalar PHP 8.4 y MariaDB 11. Los datos de conexión a la base de datos puedes colocarlos en el archivo .env agregando una línea como:
+Este es un proyecto de Synfony 6.4, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo .env agregando una línea como:
 
 	DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
 
 Ejemplo:
 
 	DATABASE_URL="mysql://registro-io:registro-io.passwd@127.0.0.1:3306/registro-io?serverVersion=11.8.3-MariaDB-0+deb13u1+from+Debian"
+
+Para SQLite3 lo correcto es:
+
+	DATABASE_URL="sqlite:///%kernel.project_dir%/var/data_%kernel.environment%.db"
 
 Todas las consultas a la base de datos que sean necesarias deben ser creadas con DQL, pues el proyecto usa Doctrine, y deben ser declaradas en los archivos que se encuentran en el directorio src/Repository/
 
