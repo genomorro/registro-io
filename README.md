@@ -164,11 +164,14 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [X] En el index de Visitor debe aparecer el nombre del paciente relacionado
 - [X] En el show de Patient debe aparecer la lista de visitantes, en la parte superior el visitante más reciente
 - [X] En el index de Visitor debe actualizarse el checkout_at por medio de un botón
-- [ ] El día y la hora predeterminada de los formularios con CheckIn, Attendance y Visitor, deben ser la fecha y hora actuales
-- [ ] En los formularios de edición, la fecha y hora de CheckOut debe ser la fecha y hora actuales
-- [ ] Cada Attendance debe tener una propiedad tag
+- [X] El día y la hora predeterminada de los formularios con CheckIn, Attendance y Visitor, deben ser la fecha y hora actuales
+- [X] En los formularios de edición, la fecha y hora de CheckOut debe ser la fecha y hora actuales
+- [X] Cada Attendance debe tener una propiedad tag
 - [ ] Búsqueda de Patient por número de expediente
 - [ ] Búsqueda de Visitor y Patient por tag
+- [ ] Implementar hoja de estilo de Gob.mx
+- [ ] Implementar paginación
+- [ ] Implementar niveles de usuario
 
 ## Contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio `registro-io` para cualquier tipo de documentación, usa `registro-io-code` para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en `registro-io-code`.
@@ -176,7 +179,7 @@ Si planeas contribuir a este proyecto, por favor usa el repositorio `registro-io
 ## Licencia
 This repo is part of Actividades escolares UNIR
 
-Copyright (C) 2022, Edgar Uriel Domínguez Espinoza
+Copyright (C) 2025, Edgar Uriel Domínguez Espinoza
 
 Registro de I/O INER is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
