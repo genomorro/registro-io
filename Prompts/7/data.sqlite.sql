@@ -39,7 +39,8 @@ FROM N;
 -- Appointments (1000 records)
 INSERT INTO appointment (patient_id, place, date_at, type)
 SELECT
-    (SELECT id FROM patient ORDER BY RANDOM() LIMIT 1),
+    -- Use random() directly for each row to avoid subquery optimization issue
+    (abs(random()) % 1000) + 1,
     CASE abs(random()) % 30
         WHEN 0 THEN 'Consultorio 1'  WHEN 1 THEN 'Consultorio 2'  WHEN 2 THEN 'Consultorio 3'
         WHEN 3 THEN 'Consultorio 4'  WHEN 4 THEN 'Consultorio 5'  WHEN 5 THEN 'Consultorio 6'
@@ -62,7 +63,8 @@ FROM N;
 -- Attendances (1000 records)
 INSERT INTO attendance (patient_id, check_in_at, check_out_at, tag)
 SELECT
-    (SELECT id FROM patient ORDER BY RANDOM() LIMIT 1),
+    -- Use random() directly for each row
+    (abs(random()) % 1000) + 1,
     datetime('now', '-' || (abs(random()) % 100) || ' hours'),
     CASE WHEN (abs(random()) % 10) > 1 THEN datetime('now', '-' || (abs(random()) % 24) || ' hours') ELSE NULL END,
     1000 + abs(random()) % 9000
@@ -91,18 +93,13 @@ FROM N;
 
 
 -- Visitor-Patient Mappings (1000 records)
--- This approach ensures that each visitor is mapped to a single, unique, randomly selected patient, preventing duplicate pairs.
-WITH
-  visitors_with_rn AS (SELECT ROW_NUMBER() OVER() as rn, id FROM visitor),
-  patients_with_rn AS (SELECT ROW_NUMBER() OVER() as rn, id FROM patient ORDER BY RANDOM())
+-- Generate more mappings than needed, then select distinct ones to get a random many-to-many relationship.
 INSERT INTO visitor_patient (visitor_id, patient_id)
-SELECT
-  v.id,
-  p.id
-FROM
-  visitors_with_rn v
-JOIN
-  patients_with_rn p ON v.rn = p.rn;
+SELECT DISTINCT
+    (abs(random()) % 1000) + 1,
+    (abs(random()) % 1000) + 1
+FROM N
+LIMIT 1000;
 
 
 -- Clean up temp table
