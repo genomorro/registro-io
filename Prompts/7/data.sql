@@ -33,7 +33,8 @@ SELECT
     ELT(1 + FLOOR(RAND() * 30), 'Consultorio 1', 'Consultorio 2', 'Consultorio 3', 'Consultorio 4', 'Consultorio 5', 'Consultorio 6', 'Consultorio 7', 'Consultorio 8', 'Consultorio 9', 'Consultorio 10', 'Consultorio 11', 'Consultorio 12', 'Consultorio 13', 'Consultorio 14', 'Consultorio 15', 'Consultorio 16', 'Consultorio 17', 'Consultorio 18', 'Consultorio 19', 'Consultorio 20', 'Consultorio 21', 'Consultorio 22', 'Consultorio 23', 'Consultorio 24', 'Consultorio 25', 'Consultorio 26', 'Consultorio 27', 'Consultorio 28', 'Clínica de sueño', 'Hospital de día'),
     NOW() - INTERVAL FLOOR(RAND() * 365) DAY,
     ELT(1 + FLOOR(RAND() * 3), 'Estudio', 'Consulta', 'Procedimiento')
-FROM patient;
+FROM
+    patient;
 
 -- Attendances (1000 records)
 INSERT INTO attendance (patient_id, check_in_at, check_out_at, tag)
@@ -42,7 +43,8 @@ SELECT
     NOW() - INTERVAL FLOOR(RAND() * 100) HOUR,
     IF(RAND() > 0.2, NOW() - INTERVAL FLOOR(RAND() * 24) HOUR, NULL),
     FLOOR(1000 + RAND() * 9000)
-FROM patient;
+FROM
+    patient;
 
 -- Visitors (1000 records)
 INSERT INTO visitor (id, name, phone, dni, tag, destination, check_in_at, check_out_at, relationship)
@@ -65,11 +67,18 @@ FROM (
 ) seq;
 
 -- Visitor-Patient Mappings (1000 records)
+-- This approach ensures that each visitor is mapped to a single, unique, randomly selected patient, preventing duplicate pairs.
 INSERT INTO visitor_patient (visitor_id, patient_id)
 SELECT
-    (SELECT id FROM visitor ORDER BY RAND() LIMIT 1),
-    (SELECT id FROM patient ORDER BY RAND() LIMIT 1)
-FROM patient;
+    v.id,
+    p.id
+FROM
+    (SELECT ROW_NUMBER() OVER() as rn, id FROM visitor) v
+JOIN
+    (SELECT ROW_NUMBER() OVER() as rn, id FROM patient ORDER BY RAND()) p
+ON
+    v.rn = p.rn;
+
 
 -- Enable foreign key checks
 SET FOREIGN_KEY_CHECKS=1;

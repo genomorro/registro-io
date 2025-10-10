@@ -14,7 +14,7 @@ DELETE FROM patient;
 DELETE FROM sqlite_sequence WHERE name IN ('patient', 'visitor', 'appointment', 'attendance');
 
 
--- Generate a sequence of 1000 numbers
+-- Generate a sequence of 1000 numbers for seeding
 CREATE TEMP TABLE N (i);
 INSERT INTO N(i)
 WITH RECURSIVE
@@ -28,10 +28,10 @@ SELECT x FROM cnt;
 
 
 -- Patients (1000 records)
-INSERT INTO patient (file, name, disability)
+INSERT INTO patient (name, file, disability)
 SELECT
-    printf('000%06d', abs(random()) % 1000000),
     'Patient Name ' || i,
+    printf('000%06d', abs(random()) % 1000000),
     abs(random()) % 2
 FROM N;
 
@@ -91,11 +91,18 @@ FROM N;
 
 
 -- Visitor-Patient Mappings (1000 records)
+-- This approach ensures that each visitor is mapped to a single, unique, randomly selected patient, preventing duplicate pairs.
+WITH
+  visitors_with_rn AS (SELECT ROW_NUMBER() OVER() as rn, id FROM visitor),
+  patients_with_rn AS (SELECT ROW_NUMBER() OVER() as rn, id FROM patient ORDER BY RANDOM())
 INSERT INTO visitor_patient (visitor_id, patient_id)
 SELECT
-    (SELECT id FROM visitor ORDER BY RANDOM() LIMIT 1),
-    (SELECT id FROM patient ORDER BY RANDOM() LIMIT 1)
-FROM N;
+  v.id,
+  p.id
+FROM
+  visitors_with_rn v
+JOIN
+  patients_with_rn p ON v.rn = p.rn;
 
 
 -- Clean up temp table
