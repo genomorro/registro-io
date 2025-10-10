@@ -24,6 +24,6 @@ Los controladores de cada entidad se encuentran en src/Controller/, ellos envía
 
 Actualmente existen cuatro entidades, Patient, Visitor, Appointment y Attendance, cada una tiene sus templates CRUD creados.
 
-Por alguna razón, el sistema no está leyendo la información de la base de datos de SQLite3. Verifica porque, aunque la base de datos tiene información, en la aplicación no aparecen los registros.
+<!--  TODO: Insert here -->
 
 Muéstrame imágenes de cada uno de los templates modificados.
