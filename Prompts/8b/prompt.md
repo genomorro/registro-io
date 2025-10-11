@@ -24,6 +24,8 @@ Los controladores de cada entidad se encuentran en src/Controller/, ellos envía
 
 Actualmente existen cuatro entidades, Patient, Visitor, Appointment y Attendance, cada una tiene sus templates CRUD creados.
 
-<!--  TODO: Insert here -->
+Implementa la paginación de la tabla de la ruta app_appointment_index que está definida en la función index del controlador AppointmentController.php. Para la paginación usa el bundle kilik/table que está documentado en https://github.com/KilikFr/TableBundle. Cada página necesita mostrar 25 resultados.
+
+En el repositorio https://github.com/KilikFr/TableDemo/ hay un ejemplo de cómo implementar la tabla deseada: https://github.com/KilikFr/TableDemo/blob/master/src/Controller/ProductController.php
 
 Muéstrame imágenes de cada uno de los templates modificados.
