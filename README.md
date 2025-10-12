@@ -167,11 +167,13 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [X] El día y la hora predeterminada de los formularios con CheckIn, Attendance y Visitor, deben ser la fecha y hora actuales
 - [X] En los formularios de edición, la fecha y hora de CheckOut debe ser la fecha y hora actuales
 - [X] Cada Attendance debe tener una propiedad tag
+- [X] Implementar hoja de estilo de Gob.mx
+- [X] Implementar paginación
+- [ ] Unificar estilos en formularios
 - [ ] Búsqueda de Patient por número de expediente
 - [ ] Búsqueda de Visitor y Patient por tag
-- [ ] Implementar hoja de estilo de Gob.mx
-- [ ] Implementar paginación
 - [ ] Implementar niveles de usuario
+- [ ] Traducir la aplicación
 
 ## Contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio `registro-io` para cualquier tipo de documentación, usa `registro-io-code` para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en `registro-io-code`.
