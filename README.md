@@ -174,6 +174,7 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [ ] Búsqueda de Visitor y Patient por tag
 - [ ] Implementar niveles de usuario
 - [ ] Traducir la aplicación
+- [ ] Implementar un API GET, para alimentar los datos
 
 ## Contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio `registro-io` para cualquier tipo de documentación, usa `registro-io-code` para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en `registro-io-code`.
