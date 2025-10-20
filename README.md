@@ -169,10 +169,11 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [X] Cada Attendance debe tener una propiedad tag
 - [X] Implementar hoja de estilo de Gob.mx
 - [X] Implementar paginación
-- [ ] Unificar estilos en formularios
+- [x] Unificar estilos en formularios
 - [ ] Búsqueda de Patient por número de expediente
 - [ ] Búsqueda de Visitor y Patient por tag
 - [ ] Implementar niveles de usuario
+- [ ] Implementar páginas de error
 - [ ] Traducir la aplicación
 - [ ] Implementar un API GET, para alimentar los datos
 
