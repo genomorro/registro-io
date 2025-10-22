@@ -170,8 +170,8 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [X] Implementar hoja de estilo de Gob.mx
 - [X] Implementar paginación
 - [x] Unificar estilos en formularios
-- [ ] Búsqueda de Patient por número de expediente
-- [ ] Búsqueda de Visitor y Patient por tag
+- [X] Búsqueda de Patient por número de expediente
+- [X] Búsqueda de Visitor y Patient por tag
 - [ ] Implementar niveles de usuario
 - [ ] Implementar páginas de error
 - [ ] Traducir la aplicación
