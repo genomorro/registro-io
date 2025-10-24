@@ -174,7 +174,7 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [X] Búsqueda de Visitor y Patient por tag
 - [ ] Implementar niveles de usuario
 - [ ] Implementar páginas de error
-- [ ] Traducir la aplicación
+- [X] Traducir la aplicación
 - [ ] Implementar un API GET, para alimentar los datos
 
 ## Contribuciones
