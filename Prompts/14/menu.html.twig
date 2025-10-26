@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-light sub-navbar fixed-top">
+    <div class="container">
+	<button
+	    type="button"
+	    class="navbar-toggler"
+	    data-bs-toggle="collapse"
+	    data-bs-target="#subNavBarDropdown"
+	    aria-controls="subNavBarDropdown"
+	    aria-expanded="false"
+	    aria-label="Toggle navigation"
+	>
+	    <span class="navbar-toggler-icon"></span>
+	</button>
+
+	<a class="navbar-brand sub-navbar" href="#"></a>
+
+	<div class="collapse navbar-collapse" id="subNavBarDropdown">
+	    <ul class="navbar-nav">
+		{# Begin: Dropdown search #}
+		<li class="nav-item dropdown">
+		    <a class="nav-link subnav-link dropdown-toggle"
+		       href="#"
+		       id="navbarDropdown"
+		       role="button"
+		       data-bs-toggle="dropdown"
+		       aria-expanded="false">
+			{% trans %}Search{% endtrans %}
+		    </a>
+		    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<li><a class="dropdown-item" href="{{ path('app_search_file_index') }}">{% trans %}Search Patient by File{% endtrans %}</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="{{ path('app_search_patient_tag_index') }}">{% trans %}Search Patient by Tag{% endtrans %}</a></li>
+			<li><a class="dropdown-item" href="{{ path('app_search_visitor_tag_index') }}">{% trans %}Search Visitor by Tag{% endtrans %}</a></li>
+		    </ul>
+		</li>
+		{# End: Dropdown search #}
+		<li class="nav-item">
+		    <a class="nav-link subnav-link" href="{{ path('app_patient_index') }}">{% trans %}Patients{% endtrans %}</a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link subnav-link" href="{{ path('app_appointment_index') }}">{% trans %}Appointments{% endtrans %}</a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link subnav-link" href="{{ path('app_attendance_index') }}">{% trans %}Attendances{% endtrans %}</a>
+		</li>		
+		<li class="nav-item">
+		    <a class="nav-link subnav-link" href="{{ path('app_visitor_index') }}">{% trans %}Visitors{% endtrans %}</a>
+		</li>
+		{# Begin: Dropdown language #}
+		<li class="nav-item dropdown">
+		    <a class="nav-link subnav-link dropdown-toggle"
+		       href="#"
+		       id="navbarDropdown"
+		       role="button"
+		       data-bs-toggle="dropdown"
+		       aria-expanded="false">
+			{% trans %}Language{% endtrans %}
+		    </a>
+		    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<li><a class="dropdown-item" href="">{{ app.locale|trans }}</a></li>
+			<li><hr class="dropdown-divider"></li>
+			{% for locale in app.enabled_locales %}
+                            {% if locale != app.locale %}
+				<li>
+				    <a class="dropdown-item"
+				       href="{{ path(app.current_route, app.current_route_parameters|merge({_locale: locale})) }}">
+					{{ locale|trans }}
+				    </a>
+				</li>
+			    {% endif %}
+                        {% endfor %}
+		    </ul>
+		</li>
+		{# End: Dropdown language #}
+		{# Begin: Dropdown user #}
+		<li class="nav-item dropdown">
+		    <a class="nav-link subnav-link dropdown-toggle"
+		       href="#"
+		       id="navbarDropdown"
+		       role="button"
+		       data-bs-toggle="dropdown"
+		       aria-expanded="false">
+			{% trans %}User{% endtrans %}
+		    </a>
+		    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			{% if app.user %}
+			    <li><a class="dropdown-item" href="{{ path('app_user_show', {'id': app.user.id}) }}">{% trans %}Profile{% endtrans %}</a></li>
+			    <li><a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}Log out{% endtrans %}</a></li>
+			{% else %}
+			    <li><a class="dropdown-item" href="{{ path('app_login') }}">{% trans %}Log in{% endtrans %}</a></li>
+			{% endif %}
+			{% if is_granted('ROLE_ADMIN') %}
+			    <li><hr class="dropdown-divider"></li>
+			    <li><a class="dropdown-item" href="{{ path('app_user_index') }}">{% trans %}User index{% endtrans %}</a></li>
+			{% endif %}
+		    </ul>
+		</li>
+		{# End: Dropdown user #}
+
+	    </ul>
+	</div>
+    </div>
+</nav>
