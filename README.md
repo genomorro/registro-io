@@ -2,21 +2,6 @@
 
 Sistema de registro de entrada y salida para los pacientes del INER y sus familiares, ya sean acompañantes o visitas.
 
-## Git
-Clonar el proyecto de manera habitual, luego cargar el submódulo:
-
-	git submodule init
-	git submodule update
-	
-Si se trabaja desde Gitlab, funcionará el espejo hacia Github. Pero si se decide trabajar desde Github, es necesario agregar Gitlab como origen y posteriormente sincronizar de forma manual:
-
-	git remote add origin2 https://gitlab.com/genomorro/registro-io.git
-	git branch -M main
-	git remote -v
-	git push -uf origin2 main
-
-No olvidar que Github maneja como rama principal _master_ y Gitlab es _main_.
-
 ## Requisitos
 Al consultar se debe mostrar todo aquello agendado para el día actual únicamente.
 
@@ -45,6 +30,7 @@ Con esto se permitirá el ingreso al instituto.
 ![Diagrama entidad-relación](DER.png)
 
 ## Development
+
 El sistema esta elaborado en Symfony 6.4 LTS:
 
     Requires: PHP 8.1.0 or higher
@@ -56,7 +42,24 @@ El sistema esta elaborado en Symfony 6.4 LTS:
 El código fuente está disponible en Gitlab.
 	
 	https://gitlab.com/genomorro/registro-io-code.git
+
+### Git
+Clonar el proyecto de manera habitual, luego cargar el submódulo:
+
+	git submodule init
+	git submodule update
 	
+Si se trabaja desde Gitlab, funcionará el espejo hacia Github. Pero si se decide trabajar desde Github, es necesario agregar Gitlab como origen y posteriormente sincronizar de forma manual:
+
+	git remote add origin2 https://gitlab.com/genomorro/registro-io.git
+	git branch -M main
+	git remote -v
+	git push -uf origin2 main
+
+No olvidar que Github maneja como rama principal _master_ y Gitlab es _main_.
+
+***
+
 Symfony se instaló con el siguiente comando:
 
 	symfony new public_html --version=lts --webapp
@@ -73,7 +76,7 @@ Se crearon las entidades con
 	
 Para incorporar cambios en la base de datos:
 
-	php bin/console make:migration  --formatted
+	php bin/console make:migration
 	php bin/console doctrine:migrations:migrate
 
 Luego el CRUD, el cual si crea archivos adicionales:
@@ -104,19 +107,28 @@ Luego el CRUD, el cual si crea archivos adicionales:
 	
 	Next: Check your new CRUD by going to /paciente/
 
-Existe un generador de datos de prueba para [MySQL/MariaDB](Prompts/7/data.sql) y [SQLite3](Prompts/7/data.sqlite.sql). Es posible ejecutarlo como normalmente se hace con cualquier archivo SQL:
+**Todas las consultas a la base de datos que sean necesarias deben ser creadas con DQL**, pues el proyecto usa Doctrine, y deben ser declaradas en los archivos que se encuentran en el directorio src/Repository/
+
+Para tener el comando `symfony` en Docker se puede agregar al Dockerfile:
+
+```
+	COPY --link \
+    --from=ghcr.io/symfony-cli/symfony-cli:latest \
+    /usr/local/bin/symfony /usr/local/bin/symfony
+```
+
+### Base de datos
+Existe un generador de datos de prueba para [MySQL/MariaDB](Prompts/07/data.sql) y [SQLite3](./Prompts/07/data.sqlite.sql). Es posible ejecutarlo como normalmente se hace con cualquier archivo SQL:
 
 	sqlite3 Test.db ".read insert_data.sql"
 
-***
-
-# Instalación
+## Instalación
 <!--  TODO:  -->
 Al descargar los repositorios, lo primero es entrar en _public_html_ y ejecutar:
 
 	composer install
 
-Este es un proyecto de Synfony 6.4, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo .env agregando una línea como:
+Este es un proyecto de Synfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo .env agregando una línea como:
 
 	DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
 
@@ -128,33 +140,19 @@ Para SQLite3 lo correcto es:
 
 	DATABASE_URL="sqlite:///%kernel.project_dir%/var/data_%kernel.environment%.db"
 
-Todas las consultas a la base de datos que sean necesarias deben ser creadas con DQL, pues el proyecto usa Doctrine, y deben ser declaradas en los archivos que se encuentran en el directorio src/Repository/
+Si se requiere solo un usuario y una base de datos limpia, puede ingresarse directamente la siguiente información en la base de datos:
 
-Se puede iniciar un servidor de prueba con la instrucción:
+| Atributo | Valor                      | Base de datos                                                |
+|----------|----------------------------|--------------------------------------------------------------|
+| Id       | 1                          | 1                                                            |
+| username | iner                       | iner                                                         |
+| roles    | ROLE_SUPER_ADMIN           | ["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]                |
+| password | 00552281                   | $2y$13$QC8jjTPtDTApjMAKgpsWcejNXdsGYvFL.iadTBEO9PiIM.i1eol86 |
+| name     | Coordinación de sistemas   | Coordinación de sistemas                                     |
 
-	symfony server:start
-
-Para tener el comando symfony en Docker se puede agregar al Dockerfile:
-
-	COPY --link \
-    --from=ghcr.io/symfony-cli/symfony-cli:latest \
-    /usr/local/bin/symfony /usr/local/bin/symfony
-
-Luego, se accede por medio de la dirección http://localhost:8000
-
-## Soporte
-
-Si se requiere un usuario puede ingresarse directamente la siguiente información en la base de datos:
-
-| Atributo | Valor                    | DB                                                           |
-| Id       | 1                        | 1                                                            |
-| username | iner                     | iner                                                         |
-| Roles    | ROLE_SUPER_ADMIN         | ["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]                |
-| Password | 00552281                 | $2y$13$QC8jjTPtDTApjMAKgpsWcejNXdsGYvFL.iadTBEO9PiIM.i1eol86 |
-| name     | Coordinación de sistemas | Coordinación de sistemas                                     |
+Se han generado [archivos sql para distintas bases de datos](./Databases) ese propósito.
 
 ## Roadmap
-
 - [X] Crear la entidad Patient
 - [X] Crear la entidad Appointment
 - [X] En el index de Patient solo deben aparecer los pacientes con cita el día de hoy 
@@ -182,15 +180,16 @@ Si se requiere un usuario puede ingresarse directamente la siguiente informació
 - [X] Búsqueda de Patient por número de expediente
 - [X] Búsqueda de Visitor y Patient por tag
 - [X] Implementar niveles de usuario
-- [ ] Implementar páginas de error
 - [X] Traducir la aplicación
+- [ ] Implementar páginas de error
+- [ ] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Implementar un API GET, para alimentar los datos
 
-## Contribuciones
+## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio `registro-io` para cualquier tipo de documentación, usa `registro-io-code` para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en `registro-io-code`.
 
 ## Licencia
-This repo is part of Actividades escolares UNIR
+This repo is part of Registro de I/O INER 
 
 Copyright (C) 2025, Edgar Uriel Domínguez Espinoza
 

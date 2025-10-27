@@ -1,0 +1,29 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS appointment (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, patient_id INTEGER NOT NULL, place VARCHAR(255) NOT NULL, date_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
+        , type VARCHAR(255) NOT NULL, CONSTRAINT FK_FE38F8446B899279 FOREIGN KEY (patient_id) REFERENCES patient (id) NOT DEFERRABLE INITIALLY IMMEDIATE);
+CREATE TABLE IF NOT EXISTS attendance (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, patient_id INTEGER NOT NULL, check_in_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
+        , check_out_at DATETIME DEFAULT NULL --(DC2Type:datetime_immutable)
+        , tag INTEGER NOT NULL, CONSTRAINT FK_6DE30D916B899279 FOREIGN KEY (patient_id) REFERENCES patient (id) NOT DEFERRABLE INITIALLY IMMEDIATE);
+CREATE TABLE IF NOT EXISTS doctrine_migration_versions (version VARCHAR(191) NOT NULL, executed_at DATETIME DEFAULT NULL, execution_time INTEGER DEFAULT NULL, PRIMARY KEY(version));
+CREATE TABLE IF NOT EXISTS messenger_messages (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, body CLOB NOT NULL, headers CLOB NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
+        , available_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
+        , delivered_at DATETIME DEFAULT NULL --(DC2Type:datetime_immutable)
+        );
+CREATE TABLE IF NOT EXISTS patient (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, file VARCHAR(12) NOT NULL, name VARCHAR(255) NOT NULL, disability BOOLEAN NOT NULL);
+CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username VARCHAR(180) NOT NULL, roles CLOB NOT NULL --(DC2Type:json)
+        , password VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL);
+CREATE TABLE IF NOT EXISTS visitor (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL, phone VARCHAR(255) DEFAULT NULL, dni VARCHAR(255) NOT NULL, tag INTEGER NOT NULL, destination VARCHAR(255) NOT NULL, check_in_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
+        , check_out_at DATETIME DEFAULT NULL --(DC2Type:datetime_immutable)
+        , relationship VARCHAR(255) DEFAULT NULL);
+CREATE TABLE IF NOT EXISTS visitor_patient (visitor_id INTEGER NOT NULL, patient_id INTEGER NOT NULL, PRIMARY KEY(visitor_id, patient_id), CONSTRAINT FK_D8C9472370BEE6D FOREIGN KEY (visitor_id) REFERENCES visitor (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_D8C947236B899279 FOREIGN KEY (patient_id) REFERENCES patient (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE);
+INSERT INTO "doctrine_migration_versions" ("version","executed_at","execution_time") VALUES ('DoctrineMigrations\Version20251027140607','2025-10-27 08:06:09',2);
+INSERT INTO "user" ("id","username","roles","password","name") VALUES (1,'iner','["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]','$2y$13$QC8jjTPtDTApjMAKgpsWcejNXdsGYvFL.iadTBEO9PiIM.i1eol86','Coordinación de sistemas');
+CREATE INDEX IDX_6DE30D916B899279 ON attendance (patient_id);
+CREATE INDEX IDX_75EA56E016BA31DB ON messenger_messages (delivered_at);
+CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at);
+CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name);
+CREATE INDEX IDX_D8C947236B899279 ON visitor_patient (patient_id);
+CREATE INDEX IDX_D8C9472370BEE6D ON visitor_patient (visitor_id);
+CREATE INDEX IDX_FE38F8446B899279 ON appointment (patient_id);
+CREATE UNIQUE INDEX UNIQ_IDENTIFIER_USERNAME ON user (username);
+COMMIT;
