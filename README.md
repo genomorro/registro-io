@@ -144,6 +144,15 @@ Luego, se accede por medio de la dirección http://localhost:8000
 
 ## Soporte
 
+Si se requiere un usuario puede ingresarse directamente la siguiente información en la base de datos:
+
+| Atributo | Valor                    | DB                                                           |
+| Id       | 1                        | 1                                                            |
+| username | iner                     | iner                                                         |
+| Roles    | ROLE_SUPER_ADMIN         | ["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]                |
+| Password | 00552281                 | $2y$13$QC8jjTPtDTApjMAKgpsWcejNXdsGYvFL.iadTBEO9PiIM.i1eol86 |
+| name     | Coordinación de sistemas | Coordinación de sistemas                                     |
+
 ## Roadmap
 
 - [X] Crear la entidad Patient
@@ -172,7 +181,7 @@ Luego, se accede por medio de la dirección http://localhost:8000
 - [x] Unificar estilos en formularios
 - [X] Búsqueda de Patient por número de expediente
 - [X] Búsqueda de Visitor y Patient por tag
-- [ ] Implementar niveles de usuario
+- [X] Implementar niveles de usuario
 - [ ] Implementar páginas de error
 - [X] Traducir la aplicación
 - [ ] Implementar un API GET, para alimentar los datos
