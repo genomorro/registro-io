@@ -127,6 +127,10 @@ Al descargar los repositorios, lo primero es entrar en _public_html_ y ejecutar:
 
 	composer install
 
+Si se usa Apache como Web Server, se debe instalar apache-pack:
+
+	composer require symfony/apache-pack
+
 Este es un proyecto de Synfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo .env agregando una línea como:
 
 	DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
