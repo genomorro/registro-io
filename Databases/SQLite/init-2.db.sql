@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS visitor (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NUL
         , check_out_at DATETIME DEFAULT NULL --(DC2Type:datetime_immutable)
         , relationship VARCHAR(255) DEFAULT NULL);
 CREATE TABLE IF NOT EXISTS visitor_patient (visitor_id INTEGER NOT NULL, patient_id INTEGER NOT NULL, PRIMARY KEY(visitor_id, patient_id), CONSTRAINT FK_D8C9472370BEE6D FOREIGN KEY (visitor_id) REFERENCES visitor (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_D8C947236B899279 FOREIGN KEY (patient_id) REFERENCES patient (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE);
-INSERT INTO "doctrine_migration_versions" ("version","executed_at","execution_time") VALUES ('DoctrineMigrations\Version20251027140607','2025-10-27 08:06:09',2);
 INSERT INTO "user" ("id","username","roles","password","name") VALUES (1,'iner','["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]','$2y$13$QC8jjTPtDTApjMAKgpsWcejNXdsGYvFL.iadTBEO9PiIM.i1eol86','Coordinación de sistemas');
 CREATE INDEX IDX_6DE30D916B899279 ON attendance (patient_id);
 CREATE INDEX IDX_75EA56E016BA31DB ON messenger_messages (delivered_at);

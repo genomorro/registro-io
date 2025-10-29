@@ -31,13 +31,12 @@ Con esto se permitirá el ingreso al instituto.
 
 ## Development
 
-El sistema esta elaborado en Symfony 6.4 LTS:
+El sistema esta elaborado en Symfony 7.3 LTS:
 
-    Requires: PHP 8.1.0 or higher
-    Latest patch version: 6.4.25
-    Released on: November 2023
-    End of bug fixes: November 2026
-    End of security fixes: November 2027
+	Version              7.3.4                            
+	Long-Term Support    No                               
+	End of maintenance   01/2026 (in +94 days)            
+	End of life          01/2026 (in +94 days)            
 
 El código fuente está disponible en Gitlab.
 	
@@ -183,7 +182,7 @@ Se han generado [archivos sql para distintas bases de datos](./Databases) ese pr
 - [X] Traducir la aplicación
 - [ ] Implementar páginas de error
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
-- [ ] Implementar un API GET, para alimentar los datos
+- [X] Implementar un API REST (GET), para alimentar los datos
 
 ## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio [registro-io](https://gitlab.com/genomorro/registro-io) para cualquier tipo de documentación, usa [registro-io-code](https://gitlab.com/genomorro/registro-io-code) para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en [registro-io-code](https://gitlab.com/genomorro/registro-io-code/-/issues).
