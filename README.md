@@ -122,7 +122,6 @@ Existe un generador de datos de prueba para [MySQL/MariaDB](Prompts/07/data.sql)
 	sqlite3 Test.db ".read insert_data.sql"
 
 ## Instalación
-<!--  TODO:  -->
 Al descargar los repositorios, lo primero es entrar en _public_html_ y ejecutar:
 
 	composer install
