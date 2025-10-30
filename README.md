@@ -309,9 +309,10 @@ server {
 - [X] Búsqueda de Visitor y Patient por tag
 - [X] Implementar niveles de usuario
 - [X] Traducir la aplicación
-- [ ] Implementar páginas de error
-- [ ] Implementar flash messages para notificación de errores básicos de la aplicación
+- [X] Implementar páginas de error
 - [X] Implementar un API REST (GET), para alimentar los datos
+- [ ] Implementar flash messages para notificación de errores básicos de la aplicación
+- [ ] Implementar un menú eficiente
 
 ## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio [registro-io](https://gitlab.com/genomorro/registro-io) para cualquier tipo de documentación, usa [registro-io-code](https://gitlab.com/genomorro/registro-io-code) para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en [registro-io-code](https://gitlab.com/genomorro/registro-io-code/-/issues).
