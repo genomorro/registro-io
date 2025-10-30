@@ -155,6 +155,132 @@ Si se requiere solo un usuario y una base de datos limpia, puede ingresarse dire
 
 Se han generado [archivos sql para distintas bases de datos](./Databases) ese propósito.
 
+Otros parámetros del archivo `.env` que se deben modificar son:
+
+```
+###> symfony/framework-bundle ###
+APP_ENV=dev
+APP_SECRET=
+###< symfony/framework-bundle ###
+###> symfony/routing ###
+# Configure how to generate URLs in non-HTTP contexts, such as CLI commands.
+# See https://symfony.com/doc/current/routing.html#generating-urls-in-commands
+DEFAULT_URI=http://localhost
+###< symfony/routing ###
+###> symfony/mailer ###
+MAILER_DSN=null://null
+###< symfony/mailer ###
+```
+
+### Web server
+
+Los ejemplos, asumen que el dominio será _io.iner.gob.mx_, que el socket de PHP se ubica en _/var/run/php/php-fpm.sock_ y que la carpeta del proyecto será _/var/www/registro-io/public\_html/public_.
+
+```Apache2
+# /etc/apache2/conf.d/io.iner.gob.mx.conf
+<VirtualHost *:80>
+    ServerName io.iner.gob.mx
+    ServerAlias www.io.iner.gob.mx
+
+    # Uncomment the following line to force Apache to pass the Authorization
+    # header to PHP: required for "basic_auth" under PHP-FPM and FastCGI
+    #
+    # SetEnvIfNoCase ^Authorization$ "(.+)" HTTP_AUTHORIZATION=$1
+
+    <FilesMatch \.php$>
+        # when using PHP-FPM as a unix socket
+        SetHandler proxy:unix:/var/run/php/php-fpm.sock|fcgi://dummy
+
+        # when PHP-FPM is configured to use TCP
+        # SetHandler proxy:fcgi://127.0.0.1:9000
+    </FilesMatch>
+
+    DocumentRoot /var/www/registro-io/public_html/public
+    <Directory /var/www/registro-io/public_html/public>
+        AllowOverride None
+        Require all granted
+        FallbackResource /index.php
+    </Directory>
+
+    # uncomment the following lines if you install assets as symlinks
+    # or run into problems when compiling LESS/Sass/CoffeeScript assets
+    # <Directory /var/www/registro-io/public_html/public>
+    #     Options FollowSymlinks
+    # </Directory>
+
+    # optionally disable the fallback resource for the asset directories
+    # which will allow Apache to return a 404 error when files are
+    # not found instead of passing the request to Symfony
+    # <Directory /var/www/registro-io/public_html/public/bundles>
+    #     DirectoryIndex disabled
+    #     FallbackResource disabled
+    # </Directory>
+
+    ErrorLog /var/log/apache2/io_error.log
+    CustomLog /var/log/apache2/io_access.log combined
+</VirtualHost>
+```
+```Nginx
+# /etc/nginx/conf.d/io.iner.gob.mx.conf
+server {
+    server_name io.iner.gob.mx www.io.iner.gob.mx;
+    root /var/www/registro-io/public_html/public;
+
+    location / {
+        # try to serve file directly, fallback to index.php
+        try_files $uri /index.php$is_args$args;
+    }
+
+    # optionally disable falling back to PHP script for the asset directories;
+    # nginx will return a 404 error when files are not found instead of passing the
+    # request to Symfony (improves performance but Symfony's 404 page is not displayed)
+    # location /bundles {
+    #     try_files $uri =404;
+    # }
+
+    location ~ ^/index\.php(/|$) {
+        # when using PHP-FPM as a unix socket
+        fastcgi_pass unix:/var/run/php/php-fpm.sock;
+
+        # when PHP-FPM is configured to use TCP
+        # fastcgi_pass 127.0.0.1:9000;
+
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+
+        # optionally set the value of the environment variables used in the application
+        # fastcgi_param APP_ENV prod;
+        # fastcgi_param APP_SECRET <app-secret-id>;
+        # fastcgi_param DATABASE_URL "mysql://db_user:db_pass@host:3306/db_name";
+
+        # When you are using symlinks to link the document root to the
+        # current version of your application, you should pass the real
+        # application path instead of the path to the symlink to PHP
+        # FPM.
+        # Otherwise, PHP's OPcache may not properly detect changes to
+        # your PHP files (see https://github.com/zendtech/ZendOptimizerPlus/issues/126
+        # for more information).
+        # Caveat: When PHP-FPM is hosted on a different machine from nginx
+        #         $realpath_root may not resolve as you expect! In this case try using
+        #         $document_root instead.
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+        # Prevents URIs that include the front controller. This will 404:
+        # http://io.iner.gob.mx/index.php/some-path
+        # Remove the internal directive to allow URIs like this
+        internal;
+    }
+
+    # return 404 for all other php files not matching the front controller
+    # this prevents access to other php files you don't want to be accessible.
+    location ~ \.php$ {
+        return 404;
+    }
+
+    error_log /var/log/nginx/io_error.log;
+    access_log /var/log/nginx/io_access.log;
+}
+```
 ## Roadmap
 - [X] Crear la entidad Patient
 - [X] Crear la entidad Appointment
