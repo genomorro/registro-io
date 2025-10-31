@@ -30,25 +30,25 @@ Con esto se permitirá el ingreso al instituto.
 ## Development
 El sistema esta elaborado en Symfony 7.3 LTS:
 ```bash
-	Version              7.3.4                            
-	Long-Term Support    No                               
-	End of maintenance   01/2026 (in +94 days)            
-	End of life          01/2026 (in +94 days)            
+Version              7.3.4                            
+Long-Term Support    No                               
+End of maintenance   01/2026 (in +94 days)            
+End of life          01/2026 (in +94 days)            
 ```
 El código fuente está disponible en [Gitlab](https://gitlab.com/genomorro/registro-io-code.git)
 
 ### Git
 Clonar el proyecto de manera habitual, luego cargar el submódulo:
 ```bash
-	git submodule init
-	git submodule update
+git submodule init
+git submodule update
 ```
 Si se trabaja desde Gitlab, funcionará el espejo hacia Github. Pero si se decide trabajar desde Github, es necesario agregar Gitlab como origen y posteriormente sincronizar de forma manual:
 ```bash
-	git remote add origin2 https://gitlab.com/genomorro/registro-io.git
-	git branch -M main
-	git remote -v
-	git push -uf origin2 main
+git remote add origin2 https://gitlab.com/genomorro/registro-io.git
+git branch -M main
+git remote -v
+git push -uf origin2 main
 ```
 No olvidar que Github maneja como rama principal _master_ y Gitlab es _main_.
 
@@ -56,56 +56,55 @@ No olvidar que Github maneja como rama principal _master_ y Gitlab es _main_.
 
 Symfony se instaló con el siguiente comando:
 ```bash
-	symfony new public_html --version=lts --webapp
+symfony new public_html --version=lts --webapp
 ```
 Para iniciar el web server de desarrollo:
 ```bash
-	symfony server:start
+symfony server:start
 ```	
 Estará disponible por medio del [navegador web](http://localhost:8000)
 
 Se crearon las entidades con 
 ```bash
-	php bin/console make:entity
+php bin/console make:entity
 ```	
 Para incorporar cambios en la base de datos:
 ```bash
-	php bin/console make:migration
-	php bin/console doctrine:migrations:migrate
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
 ```
 Luego el CRUD, el cual si crea archivos adicionales:
 ```bash
-	php bin/console make:crud
+php bin/console make:crud
+The class name of the entity to create CRUD (e.g. TinyGnome):
+> Paciente
 
-	The class name of the entity to create CRUD (e.g. TinyGnome):
-	> Paciente
+Choose a name for your controller class (e.g. PacienteController) [PacienteController]:
+> 
+
+Do you want to generate PHPUnit tests? [Experimental] (yes/no) [no]:
+> 
 	
-	Choose a name for your controller class (e.g. PacienteController) [PacienteController]:
-	> 
-	
-	Do you want to generate PHPUnit tests? [Experimental] (yes/no) [no]:
-	> 
-		
-	created: src/Controller/PacienteController.php
-	created: src/Form/PacienteType.php
-	created: templates/paciente/_delete_form.html.twig
-	created: templates/paciente/_form.html.twig
-	created: templates/paciente/edit.html.twig
-	created: templates/paciente/index.html.twig
-	created: templates/paciente/new.html.twig
-	created: templates/paciente/show.html.twig
-	
-	
-	Success! 
-	
-	
-	Next: Check your new CRUD by going to /paciente/
+created: src/Controller/PacienteController.php
+created: src/Form/PacienteType.php
+created: templates/paciente/_delete_form.html.twig
+created: templates/paciente/_form.html.twig
+created: templates/paciente/edit.html.twig
+created: templates/paciente/index.html.twig
+created: templates/paciente/new.html.twig
+created: templates/paciente/show.html.twig
+
+
+Success! 
+
+
+Next: Check your new CRUD by going to /paciente/
 ```
 **Todas las consultas a la base de datos que sean necesarias deben ser creadas con DQL**, pues el proyecto usa Doctrine, y deben ser declaradas en los archivos que se encuentran en el directorio `src/Repository/`
 
 Para tener el comando `symfony` en Docker se puede agregar al Dockerfile:
 ```docker
-	COPY --link \
+COPY --link \
     --from=ghcr.io/symfony-cli/symfony-cli:latest \
     /usr/local/bin/symfony /usr/local/bin/symfony
 ```
@@ -113,28 +112,28 @@ Para tener el comando `symfony` en Docker se puede agregar al Dockerfile:
 ### Base de datos
 Existe un generador de datos de prueba para [MySQL/MariaDB](Prompts/07/data.sql) y [SQLite3](./Prompts/07/data.sqlite.sql). Es posible ejecutarlo como normalmente se hace con cualquier archivo SQL:
 ```bash
-	sqlite3 Test.db ".read insert_data.sql"
+sqlite3 Test.db ".read insert_data.sql"
 ```
 ## Instalación
 Al descargar los repositorios, lo primero es entrar en `public_html` y ejecutar:
 ```bash
-	composer install
+composer install
 ```
 Si se usa Apache como Web Server, se debe instalar apache-pack:
 ```bash
-	composer require symfony/apache-pack
+composer require symfony/apache-pack
 ```
 Este es un proyecto de Symfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env.local` agregando una línea como:
 ```.env.local
-	DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
+DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
 ```
 Ejemplo:
 ```.env.local
-	DATABASE_URL="mysql://registro-io:registro-io.passwd@127.0.0.1:3306/registro-io?serverVersion=11.8.3-MariaDB-0+deb13u1+from+Debian"
+DATABASE_URL="mysql://registro-io:registro-io.passwd@127.0.0.1:3306/registro-io?serverVersion=11.8.3-MariaDB-0+deb13u1+from+Debian"
 ```
 Para SQLite3 lo correcto es:
 ```.env.local
-	DATABASE_URL="sqlite:///%kernel.project_dir%/var/data_%kernel.environment%.db"
+DATABASE_URL="sqlite:///%kernel.project_dir%/var/data_%kernel.environment%.db"
 ```
 Si se requiere solo un usuario y una base de datos limpia, puede ingresarse directamente la siguiente información en la base de datos:
 
