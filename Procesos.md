@@ -36,8 +36,19 @@
 5. Parentesco con el paciente
 6. Número de teléfono
 7. Número de gafete
+
+***
+
+## Salida de pacientes y visitantes
+### Requisitos
+1. Gafete
+### Procedimiento
+1. Registro en la libreta de salida
+2. Entrega de identificación
+
+***
+
 ## Otros datos relevantes
-### Pacientes
 ### Visitantes
 1. Los horarios de visita son de 4 pm a 6 pm.
 2. La visita dura una hora por persona, por lo que cada paciente tiene un máximo de dos visitantes al día
@@ -56,6 +67,8 @@
 6. Gafete cuidador veinticuatro horas
 
 ***
+
+## Transcripción automática de conversación
 
 (0:00 - 1:31)
 Para solicitar, muestran su identificación, su carnet, les pedimos un previo registro, les pedimos la hora, el nombre completo de la identificación que me está dando, para poderle dar un gráfico correspondiente y a la hora de entregar la identificación no hay error de nada. Aquí le ponen el nombre completo de la persona, el área donde van, porque aquí no sé, consulta interna, neumopediatría, fisiología, el asunto, van a estudio, consulta o cita. Ponen el número de gafete, se les da un gafete, se les pide que se lo coloquen todo el tiempo en lo que están dentro del hospital, se les da el ingreso y ellos toman su consulta. 
