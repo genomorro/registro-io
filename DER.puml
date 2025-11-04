@@ -41,8 +41,8 @@ entity "Visitor" as visitor {
   dni: varchar(255)
   tag: int
   destination: varchar(255)
-  checkInAt: datetime
-  checkOutAt: datetime
+  check_in_at: datetime
+  check_out_at: datetime
   relationship: varchar(255)
 }
 
@@ -59,8 +59,8 @@ entity "Attendance" as attendance {
   + id: int <<PK>>
   --
   # patient_id: int <<FK>>
-  checkInAt: datetime
-  checkOutAt: datetime
+  check_in_at: datetime
+  check_out_at: datetime
   tag: int
 }
 
