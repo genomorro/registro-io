@@ -9,8 +9,10 @@ Se debe registrar cuando un familiar pasa al instituto, por lo que se debe ligar
 Cada familiar debe tener un número de gafete, será posible buscar al familiar por número de gafete, cada familiar debe tener:
 
 - Nombre del familiar
+- Parentesco
 - Número de gafete
 - Destino
+- Teléfono
 - Hora de entrada
 - Hora de salida
 
