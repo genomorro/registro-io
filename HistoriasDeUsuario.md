@@ -29,6 +29,7 @@ Se han abierto o cambiado muchas ubicaciones dentro del hospital, lo cual genera
 Yo como _camillero_ quiero **saber el destino preciso del paciente** para **poder llevarlo a la ubicación correcta en el menor tiempo posible**
 ### Requisitos de aceptación
 - Tener una lista actualizada de servicios y clínicas
+- Incluir horarios de las clínicas
 - La lista debe incluir las actividades que realiza cada servicio
 
 ## Problema 5
