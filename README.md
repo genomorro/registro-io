@@ -122,17 +122,15 @@ También hay dos archivos CSV generados automáticamente en `data_wragling/out`.
 SQLite version 3.50.4 2025-07-30 19:33:53
 Enter ".help" for usage hints.
 sqlite> .mode csv
-sqlite> .import data_wrangling/out/patient.csv patient
-data_wrangling/out/patient.csv:1: INSERT failed: datatype mismatch
+sqlite> .import -skip 1 data_wrangling/out/patient.csv patient
 data_wrangling/out/patient.csv:71790: INSERT failed: UNIQUE constraint failed: patient.id
 data_wrangling/out/patient.csv:111791: INSERT failed: UNIQUE constraint failed: patient.id
 data_wrangling/out/patient.csv:131999: INSERT failed: UNIQUE constraint failed: patient.id
 data_wrangling/out/patient.csv:149241: INSERT failed: UNIQUE constraint failed: patient.id
 data_wrangling/out/patient.csv:150266: INSERT failed: UNIQUE constraint failed: patient.id
 data_wrangling/out/patient.csv:150639: INSERT failed: UNIQUE constraint failed: patient.id
-sqlite> .import data_wrangling/out/appointment.csv appointment
-data_wrangling/out/appointment.csv:1: INSERT failed: datatype mismatch
-sqlite> 
+sqlite> .import -skip 1 data_wrangling/out/appointment.csv appointment
+sqlite> .quit
 ```
 En el ejemplo se observan errores de importación, para una base de datos en producción, estos errores no deben existir.
 
