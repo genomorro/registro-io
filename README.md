@@ -143,6 +143,10 @@ Si se usa Apache como Web Server, se debe instalar apache-pack:
 ```bash
 composer require symfony/apache-pack
 ```
+Se deben cargar los assets manualmente:
+```
+php bin/console asset-map:compile
+```
 Este es un proyecto de Symfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env.local` agregando una línea como:
 ```.env.local
 DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
@@ -170,13 +174,13 @@ Se han generado [archivos sql para distintas bases de datos](./Databases) ese pr
 Otros parámetros del archivo `.env.local` que se deben modificar son:
 ```.env.local
 ###> symfony/framework-bundle ###
-APP_ENV=dev
-APP_SECRET=
+APP_ENV=prod
+APP_SECRET=io.iner.gob.mx-secret
 ###< symfony/framework-bundle ###
 ###> symfony/routing ###
 # Configure how to generate URLs in non-HTTP contexts, such as CLI commands.
 # See https://symfony.com/doc/current/routing.html#generating-urls-in-commands
-DEFAULT_URI=http://localhost
+DEFAULT_URI=http://io.iner.gob.mx
 ###< symfony/routing ###
 ###> symfony/mailer ###
 MAILER_DSN=null://null
