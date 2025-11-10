@@ -334,6 +334,10 @@ Solicitudes de DTIC
 - [ ] Un appointment debe tener como propiedad: Especialidad, estado (Agendada, cancelada)
 - [ ] El type de appointment debe ser PRIMERA VEZ, SUBSECUENTE, ESTUDIO, PROCEDIMIENTO
 - [ ] Refinar tablas de índice
+- [ ] Reordenar app_patient_show: Citas hoy, Asistencia hoy
+- [ ] Validar hora de la cita con hora de ingreso, turno matutino y vespertino
+- [ ] Validar hora de la cita con hora de ingreso, por cercanía de hora de la cita
+- [ ] Usar dos bases de datos
 
 ## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio [registro-io](https://gitlab.com/genomorro/registro-io) para cualquier tipo de documentación, usa [registro-io-code](https://gitlab.com/genomorro/registro-io-code) para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en [registro-io-code](https://gitlab.com/genomorro/registro-io-code/-/issues).
