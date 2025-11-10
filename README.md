@@ -329,6 +329,12 @@ server {
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Implementar un menú eficiente
 
+Solicitudes de DTIC
+- [ ] Ocultar el id
+- [ ] Un appointment debe tener como propiedad: Especialidad, estado (Agendada, cancelada)
+- [ ] El type de appointment debe ser PRIMERA VEZ, SUBSECUENTE, ESTUDIO, PROCEDIMIENTO
+- [ ] Refinar tablas de índice
+
 ## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio [registro-io](https://gitlab.com/genomorro/registro-io) para cualquier tipo de documentación, usa [registro-io-code](https://gitlab.com/genomorro/registro-io-code) para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en [registro-io-code](https://gitlab.com/genomorro/registro-io-code/-/issues).
 
