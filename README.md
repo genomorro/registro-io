@@ -144,11 +144,11 @@ Si se usa Apache como Web Server, se debe instalar apache-pack:
 composer require symfony/apache-pack
 ```
 Se deben cargar los assets manualmente:
-```
+```bash
 php bin/console asset-map:compile
 ```
 Si las páginas de erro no se muestran, se pueden cargar manualmente (los números pueden omitirse):
-```
+```bash
 APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/ 403 404 500 502 503
 ```
 Este es un proyecto de Symfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env.local` agregando una línea como:
