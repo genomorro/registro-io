@@ -147,7 +147,7 @@ Se deben cargar los assets manualmente:
 ```bash
 php bin/console asset-map:compile
 ```
-Si las páginas de erro no se muestran, se pueden cargar manualmente (los números pueden omitirse):
+Si las páginas de error no se muestran, se pueden cargar manualmente (los números pueden omitirse):
 ```bash
 APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/ 403 404 500 502 503
 ```
@@ -190,7 +190,11 @@ DEFAULT_URI=http://io.iner.gob.mx
 MAILER_DSN=null://null
 ###< symfony/mailer ###
 ```
-
+Si después de una configuración adecuada se obtiene el sitio en entorno `dev` pero no en `prod`, hay que limpiar el caché:
+```bash
+bin/console cache:clear
+```
+También será útil el log de error si el problema persiste: `var/cache/log/prod.log`.
 ### Web server
 Los ejemplos, asumen que el dominio será [io.iner.gob.mx](io.iner.gob.mx), que el socket de PHP se ubica en `/var/run/php/php-fpm.sock` y que la carpeta del proyecto será `/var/www/registro-io/public_html/public`.
 
