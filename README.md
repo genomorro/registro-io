@@ -32,21 +32,23 @@ Actualmente existen cuatro entidades, Patient, Visitor, Appointment y Attendance
 
 Hay un control de acceso a usuarios a nivel del controlador ilustrado en la siguiente tabla de permisos, en los métodos indicados en la primera columna.
 
-|         | Appointment      | Attendance       | Patient          | Visitor          | User             |
-| index   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       |
-| new     | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       |
-| show    | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| edit    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_USER        |
-| delete  | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
+|        | Appointment      | Attendance       | Patient          | Visitor          | User             |
+|--------|------------------|------------------|------------------|------------------|------------------|
+| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       |
+| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       |
+| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| edit   | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_USER        |
+| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 En los templates, el control de acceso indica si un botón aparece o no para un usuario, de tal forma que puede ver la ruta.
 
-|         | Appointment      | Attendance       | Patient          | Visitor          | User             |
-| index   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       |
-| new     | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       |
-| show    | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| edit    | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        |
-| delete  | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
+|        | Appointment      | Attendance       | Patient          | Visitor          | User             |
+|--------|------------------|------------------|------------------|------------------|------------------|
+| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       |
+| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       |
+| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| edit   | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        |
+| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 ## Diagrama entidad-relación
 ![Diagrama entidad-relación](DER.png)
@@ -364,7 +366,7 @@ Solicitudes de DTIC
 - [ ] Un appointment debe tener como propiedad: Especialidad, estado (Agendada, cancelada)
 - [ ] El type de appointment debe ser PRIMERA VEZ, SUBSECUENTE, ESTUDIO, PROCEDIMIENTO
 - [ ] Refinar tablas de índice
-- [ ] Reordenar app_patient_show: Citas hoy, Asistencia hoy
+- [X] Reordenar app_patient_show: Citas hoy, Asistencia hoy
 - [ ] Validar hora de la cita con hora de ingreso, turno matutino y vespertino
 - [ ] Validar hora de la cita con hora de ingreso, por cercanía de hora de la cita
 - [ ] Usar dos bases de datos
