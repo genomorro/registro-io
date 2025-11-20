@@ -363,7 +363,7 @@ server {
 
 Solicitudes de DTIC
 - [X] Ocultar el id
-- [ ] Un appointment debe tener como propiedad: Especialidad, estado (Agendada, cancelada)
+- [X] Un appointment debe tener como propiedad: Especialidad, estado (Agendada, cancelada)
 - [X] El type de appointment debe ser PRIMERA VEZ, SUBSECUENTE, ESTUDIO, PROCEDIMIENTO
 - [ ] Refinar tablas de índice
 - [X] Reordenar app_patient_show: Citas hoy, Asistencia hoy
