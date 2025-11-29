@@ -40,3 +40,11 @@ Yo como _solicitante al servicio de camillería_ quiero **tener una serie de cri
 - Criterio o protocolo sencillo y claro
 
 
+# Preguntas
+
+## Pregunta 1
+¿Cómo manejar pacientes que deben reprogramar/reagendar citas canceladas/modificadas
+
+## Pregunta 2
+¿Se requiere alguna restricción de tiempo para el registro de entrada y/o salida?
+
