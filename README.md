@@ -372,7 +372,7 @@ Solicitudes de DTIC
 - [X] En Otras Citas, solo mostrar citas futuras
 - [X] Unificar los formularios de Búsqueda
 - [X] Un solo formulario de búsqueda por gafete
-- [ ] El menú de ROLE_USER debe reducirse: Inicio, Buscar, Visitantes
+- [X] El menú de ROLE_USER debe reducirse: Inicio, Buscar, Visitantes
 - [ ] Validar hora de la cita con hora de ingreso, turno matutino y vespertino
 - [ ] Validar hora de la cita con hora de ingreso, por cercanía de hora de la cita
 - [ ] Usar dos bases de datos
