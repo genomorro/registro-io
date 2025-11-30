@@ -358,8 +358,10 @@ server {
 - [X] Traducir la aplicación
 - [X] Implementar páginas de error
 - [X] Implementar un API REST (GET), para alimentar los datos
+- [ ] Reimplementar Botones CheckOut en Attendance
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Implementar un menú eficiente
+- [ ] Crear un Dockerfile
 
 Solicitudes de DTIC
 - [X] Ocultar el id
@@ -375,7 +377,7 @@ Solicitudes de DTIC
 - [X] El menú de ROLE_USER debe reducirse: Inicio, Buscar, Visitantes
 - [ ] Validar hora de la cita con hora de ingreso, turno matutino y vespertino
 - [ ] Validar hora de la cita con hora de ingreso, por cercanía de hora de la cita
-- [ ] Usar dos bases de datos
+- [-] Usar dos bases de datos
 
 ## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio [registro-io](https://gitlab.com/genomorro/registro-io) para cualquier tipo de documentación, usa [registro-io-code](https://gitlab.com/genomorro/registro-io-code) para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en [registro-io-code](https://gitlab.com/genomorro/registro-io-code/-/issues).
