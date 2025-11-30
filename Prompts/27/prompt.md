@@ -1,11 +1,11 @@
-Change variable name
+# Funcion CheckIn
 
-Este es un proyecto de Synfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3 como base de datos. Los datos de conexión a la base de datos puedes colocarlos en el archivo .env agregando una línea como: 
-```
+Este es un proyecto de Synfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3 como base de datos. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env` agregando una línea como: 
+```.env
 DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
 ```
 Ejemplo:
-```
+```.env
 DATABASE_URL="mysql://registro-io:registro-io.passwd@127.0.0.1:3306/registro-io?serverVersion=11.8.3-MariaDB-0+deb13u1+from+Debian"
 ```
 Para SQLite3 lo correcto es:
@@ -13,8 +13,19 @@ Para SQLite3 lo correcto es:
 DATABASE_URL="sqlite:///%kernel.project_dir%/var/data_%kernel.environment%.db"
 ```
 Para incorporar cambios en la base de datos:
+```bash
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
 ```
-php bin/console make:migration php bin/console doctrine:migrations:migrate
+Como la aplicación tiene control de acceso, la base de datos debe tener al menos un registro en la tabla User, mismo que debe ser usado para ingresar al sistema.
+
+También pueden ser necesarios los siguientes comandos si una pantalla tiene problemas al cargar:
+Se deben cargar los assets manualmente:
+```bash
+php bin/console asset-map:compile
+```
+```bash
+bin/console cache:clear
 ```
 Todas las consultas a la base de datos que sean necesarias deben ser creadas con DQL, pues el proyecto usa Doctrine, y deben ser declaradas en los archivos que se encuentran en el directorio src/Repository/
 
@@ -43,8 +54,15 @@ Hay un control de acceso a usuarios a nivel del controlador ilustrado en la sigu
 | edit    | ROLE_ADMIN       | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
 | delete  | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
-La entidad Appointment necesita un atributo llamado `location`. Es una cadena de texto.
+En el controlador PatientController existen dos métodos con dos rutas:
 
-Si surge algún error, notifica inmediatamente, con una captura de pantalla, así podré darte instrucciones.
+1. checkIn
+2. checkOutShow
 
-Muéstrame imágenes de cada uno de los templates modificados.
+Esas funciones son idénticas, solo se diferencian que la línea `return $this->redirectToRoute()` lleva a tres rutas distintas. Requiero que unifiques esas funciones para que solo exista `checkOut` con la ruta `app_visitor_check_out` y reciba como argumento a donde va a redirigir.
+
+Posteriormente, busca el uso de las dos funciones entre todos los templates, y reescribe el código para que use esta nueva función.
+
+Otras notas adicionales:
+
+1. Comenta temporalmente las líneas denyAccessUnlessGranted para que no se necesite un control de acceso al probar el código.

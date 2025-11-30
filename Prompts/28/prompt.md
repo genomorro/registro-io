@@ -1,11 +1,11 @@
-Change variable name
+# Refactor CheckOut
 
-Este es un proyecto de Synfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3 como base de datos. Los datos de conexión a la base de datos puedes colocarlos en el archivo .env agregando una línea como: 
-```
+Este es un proyecto de Synfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3 como base de datos. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env` agregando una línea como: 
+```.env
 DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
 ```
 Ejemplo:
-```
+```.env
 DATABASE_URL="mysql://registro-io:registro-io.passwd@127.0.0.1:3306/registro-io?serverVersion=11.8.3-MariaDB-0+deb13u1+from+Debian"
 ```
 Para SQLite3 lo correcto es:
@@ -13,8 +13,19 @@ Para SQLite3 lo correcto es:
 DATABASE_URL="sqlite:///%kernel.project_dir%/var/data_%kernel.environment%.db"
 ```
 Para incorporar cambios en la base de datos:
+```bash
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
 ```
-php bin/console make:migration php bin/console doctrine:migrations:migrate
+Como la aplicación tiene control de acceso, la base de datos debe tener al menos un registro en la tabla User, mismo que debe ser usado para ingresar al sistema.
+
+También pueden ser necesarios los siguientes comandos si una pantalla tiene problemas al cargar:
+Se deben cargar los assets manualmente:
+```bash
+php bin/console asset-map:compile
+```
+```bash
+bin/console cache:clear
 ```
 Todas las consultas a la base de datos que sean necesarias deben ser creadas con DQL, pues el proyecto usa Doctrine, y deben ser declaradas en los archivos que se encuentran en el directorio src/Repository/
 
@@ -43,8 +54,12 @@ Hay un control de acceso a usuarios a nivel del controlador ilustrado en la sigu
 | edit    | ROLE_ADMIN       | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
 | delete  | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
-La entidad Appointment necesita un atributo llamado `location`. Es una cadena de texto.
+Existen en el controlador SearchController dos métodos, `checkOutList` que usa el template `search/check_out_list.html.twig` y `checkOut` que usa el template `search/check_out.html.twig`.
 
-Si surge algún error, notifica inmediatamente, con una captura de pantalla, así podré darte instrucciones.
+Estos dos templates son muy similares, la diferencia es el título de la usado en la vista y que `search/check_out.html.twig` debe recibir la variable `tag` para funcionar.
 
-Muéstrame imágenes de cada uno de los templates modificados.
+Revisa si es posible unir estos templates en uno solo llamado `search/check_out.html.twig` que según el método que la necesite, solicite el título de la página y el `tag` si es el caso.
+
+Si tienes problemas con la autenticación que necesita el sitio, puedes comentar las líneas `denyAccessUnlessGranted`, así las páginas serán visibles para su verificación.
+
+Muestrame imágenes del resultado.
