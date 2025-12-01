@@ -358,9 +358,9 @@ server {
 - [X] Traducir la aplicación
 - [X] Implementar páginas de error
 - [X] Implementar un API REST (GET), para alimentar los datos
-- [ ] Reimplementar Botones CheckOut en Attendance
+- [X] Reimplementar Botones CheckOut en Attendance
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
-- [ ] Implementar un menú eficiente
+- [-] Implementar un menú eficiente
 - [ ] Crear un Dockerfile
 
 Solicitudes de DTIC
