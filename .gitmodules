@@ -1,9 +1,6 @@
 [submodule "public_html"]
 	path = public_html
-	url = git@gitlab.com:genomorro/registro-io-code.git
-[submodule "tic-iner"]
-	path = tic-iner
-	url = git@gitlab.com:genomorro/tic-iner.git
+	url = https://gitlab.com/genomorro/registro-io-code.git
 [submodule "data_wrangling"]
 	path = data_wrangling
-	url = git@gitlab.com:genomorro/tic-iner.git
+	url = https://gitlab.com/genomorro/tic-iner.git
