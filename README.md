@@ -219,6 +219,13 @@ Si después de una configuración adecuada se obtiene el sitio en entorno `dev` 
 bin/console cache:clear
 ```
 También será útil el log de error si el problema persiste: `var/cache/log/prod.log`.
+
+En algunos entornos con SELinux activado, hay que ajustar los permisos como dice en [la documentación de Symfony](https://symfony.com/doc/current/setup/file_permissions.html)
+y después si es necesario:
+```bash
+chcon -R -t httpd_sys_content_rw_t /var/www/
+```
+
 ### Web server
 Los ejemplos, asumen que el dominio será [io.iner.gob.mx](io.iner.gob.mx), que el socket de PHP se ubica en `/var/run/php/php-fpm.sock` y que la carpeta del proyecto será `/var/www/registro-io/public_html/public`.
 
