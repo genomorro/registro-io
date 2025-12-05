@@ -366,9 +366,11 @@ server {
 - [X] Implementar páginas de error
 - [X] Implementar un API REST (GET), para alimentar los datos
 - [X] Reimplementar Botones CheckOut en Attendance
+- [X] Identificar pacientes hospitalizados: Servicio y cama
+- [ ] Agregar documento probatorio a Visitor y Attendance
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
-- [-] Implementar un menú eficiente
 - [ ] Crear un Dockerfile
+- [-] Implementar un menú eficiente
 
 Solicitudes de DTIC
 - [X] Ocultar el id
@@ -382,8 +384,8 @@ Solicitudes de DTIC
 - [X] Unificar los formularios de Búsqueda
 - [X] Un solo formulario de búsqueda por gafete
 - [X] El menú de ROLE_USER debe reducirse: Inicio, Buscar, Visitantes
-- [ ] Validar hora de la cita con hora de ingreso, turno matutino y vespertino
-- [ ] Validar hora de la cita con hora de ingreso, por cercanía de hora de la cita
+- [-] Validar hora de la cita con hora de ingreso, turno matutino y vespertino
+- [-] Validar hora de la cita con hora de ingreso, por cercanía de hora de la cita
 - [-] Usar dos bases de datos
 
 ## Soporte y contribuciones
