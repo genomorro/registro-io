@@ -367,7 +367,7 @@ server {
 - [X] Implementar un API REST (GET), para alimentar los datos
 - [X] Reimplementar Botones CheckOut en Attendance
 - [X] Identificar pacientes hospitalizados: Servicio y cama
-- [ ] Agregar documento probatorio a Visitor y Attendance
+- [X] Agregar documento probatorio a Visitor y Attendance
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Crear un Dockerfile
 - [-] Implementar un menú eficiente
