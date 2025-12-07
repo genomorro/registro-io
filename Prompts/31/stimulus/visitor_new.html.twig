@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}New Visitor{% endtrans %}{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="www.gob.mx"><i class="icon icon-home"></i></a></li>
+	<li class="breadcrumb-item"><a href="{{ path('app_index') }}">{% trans %}Begin{% endtrans %}</a></li>
+	<li class="breadcrumb-item"><a href="{{ path('app_visitor_index') }}">{% trans %}Visitor{% endtrans %}</a></li>
+	<li class="breadcrumb-item active" aria-current="page"><a href="{{ path('app_visitor_new') }}">{% trans %}New Visitor{% endtrans %}</a></li>
+    </ol>
+
+    <h1>{% trans %}Create new Visitor{% endtrans %}</h1>
+    <hr class="red">
+
+    <div class="row" {{ stimulus_controller('webrtc') }}>
+	<div class="col-md-6">
+	    {{ form_start(form, {'attr': {'data-webrtc-target': 'form', 'data-action': 'submit->webrtc#capture'}}) }}
+		{{ form_widget(form.evidence, {'attr': {'data-webrtc-target': 'evidence'}}) }}
+		<div class="form-group">
+		    {{ form_label(form.name) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.name) }}
+			    <span class="text-danger">{{ form_errors(form.name) }}</span>
+			</div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    {{ form_label(form.phone) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.phone) }}
+			    <span class="text-danger">{{ form_errors(form.phone) }}</span>
+			</div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    {{ form_label(form.dni) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.dni) }}
+			    <span class="text-danger">{{ form_errors(form.dni) }}</span>
+			</div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    {{ form_label(form.tag) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.tag) }}
+			    <span class="text-danger">{{ form_errors(form.tag) }}</span>
+			</div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    {{ form_label(form.destination) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.destination) }}
+			    <span class="text-danger">{{ form_errors(form.destination) }}</span>
+			</div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    {{ form_label(form.patient) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.patient) }}
+			    <span class="text-danger">{{ form_errors(form.patient) }}</span>
+			</div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    {{ form_label(form.relationship) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.relationship) }}
+			    <span class="text-danger">{{ form_errors(form.relationship) }}</span>
+			</div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    {{ form_label(form.checkInAt) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.checkInAt) }}
+			    <span class="text-danger">{{ form_errors(form.checkInAt) }}</span>
+			</div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    {{ form_label(form.checkOutAt) }}:
+		    <div class="row">
+			<div class="col-md">
+			    {{ form_widget(form.checkOutAt) }}
+			    <span class="text-danger">{{ form_errors(form.checkOutAt) }}</span>
+			</div>
+		    </div>
+		</div>
+
+		<div class="d-grid gap-2 d-md-block">
+		    <button type="submit" value="Save" class="btn btn-primary">{% trans %}Save{% endtrans %}</button>
+		    <button type="reset" value="Reset" class="btn btn-secondary">{% trans %}Reset{% endtrans %}</button>
+		    <a class="btn btn-link" href="{{ path('app_visitor_index') }}" role="button">{% trans %}Back to list{% endtrans %}</a>
+		</div>
+	    {{ form_end(form) }}
+	</div>
+	<div class="col-md-6 d-flex align-items-center justify-content-center">
+	    <video data-webrtc-target="video" width="480" height="360" class="border" autoplay></video>
+	    <canvas data-webrtc-target="canvas" style="display:none;"></canvas>
+	</div>
+    </div>
+{% endblock %}
