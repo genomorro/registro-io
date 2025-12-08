@@ -364,10 +364,13 @@ server {
 - [X] Implementar niveles de usuario
 - [X] Traducir la aplicación
 - [X] Implementar páginas de error
-- [X] Implementar un API REST (GET), para alimentar los datos
+- [ ] Implementar un API REST (GET), para alimentar los datos
 - [X] Reimplementar Botones CheckOut en Attendance
 - [X] Identificar pacientes hospitalizados: Servicio y cama
 - [X] Agregar documento probatorio a Visitor y Attendance
+- [ ] Rotar archivos históricos en `public/upload`
+- [ ] Implementar firma y consentimiento
+- [ ] Corregir instalación en Apache bajo Fedora u otros GNU/Linux
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Crear un Dockerfile
 - [-] Implementar un menú eficiente
