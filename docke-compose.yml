@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  symfony:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: registro-io
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public_html/var:/var/www/public_html/var
+      - ./certs:/etc/apache2/ssl   # opcional si usas SSL
+    environment:
+      APP_ENV: prod
+      APP_DEBUG: "0"
+    restart: unless-stopped

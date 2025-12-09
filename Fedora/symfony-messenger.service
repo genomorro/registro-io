@@ -1,0 +1,16 @@
+[Unit]
+Description=Symfony Messenger Worker
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/registro-io/public_html
+ExecStart=/usr/bin/php bin/console messenger:consume async --time-limit=3600 --memory-limit=512M -vv
+Restart=always
+RestartSec=3
+User=apache
+Group=apache
+Environment=APP_ENV=prod
+
+[Install]
+WantedBy=multi-user.target
