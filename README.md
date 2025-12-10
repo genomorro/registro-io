@@ -54,12 +54,12 @@ En los templates, el control de acceso indica si un botón aparece o no para un 
 ![Diagrama entidad-relación](DER.png)
 
 ## Development
-El sistema esta elaborado en Symfony 7.3 LTS:
+El sistema esta elaborado en Symfony 7.4 LTS:
 ```bash
-Version              7.3.4                            
-Long-Term Support    No                               
-End of maintenance   01/2026 (in +94 days)            
-End of life          01/2026 (in +94 days)            
+  Version              7.4.2
+  Long-Term Support    Yes
+  End of maintenance   11/2028 (in +1086 days)
+  End of life          11/2029 (in +1451 days)
 ```
 El código fuente está disponible en [Gitlab](https://gitlab.com/genomorro/registro-io-code.git)
 
@@ -136,9 +136,9 @@ COPY --link \
 ```
 
 ### Base de datos
-Existe un generador de datos de prueba para [MySQL/MariaDB](Prompts/07/data.sql) y [SQLite3](./Prompts/07/data.sqlite.sql). Es posible ejecutarlo como normalmente se hace con cualquier archivo SQL:
+Existe un archivo SQL que carga usuarios para entrar en el sistema [MySQL/MariaDB](./Databases/MySQL/data.sql) y [SQLite3](./Databases/SQLite/data.sql). Es posible ejecutarlo como normalmente se hace con cualquier archivo SQL:
 ```bash
-sqlite3 Test.db ".read insert_data.sql"
+sqlite3 public_html/var/data_dev.db ".read Databases/SQLite/data.sql"
 ```
 También hay dos archivos CSV generados automáticamente en `data_wragling/out`. Para cargarlos en SQLite3:
 
@@ -175,16 +175,16 @@ Si las páginas de error no se muestran, se pueden cargar manualmente (los núme
 ```bash
 APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/ 403 404 500 502 503
 ```
-Este es un proyecto de Symfony 7.3, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env.local` agregando una línea como:
-```.env.local
+Este es un proyecto de Symfony 7.4, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env` agregando una línea como:
+```.env
 DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.5.8-MariaDB"
 ```
 Ejemplo:
-```.env.local
+```.env
 DATABASE_URL="mysql://registro-io:registro-io.passwd@127.0.0.1:3306/registro-io?serverVersion=11.8.3-MariaDB-0+deb13u1+from+Debian"
 ```
 Para SQLite3 lo correcto es:
-```.env.local
+```.env
 DATABASE_URL="sqlite:///%kernel.project_dir%/var/data_%kernel.environment%.db"
 ```
 Si se requiere solo un usuario y una base de datos limpia, puede ingresarse directamente la siguiente información en la base de datos:
@@ -199,8 +199,8 @@ Si se requiere solo un usuario y una base de datos limpia, puede ingresarse dire
 
 Se han generado [archivos sql para distintas bases de datos](./Databases) ese propósito.
 
-Otros parámetros del archivo `.env.local` que se deben modificar son:
-```.env.local
+Otros parámetros del archivo `.env` que se deben modificar son:
+```.env
 ###> symfony/framework-bundle ###
 APP_ENV=prod
 APP_SECRET=io.iner.gob.mx-secret
@@ -208,7 +208,7 @@ APP_SECRET=io.iner.gob.mx-secret
 ###> symfony/routing ###
 # Configure how to generate URLs in non-HTTP contexts, such as CLI commands.
 # See https://symfony.com/doc/current/routing.html#generating-urls-in-commands
-DEFAULT_URI=http://io.iner.gob.mx
+DEFAULT_URI=https://accesos.iner.gob.mx
 ###< symfony/routing ###
 ###> symfony/mailer ###
 MAILER_DSN=null://null
@@ -227,13 +227,13 @@ chcon -R -t httpd_sys_content_rw_t /var/www/
 ```
 
 ### Web server
-Los ejemplos, asumen que el dominio será [io.iner.gob.mx](io.iner.gob.mx), que el socket de PHP se ubica en `/var/run/php/php-fpm.sock` y que la carpeta del proyecto será `/var/www/registro-io/public_html/public`.
+Los ejemplos, asumen que el dominio será accesos.iner.gob.mx](accesos.iner.gob.mx), que el socket de PHP se ubica en `/var/run/php/php-fpm.sock` y que la carpeta del proyecto será `/var/www/registro-io/public_html/public`.
 
 ```Apache2
-# /etc/apache2/conf.d/io.iner.gob.mx.conf
+# /etc/apache2/conf.d/accesos.iner.gob.mx.conf
 <VirtualHost *:80>
-    ServerName io.iner.gob.mx
-    ServerAlias www.io.iner.gob.mx
+    ServerName accesos.iner.gob.mx
+    ServerAlias www.accesos.iner.gob.mx
 
     # Uncomment the following line to force Apache to pass the Authorization
     # header to PHP: required for "basic_auth" under PHP-FPM and FastCGI
@@ -269,14 +269,14 @@ Los ejemplos, asumen que el dominio será [io.iner.gob.mx](io.iner.gob.mx), que 
     #     FallbackResource disabled
     # </Directory>
 
-    ErrorLog /var/log/apache2/io_error.log
-    CustomLog /var/log/apache2/io_access.log combined
+    ErrorLog /var/log/apache2/accesos_error.log
+    CustomLog /var/log/apache2/accesos_access.log combined
 </VirtualHost>
 ```
 ```Nginx
-# /etc/nginx/conf.d/io.iner.gob.mx.conf
+# /etc/nginx/conf.d/accesos.iner.gob.mx.conf
 server {
-    server_name io.iner.gob.mx www.io.iner.gob.mx;
+    server_name accesos.iner.gob.mx www.io.iner.gob.mx;
     root /var/www/registro-io/public_html/public;
 
     location / {
