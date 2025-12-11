@@ -44,6 +44,7 @@ entity "Visitor" as visitor {
   check_in_at: datetime
   check_out_at: datetime
   relationship: varchar(255)
+  evidence: varchar(255)
 }
 
 entity "Appointment" as appointment {
@@ -65,6 +66,7 @@ entity "Attendance" as attendance {
   check_in_at: datetime
   check_out_at: datetime
   tag: int
+  evidence: varchar(255)
 }
 
 ' Relationships
