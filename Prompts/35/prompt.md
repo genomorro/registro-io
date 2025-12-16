@@ -103,3 +103,25 @@ Información adicional:
 2. La base de datos destino tiene una tabla llamada `appointment`, que corresponde a la entidad Appointment.php
 3. Igualando las tablas origen y destino: 'idCita' = 'id', 'idPac'='patient_id', 'lugRealizacion'='agenda', 'especialidad'='specialty', 'ubicacion'='location', 'fechaCita'='date_at'. Siempre con la modificación de las cadenas que se hacen en el script de Python.
 4. La IP 192.168.27.30 será inaccesible desde tu ubicación, por lo que no podrás hacer una prueba real.
+
+***
+
+Al ejecutar el comando, obtengo el siguiente error:
+```
+ [ERROR] Could not connect to the external database: An exception occurred in the driver:        
+         SQLSTATE[HY000] [1045] Access denied for user 'pbaconnectmsql'@'192.168.27.34' (using   
+         password: YES)                                                                          
+```
+
+Es extraño, porque la IP es incorrecta, yo quiero conectacme a la 192.168.27.30, por lo que esto es lo que hay en mi archivo `env`. 
+
+```
+###> app/import-data ###
+REMOTE_DB_NAME="r3sp1ra770ri4x8025"
+REMOTE_DB_USER="pbaconnectmsql"
+REMOTE_DB_PASSWORD="Tduc$aupydl$5t"
+REMOTE_DB_HOST="192.168.27.30"
+###< app/import-data ###
+```
+
+Revisa por favor, si en algún lugar del código está declarada mal la IP de conexión.
