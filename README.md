@@ -225,9 +225,10 @@ y después si es necesario:
 ```bash
 chcon -R -t httpd_sys_content_rw_t /var/www/
 ```
-
+### Servicios
+La aplicación necesita que se instale un servicio de forma permanente, con el fin de mantener sincronizada la base de datos y rotar los archivos subidos a la aplicación. El guion de inicio para Systemd está disponible en el archivo [symfony-scheduler.service](./services/symfony-scheduler.service)
 ### Web server
-Los ejemplos, asumen que el dominio será accesos.iner.gob.mx](accesos.iner.gob.mx), que el socket de PHP se ubica en `/var/run/php/php-fpm.sock` y que la carpeta del proyecto será `/var/www/registro-io/public_html/public`.
+Los ejemplos, asumen que el dominio será [accesos.iner.gob.mx](accesos.iner.gob.mx), que el socket de PHP se ubica en `/var/run/php/php-fpm.sock` y que la carpeta del proyecto será `/var/www/registro-io/public_html/public`.
 
 ```Apache2
 # /etc/apache2/conf.d/accesos.iner.gob.mx.conf
@@ -368,7 +369,9 @@ server {
 - [X] Reimplementar Botones CheckOut en Attendance
 - [X] Identificar pacientes hospitalizados: Servicio y cama
 - [X] Agregar documento probatorio a Visitor y Attendance
-- [ ] Rotar archivos históricos en `public/upload`
+- [X] Rotar archivos históricos en `public/upload`
+- [X] Crear comandos para sincronizar base de datos
+- [X] Crear servicios cron
 - [ ] Implementar firma y consentimiento
 - [ ] Corregir instalación en Apache bajo Fedora u otros GNU/Linux
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
