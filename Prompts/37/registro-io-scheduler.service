@@ -1,0 +1,16 @@
+[Unit]
+Description=Symfony Scheduler
+After=network.target
+
+[Service]
+User=apache
+Group=apache
+Type=simple
+WorkingDirectory=/var/www/registro-io/public_html
+ExecStart=/usr/bin/php bin/console messenger:consume scheduler_default -vv
+Restart=always
+RestartSec=5s
+Environment=APP_ENV=prod
+
+[Install]
+WantedBy=multi-user.target
