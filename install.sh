@@ -9,12 +9,14 @@ GIT_ROOT="/var/www/registro-io/"
 APP_ROOT="/var/www/registro-io/public_html"
 UPLOADS_DIR="$APP_ROOT/public/uploads"
 VAR_DIR="$APP_ROOT/var"
+HTTPD_USER="apache"
 
 echo "Configurando Symfony en:"
-echo "  GIT_ROOT:   $GIT_ROOT"
-echo "  APP_ROOT:   $APP_ROOT"
-echo "  VAR_DIR:    $VAR_DIR"
-echo "  UPLOADS_DIR:$UPLOADS_DIR"
+echo "   GIT_ROOT: $GIT_ROOT"
+echo "   APP_ROOT: $APP_ROOT"
+echo "    VAR_DIR: $VAR_DIR"
+echo "UPLOADS_DIR: $UPLOADS_DIR"
+echo " HTTPD_USER: $HTTPD_USER"
 echo
 
 echo "Iniciando submódulos…"
@@ -27,8 +29,8 @@ cd "$APP_ROOT" || exit 1
 git checkout master
 
 echo "Instalando dependencias Composer…"
-composer install --no-dev --optimize-autoloader --no-interaction
-composer require symfony/apache-pack
+sudo -u "$HTTPD_USER" composer install --no-dev --optimize-autoloader --no-interaction
+sudo -u "$HTTPD_USER" composer require symfony/apache-pack
 
 echo "Ejecutando migraciones Doctrine…"
 php bin/console make:migration --no-interaction
