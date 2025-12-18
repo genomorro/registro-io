@@ -30,7 +30,7 @@ git checkout master
 
 echo "Instalando dependencias Composer…"
 sudo -u "$HTTPD_USER" composer install --no-dev --optimize-autoloader --no-interaction
-sudo -u "$HTTPD_USER" composer require symfony/apache-pack
+sudo -u "$HTTPD_USER" composer require --no-interaction symfony/apache-pack
 
 echo "Ejecutando migraciones Doctrine…"
 php bin/console make:migration --no-interaction
