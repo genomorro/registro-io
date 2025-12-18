@@ -39,7 +39,7 @@ php bin/console doctrine:migrations:migrate --no-interaction
 echo "Habilitando entorno de producción…"
 sqlite3 "$VAR_DIR/data_dev.db" ".read $GIT_ROOT/Databases/SQLite/data.sql"
 cp "$VAR_DIR/data_dev.db" "$VAR_DIR/data_prod.db"
-composer dump-env prod
+sudo -u "$HTTPD_USER" composer dump-env prod
 
 echo "Limpiando y regenerando cache…"
 php bin/console cache:clear --env=prod
