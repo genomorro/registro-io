@@ -5,8 +5,8 @@
 # Fedora 41 + Apache
 # ===========================================
 
-GIT_ROOT="/var/www/registro-io/"
-APP_ROOT="/var/www/registro-io/public_html"
+GIT_ROOT=$(pwd)
+APP_ROOT="$GIT_ROOT/public_html"
 UPLOADS_DIR="$APP_ROOT/public/uploads"
 VAR_DIR="$APP_ROOT/var"
 HTTPD_USER="apache"
