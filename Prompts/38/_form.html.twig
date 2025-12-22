@@ -1,0 +1,102 @@
+{% set form_attr = form_attr|default({}) %}
+{{ form_start(form, {'attr': form_attr}) }}
+    {{ form_widget(form.evidence, {'attr': {'data-webrtc-target': 'evidence'}}) }}
+    <div class="form-group">
+        {{ form_label(form.name) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.name) }}
+                <span class="text-danger">{{ form_errors(form.name) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.phone) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.phone) }}
+                <span class="text-danger">{{ form_errors(form.phone) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" data-controller="conditional-field" data-conditional-field-condition-value="Otro">
+        {{ form_label(form.dni) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.dni, {'attr': {'data-action': 'change->conditional-field#toggle'}}) }}
+                <span class="text-danger">{{ form_errors(form.dni) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group d-none" data-conditional-field-target="field">
+        {{ form_label(form.dni_other) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.dni_other) }}
+                <span class="text-danger">{{ form_errors(form.dni_other) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.tag) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.tag) }}
+                <span class="text-danger">{{ form_errors(form.tag) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.destination) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.destination) }}
+                <span class="text-danger">{{ form_errors(form.destination) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.patient) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.patient) }}
+                <span class="text-danger">{{ form_errors(form.patient) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.relationship) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.relationship) }}
+                <span class="text-danger">{{ form_errors(form.relationship) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.checkInAt) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.checkInAt) }}
+                <span class="text-danger">{{ form_errors(form.checkInAt) }}</span>
+            </div>
+        </div>
+    </div>
+    {% if form.checkOutAt is defined %}
+    <div class="form-group">
+        {{ form_label(form.checkOutAt) }}:
+        <div class="row">
+            <div class="col-md">
+                {{ form_widget(form.checkOutAt) }}
+                <span class="text-danger">{{ form_errors(form.checkOutAt) }}</span>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="d-grid gap-2 d-md-block">
+        <button type="submit" value="Save" class="btn btn-primary">{% trans %}{{ button_label|default('Save') }}{% endtrans %}</button>
+        <button type="reset" value="Reset" class="btn btn-secondary">{% trans %}Reset{% endtrans %}</button>
+        <a class="btn btn-link" href="{{ path('app_visitor_index') }}" role="button">{% trans %}Back to list{% endtrans %}</a>
+    </div>
+{{ form_end(form) }}
