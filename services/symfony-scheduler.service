@@ -7,7 +7,7 @@ User=apache
 Group=apache
 Type=simple
 WorkingDirectory=/var/www/registro-io/public_html
-ExecStart=/usr/bin/php bin/console messenger:consume scheduler_default -vv
+ExecStart=/usr/bin/php bin/console messenger:consume scheduler_import_data_provider --time-limit=3600 -vvv
 Restart=always
 RestartSec=5s
 Environment=APP_ENV=prod
