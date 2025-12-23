@@ -1,4 +1,4 @@
-# Hides CheckOut in New templates
+# User Log with Visitors
 
 Este es un proyecto de Synfony 7.4, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3 como base de datos. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env` agregando una línea como: 
 ```.env
@@ -54,11 +54,8 @@ Hay un control de acceso a usuarios a nivel del controlador ilustrado en la sigu
 | edit    | ROLE_ADMIN            | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
 | delete  | ROLE_SUPER_ADMIN      | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
-En el sistema existe la vista `app_visitor_new` y `app_visitor_edit` con el campo 'dni' que en estos momentos en el formulario usa un menú de opciones, el cual se incluye la opción "Otro".
+En la entidad Visitor se han creado las propiedades `checkInUser` y `checkOutUser`. El propósito es que `checkInUser` almacene el User que creó el registro, es decir, que hizo el "check in". Mientras que `checkOutUser` guardará que User registró el "check out".
 
-Quiero que al seleccionar la opción "Otro", aparezca un campo de texto con label "Which?". Este campo de texto es lo que valdrá el campo 'dni' en el registro a la base de datos.
+Estos dos campos se llenarán automáticamente, por lo que no es necesario modificar los formularios de src/Form/, solo se debe modificar el VisitorController.
 
-De la misma manera y en este mismo caso, al momento de editar, el campo 'dni' deberá mostrar el valor correcto guardado en la base de datos, ya sea agregando la opción al ChooseType por medio de JavaScript o habilitando el valor otro y mostrando el valor final en el campo de texto "Which?".
-
-
-
+Verifica y realiza el cambio si es posible.
