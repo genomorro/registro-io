@@ -1,77 +1,80 @@
-@startuml
+@startuml ERD
 
-' Diagram settings
+!theme vibrant
 hide circle
-skinparam linetype ortho
-skinparam shadowing false
-skinparam roundCorner 5
-skinparam defaultFontName "Roboto, Helvetica"
-skinparam class {
-    BackgroundColor PaleGreen
-    ArrowColor SeaGreen
-    BorderColor SeaGreen
-}
+skinparam linetype polyline
 
 ' Title
 title Entity-Relationship Diagram for Patient/Visitor System
 
-' Entities
 entity "User" as user {
-  + id: int <<PK>>
+  + id: int
   --
-  username: varchar(180) <<unique>>
-  roles: json
-  password: varchar(255)
-  name: varchar(255)
+  * username: string
+  * roles: array
+  * password: string
+  * name: string
 }
 
 entity "Patient" as patient {
-  + id: int <<PK>>
+  + id: int
   --
-  file: varchar(12) <<unique>>
-  name: varchar(255)
-  disability: boolean
+  * file: string
+  * name: string
+  * disability: bool
+}
+
+entity "Hospitalized" as hospitalized {
+  + id: int
+  --
+  * service: string
+  * bed: string
 }
 
 entity "Visitor" as visitor {
-  + id: int <<PK>>
+  + id: int
   --
-  name: varchar(255)
-  phone: varchar(255)
-  dni: varchar(255)
-  tag: int
-  destination: varchar(255)
-  check_in_at: datetime
-  check_out_at: datetime
-  relationship: varchar(255)
-  evidence: varchar(255)
+  * name: string
+  phone: string
+  * dni: string
+  * tag: int
+  * destination: string
+  * checkInAt: DateTime
+  checkOutAt: DateTime
+  relationship: string
+  evidence: string
 }
 
 entity "Appointment" as appointment {
-  + id: int <<PK>>
+  + id: int
   --
-  # patient_id: int <<FK>>
-  agenda: varchar(255)
-  specialty: varchar(255)
-  location: varchar(255)
-  date_at: datetime
-  type: varchar(255)
-  status: varchar(255)
+  * agenda: string
+  * specialty: string
+  * location: string
+  * date_at: DateTime
+  * type: string
+  * status: string
 }
 
 entity "Attendance" as attendance {
-  + id: int <<PK>>
+  + id: int
   --
-  # patient_id: int <<FK>>
-  check_in_at: datetime
-  check_out_at: datetime
-  tag: int
-  evidence: varchar(255)
+  * checkInAt: DateTime
+  checkOutAt: DateTime
+  * tag: int
+  evidence: string
 }
 
 ' Relationships
-patient "1" ||--|{ "0..*" appointment : "schedules"
-patient "1" ||--|{ "0..*" attendance : "has"
-patient "0..*" }o--o{ "0..*" visitor : "is visited by"
+
+user ||--o{ attendance : "checkInUser"
+user ||--o{ attendance : "checkOutUser"
+user ||--o{ visitor : "checkInUser"
+user ||--o{ visitor : "checkOutUser"
+
+patient ||--o{ appointment
+patient ||--o{ attendance
+patient }o--o{ visitor
+patient ||--|| hospitalized
 
 @enduml
