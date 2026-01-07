@@ -367,12 +367,19 @@ server {
 - [X] Implementar páginas de error
 - [ ] Implementar un API REST (GET), para alimentar los datos
 - [X] Reimplementar Botones CheckOut en Attendance
+- [X] Crear la entidad Hospitalized
 - [X] Identificar pacientes hospitalizados: Servicio y cama
 - [X] Agregar documento probatorio a Visitor y Attendance
 - [X] Rotar archivos históricos en `public/upload`
 - [X] Crear comandos para sincronizar base de datos
 - [X] Crear servicios cron
-- [ ] Implementar firma y consentimiento
+- [X] Relacionar la entidad User con checkInAt y checkOutAt de Visitor y Attendance
+- [ ] Mostrar la relación User-check in/out según corresponda
+- [ ] Crear la entidad Stakeholder
+- [ ] Adaptar a dispositivos móviles como opción. Puede haber múltiples cámaras
+- [ ] Implementar firma autógrafa
+- [ ] Revisar UI de las vistas Hospitalized y Stakeholder
+- [ ] Implementar una interfaz que relacione una tablet con la firma autógrafa
 - [ ] Corregir instalación en Apache bajo Fedora u otros GNU/Linux
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Crear un Dockerfile
