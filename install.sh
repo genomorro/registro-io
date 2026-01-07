@@ -38,7 +38,7 @@ php bin/console make:migration --no-interaction
 php bin/console doctrine:migrations:migrate --no-interaction
 
 echo "Habilitando entorno de producción…"
-sqlite3 "$VAR_DIR/data_dev.db" ".read $GIT_ROOT/Databases/SQLite/data.sql"
+sqlite3 "$VAR_DIR/data_dev.db" ".read $GIT_ROOT/Databases/SQLite/user.sql"
 cp "$VAR_DIR/data_dev.db" "$VAR_DIR/data_prod.db"
 sudo -u "$HTTPD_USER" composer dump-env prod
 
