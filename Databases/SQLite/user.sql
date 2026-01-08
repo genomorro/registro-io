@@ -8,5 +8,4 @@ INSERT INTO "user" ("id","username","roles","password","name") VALUES (3,'oficia
 INSERT INTO "user" ("id","username","roles","password","name") VALUES (4,'Jefe_Servicio','["ROLE_USER"]','$2y$13$ayzvOKNVDswnT8QTjnLJR.f1AGbjRe2.KbMs2iI8pPuqNyToihY56','Juan Jose Mejia Lozada');
 INSERT INTO "user" ("id","username","roles","password","name") VALUES (5,'Jefa_Turno_A','["ROLE_USER"]','$2y$13$UergpkKH6zYUjXu.Wc1Tkek8R/ueXv.Qe.BBsad6pfvU1jI.IIUQW','Laura Berenice Romero Tejada');
 INSERT INTO "user" ("id","username","roles","password","name") VALUES (6,'Jefa_Turno_B','["ROLE_USER"]','$2y$13$qwVlHfw8Vli.Bm6DzMkvZuBFn.bmFXmfJnVQEMS1DHoAats1is3sG','Maria Cruz Hernandez Galicia');
-CREATE UNIQUE INDEX UNIQ_IDENTIFIER_USERNAME ON user (username);
 COMMIT;
