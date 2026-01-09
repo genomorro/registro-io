@@ -27,6 +27,7 @@ git submodule update
 echo "Despliegue Symfony iniciado…"
 cd "$APP_ROOT" || exit 1
 git config --global --add safe.directory "$APP_ROOT"
+sudo -u "$HTTPD_USER" git config --global --add safe.directory "$APP_ROOT"
 git checkout master
 
 echo "Instalando dependencias Composer…"
