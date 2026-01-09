@@ -54,6 +54,8 @@ Hay un control de acceso a usuarios a nivel del controlador ilustrado en la sigu
 | edit    | ROLE_ADMIN            | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
 | delete  | ROLE_SUPER_ADMIN      | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
-Existe el comando `app:import-data:hospitalized` que importa registros de una base de datos a la tabla 'hospitalized' del sistema. Por favor crea la siguiente validación:
+Existe el comando `app:import-data` que importa registros de una base de datos externa al sistema. Cuando la base de datos del sistema es SQLite3, este comando bloquea la base de datos. Impidiendo que sea usada.
 
-Si un registro que se desea exportar tiene un id_patient que no existe en la tabla 'patient' de la base de datos del sistema, este registro debe omitirse.
+Esto causa un error 500 con la siguiente descripción: An exception occurred while executing a query: SQLSTATE[HY000]: General error: 5 database is locked
+
+Quiero que crees una página de mantenimiento que aparezca mientras se ejecuta el comando de importación o cualquiera de sus variantes: `app:import-data:patient`, `app:import-data:appointment`, `app:import-data:hospitalized`
