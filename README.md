@@ -335,6 +335,24 @@ server {
     access_log /var/log/nginx/io_access.log;
 }
 ```
+## Respaldo
+Los archivos y directorios a respaldar son las carpetas dentro de `public/uploads` que contienen las imágenes del sistema y si la base de datos es SQLite3, también deben guardarse los archivos con extensión `.db` ubicados en la carpeta `var/`.
+
+## Comandos
+
+Existen cuatro comandos dentro del sistema que sirven para hacer tareas de mantenimiento.
+
+1. Sincronización con el Expediente Clínico Electrónico:
+```
+symfony console app:import-data
+```
+Este comando, de hecho, ejecuta tres comandos, `app:import-data:patient`, `app:import-data:appointment`, `app:import-data:hospitalized`.
+
+2. Rotación de archivos creados por el sistema
+```
+symfony console app:compress-image
+```
+
 ## Roadmap
 - [X] Crear la entidad Patient
 - [X] Crear la entidad Appointment
