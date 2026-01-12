@@ -44,7 +44,9 @@ Yo como _solicitante al servicio de camillería_ quiero **tener una serie de cri
 
 ## Pregunta 1
 ¿Cómo manejar pacientes que deben reprogramar/reagendar citas canceladas/modificadas
-
+### Respuesta
+Será un proceso de decisión fuera del sistema
 ## Pregunta 2
 ¿Se requiere alguna restricción de tiempo para el registro de entrada y/o salida?
-
+### Respuesta
+No
