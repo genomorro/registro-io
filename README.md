@@ -392,12 +392,14 @@ symfony console app:compress-image
 - [X] Crear comandos para sincronizar base de datos
 - [X] Crear servicios cron
 - [X] Relacionar la entidad User con checkInAt y checkOutAt de Visitor y Attendance
-- [ ] Mostrar la relación User-check in/out según corresponda
-- [ ] Crear la entidad Stakeholder
-- [ ] Adaptar a dispositivos móviles como opción. Puede haber múltiples cámaras
-- [ ] Implementar firma autógrafa
+- [x] Mostrar la relación User-check in/out según corresponda
+- [x] Crear la entidad Stakeholder
+- [x] Adaptar a dispositivos móviles como opción. Puede haber múltiples cámaras
+- [x] Implementar firma autógrafa
 - [ ] Revisar UI de las vistas Hospitalized y Stakeholder
 - [ ] Implementar una interfaz que relacione una tablet con la firma autógrafa
+- [ ] Implementar modo de mantenimiento
+- [ ] Implementar solo actualización al importar datos para no bloquear la base de datos SQLite3
 - [ ] Corregir instalación en Apache bajo Fedora u otros GNU/Linux
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Crear un Dockerfile
