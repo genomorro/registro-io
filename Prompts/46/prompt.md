@@ -1,4 +1,4 @@
-# Fix Command Hospitalized
+# Fix Command Update
 
 Este es un proyecto de Synfony 7.4, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3 como base de datos. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env` agregando una línea como: 
 ```.env
@@ -58,4 +58,34 @@ Existe el comando `app:import-data` que importa registros de una base de datos e
 
 Esto causa un error 500 con la siguiente descripción: An exception occurred while executing a query: SQLSTATE[HY000]: General error: 5 database is locked
 
-Quiero que crees una página de mantenimiento que aparezca mientras se ejecuta el comando de importación o cualquiera de sus variantes: `app:import-data:patient`, `app:import-data:appointment`, `app:import-data:hospitalized`
+Quiero que modifiques los comandos `app:import-data:patient`, `app:import-data:appointment`, `app:import-data:hospitalized` creando la opción `--update` o `-u` para que lean los registros de la base de datos y si hay cambios con respecto a la base de datos origen realicen los cambios pertinentes, ya sea actualizar un registro, borrar un registro que ya no está o crear un registro nuevo. De tal forma que no haya necesidad de borrar toda la información de las tablas como ahora.
+
+Notas a considerar:
+
+1. Quiero conservar el comportamiento actual de los comandos, por lo que no debes borrar está lógica, solo agregar la nueva.
+2. Estas nuevas funciones deben poder usarse tanto en SQLite3 como en MySQL
+
+*** 
+Me encuentro con los siguientes problemas:
+
+1. Cuando ejecuto `php  bin/console app:import-data`, no se ejecuta el comando, por alguna razón no logra conectarse a la base de datos, aunque si ejecuto los comandos por separado si lo hace. El error es el siguiente:
+```
+```
+
+2. Cuando ejecuto `php  bin/console app:import-data:patient` obtengo un error que parece aislado, pero me gustaría que analizaras:
+```
+[ERROR] An error occurred during data update: While adding an entity of class App\Entity\Patient with an ID hash of    
+         "727317" to the identity map,                                                                                  
+         another object of class App\Entity\Patient was already present for the same ID. This exception                 
+         is a safeguard against an internal inconsistency - IDs should uniquely map to                                  
+         entity object instances. This problem may occur if:                                                            
+                                                                                                                        
+         - you use application-provided IDs and reuse ID values;                                                        
+         - database-provided IDs are reassigned after truncating the database without                                   
+         clearing the EntityManager;                                                                                    
+         - you might have been using EntityManager#getReference() to create a reference                                 
+         for a nonexistent ID that was subsequently (by the RDBMS) assigned to another                                  
+         entity.                                                                                                        
+                                                                                                                        
+         Otherwise, it might be an ORM-internal inconsistency, please report it.           
+```
