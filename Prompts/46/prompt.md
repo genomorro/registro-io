@@ -64,28 +64,3 @@ Notas a considerar:
 
 1. Quiero conservar el comportamiento actual de los comandos, por lo que no debes borrar está lógica, solo agregar la nueva.
 2. Estas nuevas funciones deben poder usarse tanto en SQLite3 como en MySQL
-
-*** 
-Me encuentro con los siguientes problemas:
-
-1. Cuando ejecuto `php  bin/console app:import-data`, no se ejecuta el comando, por alguna razón no logra conectarse a la base de datos, aunque si ejecuto los comandos por separado si lo hace. El error es el siguiente:
-```
-```
-
-2. Cuando ejecuto `php  bin/console app:import-data:patient` obtengo un error que parece aislado, pero me gustaría que analizaras:
-```
-[ERROR] An error occurred during data update: While adding an entity of class App\Entity\Patient with an ID hash of    
-         "727317" to the identity map,                                                                                  
-         another object of class App\Entity\Patient was already present for the same ID. This exception                 
-         is a safeguard against an internal inconsistency - IDs should uniquely map to                                  
-         entity object instances. This problem may occur if:                                                            
-                                                                                                                        
-         - you use application-provided IDs and reuse ID values;                                                        
-         - database-provided IDs are reassigned after truncating the database without                                   
-         clearing the EntityManager;                                                                                    
-         - you might have been using EntityManager#getReference() to create a reference                                 
-         for a nonexistent ID that was subsequently (by the RDBMS) assigned to another                                  
-         entity.                                                                                                        
-                                                                                                                        
-         Otherwise, it might be an ORM-internal inconsistency, please report it.           
-```
