@@ -32,23 +32,23 @@ Actualmente existen cuatro entidades, Patient, Visitor, Appointment y Attendance
 
 Hay un control de acceso a usuarios a nivel del controlador ilustrado en la siguiente tabla de permisos, en los métodos indicados en la primera columna.
 
-|        | Appointment      | Attendance       | Patient          | Visitor          | User             |
-|--------|------------------|------------------|------------------|------------------|------------------|
-| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       |
-| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       |
-| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| edit   | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_USER        |
-| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
+|        | Appointment      | Attendance       | Patient          | Visitor          | User             | Stakeholder      |
+|--------|------------------|------------------|------------------|------------------|------------------|------------------|
+| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        |
+| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        |
+| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| edit   | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 En los templates, el control de acceso indica si un botón aparece o no para un usuario, de tal forma que puede ver la ruta.
 
-|        | Appointment      | Attendance       | Patient          | Visitor          | User             |
-|--------|------------------|------------------|------------------|------------------|------------------|
-| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       |
-| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       |
-| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| edit   | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        |
-| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
+|        | Appointment      | Attendance       | Patient          | Visitor          | User             | Stakeholder      |
+|--------|------------------|------------------|------------------|------------------|------------------|------------------|
+| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        |
+| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        |
+| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| edit   | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN |
+| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 ## Diagrama entidad-relación
 ![Diagrama entidad-relación](DER.png)
@@ -391,15 +391,15 @@ symfony console app:compress-image
 - [X] Rotar archivos históricos en `public/upload`
 - [X] Crear comandos para sincronizar base de datos
 - [X] Crear servicios cron
-- [X] Relacionar la entidad User con checkInAt y checkOutAt de Visitor y Attendance
+- [x] Relacionar la entidad User con checkInAt y checkOutAt de Visitor y Attendance
 - [x] Mostrar la relación User-check in/out según corresponda
 - [x] Crear la entidad Stakeholder
 - [x] Adaptar a dispositivos móviles como opción. Puede haber múltiples cámaras
 - [x] Implementar firma autógrafa
-- [ ] Revisar UI de las vistas Hospitalized y Stakeholder
+- [x] Revisar UI de las vistas Hospitalized y Stakeholder
 - [ ] Implementar una interfaz que relacione una tablet con la firma autógrafa
 - [ ] Implementar modo de mantenimiento
-- [ ] Implementar solo actualización al importar datos para no bloquear la base de datos SQLite3
+- [x] Implementar solo actualización al importar datos para no bloquear la base de datos SQLite3
 - [ ] Corregir instalación en Apache bajo Fedora u otros GNU/Linux
 - [ ] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Crear un Dockerfile
