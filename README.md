@@ -352,6 +352,14 @@ Este comando, de hecho, ejecuta tres comandos, `app:import-data:patient`, `app:i
 ```
 symfony console app:compress-image
 ```
+Este comando realiza las siguientes acciones:
+| Condición | Acción                    |
+|-----------|---------------------------|
+| PNG       | `png → png.gz`            |
+| SVG       | `svg → svg.gz`            |
+| ≥12 meses | Comprime archivos         |
+| ≥24 meses | Empaqueta en `.tar.gz`    |
+| ≥36 meses | Borra archivos históricos |
 
 ## Roadmap
 - [X] Crear la entidad Patient
