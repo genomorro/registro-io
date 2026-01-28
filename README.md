@@ -171,6 +171,10 @@ Se deben cargar los assets manualmente:
 ```bash
 php bin/console asset-map:compile
 ```
+También hay que cargar el framework de Gob-mx:
+```bash
+symfony console app:gob-mx
+```
 Si las páginas de error no se muestran, se pueden cargar manualmente (los números pueden omitirse):
 ```bash
 APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/ 403 404 500 502 503
@@ -340,15 +344,24 @@ Los archivos y directorios a respaldar son las carpetas dentro de `public/upload
 
 ## Comandos
 
-Existen cuatro comandos dentro del sistema que sirven para hacer tareas de mantenimiento.
+Existen cinco comandos dentro del sistema que sirven para hacer tareas de mantenimiento.
 
 1. Sincronización con el Expediente Clínico Electrónico:
-```
+```bash
 symfony console app:import-data
 ```
 Este comando, de hecho, ejecuta tres comandos, `app:import-data:patient`, `app:import-data:appointment`, `app:import-data:hospitalized`.
 
-2. Rotación de archivos creados por el sistema
+Cada uno de estos comandos, borra la tabla correspondiente de la base de datos, posteriormente, copia nueva información. Si solo se quiere actualizar, se debe usar la bandera `-u`:
+```bash
+symfony console app:import-data -u
+```
+2. Instalar el Framework Gob.mx sin que colisionen las versiones de Bootstrap, antes de poner en producción el sistema hay que ejecutar:
+```bash
+symfony console app:gob-mx
+```
+Este comando, modifica el archivo en línea de `gobmx.js`, si ese archivo es modificado en el CDN de Gob.mx se deberá modificar el comando.
+3. Rotación de archivos creados por el sistema
 ```
 symfony console app:compress-image
 ```
