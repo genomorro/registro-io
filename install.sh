@@ -34,6 +34,9 @@ echo "Instalando dependencias Composer…"
 sudo -u "$HTTPD_USER" composer install --no-dev --optimize-autoloader --no-interaction
 sudo -u "$HTTPD_USER" composer require --no-interaction symfony/apache-pack
 
+echo "Instalando framework Gob.mx"
+php bin/console app:gob-mx
+
 echo "Ejecutando migraciones Doctrine…"
 php bin/console make:migration --no-interaction
 php bin/console doctrine:migrations:migrate --no-interaction
@@ -59,7 +62,6 @@ APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/ 403 404 500 
 echo "Crear directorios var y uploads si no existen…"
 [ ! -d "$VAR_DIR" ] && mkdir -p "$VAR_DIR"
 [ ! -d "$UPLOADS_DIR" ] && mkdir -p "$UPLOADS_DIR"
-
 
 echo "Corrigiendo permisos…"
 chown -R apache:apache "$APP_ROOT"
