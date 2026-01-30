@@ -54,6 +54,21 @@ Hay un control de acceso a usuarios a nivel del controlador ilustrado en la sigu
 | edit   | ROLE_ADMIN           | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
 | delete | ROLE_SUPER_ADMIN     | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
+La aplicación usa el framework Gob.mx. Este framework se carga desde un CDN, por lo que no puedo modificarlo. Se carga desde las líneas 14, 15 y 28 del template `base.html.twig`. Ese framework, carga bootstrap 5.3.3 desde el archivo gobmx.js
+
+Esto provoca que múltiples instancias de Bootstrap sean cargadas, ya que AssetMapper lo carga para que funcione UX-Autocomplete. Esto causa conflictos con algunos eventos como `data-bs-toggle` que causa fallas aleatorias al expandir y colapsar menús.
+
+Será posible hacer funcionar el sitio, especialmente UX-Autocomplete evitando conflictos de bibliotecas con el framework Gob.mx.
+
+Mi solución ideal sería:
+
+1. Crea un comando llamado `app:gob-mx`
+2. Al ser llamado, el comando descarga el archivo `gobmx.js` y lo coloca en assets/vendor/gobmx
+3. Modifica el archivo `gobmx.js` para que no cargue Bootstrap
+4. Se carga el framework Gob.mx desde el archivo modificado.
+
+***
+
 El menú de la aplicación está definido en el template `menu.html.twig`. Este menú está completo pero tiene un problema: de forma aleatoria, en el menú responsivo una vez que se despliega, no se vuelve a compactar. De forma similar, si tuviera una opción Dropdown, de forma aleatoria, al presionar, no se despliega. Esto puede deberse al uso del framework Gob.mx. He descargado los tres archivos básicos de este framework en la carpeta `assets/style`: main.css, main.js gobmx.js
 
 Quiero que hagas dos tareas:
