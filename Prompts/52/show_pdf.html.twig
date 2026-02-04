@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans %}Stakeholder{% endtrans %}</title>
+    <style>
+        body { font-family: sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; width: 30%; }
+        .header { text-align: center; margin-bottom: 20px; }
+        hr.red { border: 0; border-top: 2px solid #611232; margin-bottom: 20px; }
+        .img-container { text-align: center; margin-top: 20px; display: inline-block; width: 45%; vertical-align: top; }
+        .img-container img { max-width: 100%; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{% trans %}Stakeholder{% endtrans %}</h1>
+    </div>
+    <hr class="red">
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <td>{{ stakeholder.id }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ stakeholder.name|title }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}DNI{% endtrans %}</th>
+                <td>{{ stakeholder.dni }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Tag{% endtrans %}</th>
+                <td>{{ stakeholder.tag }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Subject{% endtrans %}</th>
+                <td>{{ stakeholder.subject }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Destination{% endtrans %}</th>
+                <td>{{ stakeholder.destination }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Check in{% endtrans %}</th>
+                <td>{{ stakeholder.checkInAt ? stakeholder.checkInAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Check out{% endtrans %}</th>
+                <td>{{ stakeholder.checkOutAt ? stakeholder.checkOutAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="width: 100%; margin-top: 30px;">
+        {% if stakeholder.evidence %}
+            <div class="img-container">
+                <h3>{% trans %}Evidence{% endtrans %}</h3>
+                <img src="{{ project_dir ~ '/public' ~ stakeholder.evidence }}" alt="Evidence">
+            </div>
+        {% endif %}
+        {% if stakeholder.sign %}
+            <div class="img-container">
+                <h3>{% trans %}Signature{% endtrans %}</h3>
+                <img src="{{ project_dir ~ '/public' ~ stakeholder.sign }}" alt="Signature">
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
