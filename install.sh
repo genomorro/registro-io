@@ -27,10 +27,10 @@ git submodule update
 echo "Despliegue Symfony iniciado…"
 cd "$APP_ROOT" || exit 1
 git config --global --add safe.directory "$APP_ROOT"
-sudo -u "$HTTPD_USER" git config --global --add safe.directory "$APP_ROOT"
 git checkout master
 
 echo "Instalando dependencias Composer…"
+sudo -u "$HTTPD_USER" git config --global --add safe.directory "$APP_ROOT"
 sudo -u "$HTTPD_USER" composer install --no-dev --optimize-autoloader --no-interaction
 sudo -u "$HTTPD_USER" composer require --no-interaction symfony/apache-pack
 
