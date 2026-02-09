@@ -54,6 +54,21 @@ Hay un control de acceso a usuarios a nivel del controlador ilustrado en la sigu
 | edit   | ROLE_ADMIN           | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
 | delete | ROLE_SUPER_ADMIN     | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
+Actualmente, tengo rutas del tipo "/patient/19" donde el número es el ID de la base de datos. Quiero que en las rutas no se muestre esa información, ya sea que se omita o sea sustituía.
+
+¿Que puedes implementar para este requerimiento?
+***
+
+iFrame
+
+Necesito que la URI del proyecto nunca cambie en el navegador y solo se muestre el dominio principal.
+
+Es decir, que siempre se muestre accesos.iner.gob.mx en la barra de navegación del navegador web, aunque la ruta del sistema sea, por ejemplo, accesos.iner.gob.mx/patient/19
+
+Hay una forma en la que symfony maneje ese comportamiento.
+
+***
+
 Puedes implementar el uso de un ID público para las URI.
 
 Quero que la ruta en el navegador, en lugar de que sea "/patient/19" cambie a algo similar de "/patient/550e8400-e29b-41d4-a716-446655440000".
