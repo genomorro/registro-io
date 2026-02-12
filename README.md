@@ -422,9 +422,9 @@ Este comando realiza las siguientes acciones:
 - [ ] Implementar modo de mantenimiento
 - [x] Implementar solo actualización al importar datos para no bloquear la base de datos SQLite3
 - [ ] Corregir instalación en Apache bajo Fedora u otros GNU/Linux
-- [ ] Implementar flash messages para notificación de errores básicos de la aplicación
+- [x] Implementar flash messages para notificación de errores básicos de la aplicación
 - [ ] Crear un Dockerfile
-- [-] Implementar un menú eficiente
+- [x] Implementar un menú eficiente
 
 Solicitudes de DTIC
 - [X] Ocultar el id
@@ -441,6 +441,7 @@ Solicitudes de DTIC
 - [-] Validar hora de la cita con hora de ingreso, turno matutino y vespertino
 - [-] Validar hora de la cita con hora de ingreso, por cercanía de hora de la cita
 - [-] Usar dos bases de datos
+- [x] Ocultar id de la URI
 
 ## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio [registro-io](https://gitlab.com/genomorro/registro-io) para cualquier tipo de documentación, usa [registro-io-code](https://gitlab.com/genomorro/registro-io-code) para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en [registro-io-code](https://gitlab.com/genomorro/registro-io-code/-/issues).
