@@ -1,0 +1,322 @@
+# src
+## Controller
+### AppointmentController.php
+'Appointment added successfully.': 'Cita agregada exitosamente.'
+'Appointment updated successfully.': 'Cita actualizada exitosamente.'
+'Appointment deleted successfully.': 'Cita borrada exitosamente.'
+### AttendanceController.php
+'Attendance added successfully.': 'Asistencia agregada exitosamente.'
+'Attendance updated successfully.': 'Asistencia actualizada exitosamente.'
+'Attendance deleted successfully.': 'Asistencia borrada exitosamente.'
+### HospitalizedController.php
+'Patient hospitalized added successfully.': 'Paciente hospitalizado agregado exitosamente.'
+'Hospitalized updated successfully.': 'Paciente hospitalizado actualizado exitosamente.'
+'Hospitalized deleted successfully.': 'Paciente hospitalizado borrado exitosamente.'
+### PatientController.php
+'Patient added successfully.': 'Paciente agregado exitosamente.'
+'Patient updated successfully.': 'Paciente actualizado exitosamente.'
+'Patient deleted successfully.': 'Paciente borrado exitosamente.'
+'A numeric tag is required to check in.': 'Se requiere el número de gafete para el registro.'
+'Patient check in successfully.': 'Entrada de paciente registrada exitosamente.'
+'Patient check out successfully.': 'Salida de paciente registrada exitosamente.'
+### RegistrationController.php
+'User added successfully.': 'Usuario agregado exitosamente.'
+### SearchController.php
+'Patient not found': 'Paciente no encontrado'
+'Improve the search criteria': 'Mejora el criterio de búsqueda' 
+'Patient not found for the given name.': 'Paciente no encontrado para el nombre proporcionado.'
+'Patient nor Visitor not found for the given tag.': 'No se encontraron pacientes o visitantes con ese gafete.'
+### StakeholderController.php
+'Stakeholder added successfully.': 'Involucrado agregado exitosamente.'
+'Stakeholder updated successfully.': 'Involucrado actualizado exitosamente.'
+'Stakeholder deleted successfully.': 'Involucrado borrado exitosamente.'
+### UserController.php
+'User updated successfully.': 'Usuario actualizado exitosamente.'
+'User deleted successfully.': 'Usuario borrado exitosamente.'
+### VisitorController.php
+'Visitor added successfully.': 'Visitante agregado exitosamente.'
+'Visitor updated successfully.': 'Visitante actualizado exitosamente.'
+'Visitor deleted successfully.': 'Visitante borrado exitosamente.'
+'Visitor check out successfully.': 'Salida de visitante registrada exitosamente.'
+# templates
+## about.html.twig
+'About': 'Acerca de'
+'Version': 'Versión'
+'for': 'para'
+'License': 'Licencia'
+license:
+  paragraph:
+    one: 'Este software forma parte de'
+    three: 'es software libre; puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General de GNU publicada por la Free Software Foundation; ya sea la versión 3 de la Licencia o (a su elección) cualquier versión posterior.'
+    four: 'distribuye con la esperanza de que sea útil, pero SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Consulte la Licencia Pública General de GNU para obtener más detalles.'
+    five:
+      one: 'bería haber recibido una copia de la Licencia Pública General de GNU junto con'
+      two: 'de no ser así, consulte'
+      three: 'o escriba a la'
+'Symfony Information': 'Información de Symfony'
+'Created by': 'Creado por'
+## base.html.twig
+'Patient and visitor check-in and check-out system': 'Sistema de registro de entrada y salida de pacientes y visitantes'
+## index.html.twig
+'Known issues': 'Problemas conocidos'
+welcome:
+  title: '¡Bienvenido!'
+  sysname: 'Sistema de registro de entrada y salida de pacientes y visitantes'
+  paragraph:
+    one: 'Has entrado en el'
+    two: 'Para usar este sitio web debes tener en cuenta los siguientes elementos de navegación'
+    ul:
+      one:
+        title: 'Menú principal'
+        desc: 'Se encuentra en la parte superior, justo abajo del encabezado del sitio web. Sirve para encontrar las distintas secciones disponibles en el sistema. Es de color rojo y contiene estos elementos actualmente'
+        ul:
+          search: 'Enlace a la búsqueda'
+          sub: 'Submenú de'
+          link: 'Enlace a sección de'
+          lang: 'Cambiar idioma'
+          user: 'Opciones de usuario'
+      two:
+        title: 'Menú de ruta de exploración'
+        desc: 'Es el primer elemento de contenido que se observa en el sitio web. Permite conocer la ruta de su ubicación en directorios y subdirectorios, además puede permitirle una navegación más rápida. Tiene el siguiente aspecto'
+      three: 'El ícono de Home'
+      four: 'siempre será un enlace al sitio principal del Gobierno de México, los otros elementos corresponden a enlaces a páginas de este sitio web, el último elemento, siempre en'
+      five: 'negritas'
+      six: 'es la página donde se ubica actualmente'
+session:
+  title: 'Iniciar sesión'
+  paragraph:
+    one: 'Para iniciar sesión, debe ir al'
+    user: 'botón usuario'
+    two: 'al dar click aparecerá la opción'
+    three: 'Una vez que ha iniciado sesión el'
+    four: 'tendrá las opciones'
+    five: 'Si usted no tiene un usuario para este sitio web, deberá solicitarlo a su superior en el área de trabajo correspondiente.'
+    six: 'Es posible cambiar el idioma de este sitio web, presione el'
+    lang: 'botón de idioma'
+    seven: 'y seleccione su preferencia. Actualmente está disponible el idioma inglés y español.'
+## menu.html.twig
+'Search': 'Buscar'
+'Patients': 'Pacientes'
+'All Patients': 'Todos los pacientes'
+'Hospitalized': 'Hospitalizados'
+'Appointments': 'Citas'
+'Attendances': 'Asistencias'
+'Visitors': 'Visitantes'
+'Stakeholders': 'Involucrados'
+'Reports': 'Reportes'
+'Language': 'Idioma'
+'es_MX': 'Español'
+'es': 'Español'
+'en': 'English'
+'User': 'Usuario'
+'Users': 'Usuarios'
+'Sign in': 'Iniciar sesión'
+'Log out': 'Terminar sesión'
+'Profile': 'Perfil'
+## appointment
+### _delete_form.html.twig
+'Are you sure you want to delete this item?': '¿Está seguro que desea borrar este registro?'
+'Delete': 'Borrar'
+### edit.html.twig
+'Edit Appointment': 'Editar cita'
+'Choose a type of appointment': 'Selecciona un tipo de cita'
+'Patient': 'Paciente'
+'Search by name or by file': 'Buscar por nombre o por expediente'
+'Date at': 'Fecha'
+'Agenda': 'Agenda'
+'Type': 'Tipo'
+'Apertura/Primera vez': 'Apertura/Primera vez'
+'Estudios': 'Estudios'
+'Preconsulta': 'Preconsulta'
+'Primera vez y subsecuente': 'Primera vez y subsecuente'
+'Primera vez': 'Primera vez'
+'Subsecuente': 'Subsecuente'
+'Agendada': 'Agendada'
+'Cancelada': 'Cancelada'
+'Choose a status': 'Selecciona un estado'
+'Update': 'Actualizar'
+'Back to list': 'Volver a la lista'
+'Begin': 'Inicio'
+### index.html.twig
+'Search by Name, Agenda or Date': 'Buscar por nombre, agenda o fecha'
+'Id': 'Id'
+'actions': 'acciones'
+'Appointment index': 'Índice de citas'
+'Location': 'Ubicación'
+'Show': 'Mostrar'
+'Edit': 'Editar'
+'no records found': 'no se encontraron registros'
+'Create new': 'Crear nuevo'
+'Specialty': 'Especialidad'
+'Status': 'Estado'
+### new.html.twig
+'New': 'Nuevo'
+'New Appointment': 'Nueva cita'
+'Create new Appointment': 'Crear nueva cita'
+'Save': 'Guardar'
+'Reset': 'Limpiar'
+### show.html.twig
+'Appointment': 'Cita'
+'Patient name': 'Nombre del paciente'
+'Patient file': 'Expediente del paciente'
+## attendance
+### edit.html.twig
+'Edit Attendance': 'Editar asistencia'
+'Tag': 'Gafete'
+'Check in': 'Hora de entrada'
+'Check out': 'Hora de salida'
+### index.html.twig
+'Attendance index': 'Índice de asistencia'
+'Search by Name or Tag': 'Buscar por nombre o gafete'
+'Are you sure you want to check out?': '¿Está seguro que desea registrar la salida?'
+### new.html.twig
+'New Attendance': 'Nueva asistencia'
+'Create new Attendance': 'Crear nueva asistencia'
+'Your browser does not support the <video> tag': 'Tu navegador no soporta la etiqueta <video>'
+'Flip Camera': 'Cambiar cámara'
+### show.html.twig
+'Attendance': 'Asistencia'
+'User who checked in': 'Usuario que hizo el registro de entrada'
+'User who checked out': 'Usuario que hizo el registro de salida'
+## hospitalized
+### edit.html.twig
+'Edit Hospitalized': 'Editar hospitalización'
+'Service': 'Servicio'
+'Bed': 'Cama'
+### index.html.twig
+'Hospitalized index': 'Índice de hospitalizados'
+'Search by File or Name': 'Buscar por expediente o nombre'
+## patient
+### edit.html.twig
+'File': 'Expediente'
+'Name': 'Nombre'
+'Disability': 'Discapacidad'
+'Edit Patient': 'Editar paciente'
+### index.html.twig
+'Patient index': 'Índice de pacientes'
+### new.html.twig
+'Create new Patient': 'Crear nuevo paciente'
+'New Patient': 'Nuevo paciente'
+### show.html.twig
+"Today's Attendance": 'Asistencia de hoy'
+'Are you sure you want to check in?': '¿Está seguro que desea registrar la entrada?'
+'Is the patient accompanied?': '¿Está el paciente acompañado?'
+'Register visitor': 'Registrar visitante'
+"Today's Appointments": 'Citas agendadas para hoy'
+'No appointments for today.': 'No hay citas agendadas para hoy.'
+'Other Appointments': 'Otras citas'
+'No other appointments.': 'No hay otras citas.'
+"Today's Visitors": 'Visitantes registrados hoy'
+'No visitors for today.': 'No hay visitantes registrados hoy.'
+'Date': 'Fecha'
+'Yes': 'Si'
+'No': 'No'
+## report
+'Patients Today Report': 'Reporte de pacientes de hoy'
+'Patients Attendance Status': 'Estado de asistencia de pacientes'
+'Count': 'Total'
+'Patient List': 'Lista de pacientes'
+'Patient Name': 'Nombre del paciente'
+'Attended': 'Asistió'
+'Not Attended': 'No asistió'
+'User Activity Report': 'Reporte de actividad de usuarios'
+'User Name': 'Nombre de usuario'
+'Attendance Check-ins Today': 'Asistencias - Entradas hoy'
+'Attendance Check-outs Today': 'Asistencias - Salidas hoy'
+'Attendance Check-ins Total': 'Asistencias - Entradas totales'
+'Attendance Check-outs Total': 'Asistencias - Salidas totales'
+'Visitor Check-ins Today': 'Visitantes - Entradas hoy'
+'Visitor Check-outs Today': 'Visitantes - Salidas hoy'
+'Visitor Check-ins Total': 'Visitantes - Entradas totales'
+'Visitor Check-outs Total': 'Visitantes - Salidas totales'
+'Stakeholder Check-ins Today': 'Involucrados - Entradas hoy'
+'Stakeholder Check-outs Today': 'Involucrados - Salidas hoy'
+'Stakeholder Check-ins Total': 'Involucrados - Entradas totales'
+'Stakeholder Check-outs Total': 'Involucrados - Salidas totales'
+## search
+### index.html.twig
+'Search Patient by File': 'Buscar paciente por expediente'
+'Search Options': 'Opciones de búsqueda'
+'Search by Tag': 'Buscar por gafete'
+### check_out.html.twig
+'Check Out List': 'Lista de registro de salida'
+'Check Out by Tag': 'Registro de salida por gafete'
+### name.html.twig
+'Search by Name': 'Buscar por nombre'
+## visitor
+### edit.html.twig
+'Edit Visitor': 'Editar visitante'
+'Phone number': 'Número de teléfono'
+'DNI': 'Identificación'
+'Destination': 'Destino'
+'Hospitalización': 'Hospitalización'
+'Relationship': 'Parentesco'
+### index.html.twig
+'Visitor index': 'Índice de visitantes'
+'Phone': 'Teléfono'
+### new.html.twig
+'New Visitor': 'Nuevo visitante'
+'Create new Visitor': 'Crear nuevo visitante'
+'Choose a DNI': 'Selecciona una identificación'
+'Other DNI': 'Otra identificación'
+'INE': 'INE'
+'Pasaporte': 'Pasaporte'
+'Cédula profesional': 'Cédula profesional'
+'Licencia de conducir': 'Licencia de conducir'
+'INAPAM': 'INAPAM'
+'Otro': 'Otro'
+'Choose a destination': 'Selecciona un destino'
+'Consulta Externa': 'Consulta Externa'
+'CIENI': 'CIENI'
+'Clínica del Asma': 'Clínica del Asma'
+'Clínica de EPOC': 'Clínica de EPOC'
+'Unidad de Urgencias Respiratorias': 'Unidad de Urgencias Respiratorias'
+'Servicio Clínico 1': 'Servicio Clínico 1'
+'Servicio Clínico 2': 'Servicio Clínico 2'
+'Servicio Clínico 3': 'Servicio Clínico 3'
+'Servicio Clínico 4': 'Servicio Clínico 4'
+'Servicio Clínico 5': 'Servicio Clínico 5'
+'Hospital de día': 'Hospital de día'
+'Unidad de Terapia Intermedia': 'Unidad de Terapia Intermedia'
+'Nefrología': 'Nefrología'
+'Oncología': 'Oncología'
+'Broncoscopia Intervencionista': 'Broncoscopia Intervencionista'
+'Broncoscopia': 'Broncoscopia'
+'Servicio Clínico 7': 'Servicio Clínico 7'
+'Neumología Pediátrica Ambulatoria': 'Neumología Pediátrica Ambulatoria'
+'Unidad de Terapia Intensiva Pediátrica': 'Unidad de Terapia Intensiva Pediátrica'
+'Servicio Clínico 8': 'Servicio Clínico 8'
+'Servicio Clínico 9': 'Servicio Clínico 9'
+'Servicio Clínico 10 Postquirúrgicos': 'Servicio Clínico 10 Postquirúrgicos'
+'Servicio Clínico 10 Recuperación': 'Servicio Clínico 10 Recuperación'
+'Choose a relationship': 'Selecciona un parentesco'
+'Paciente': 'Paciente'
+'Padre': 'Padre'
+'Madre': 'Madre'
+'Hijo (a)': 'Hijo (a)'
+'Cónyuge': 'Cónyuge'
+'Concubino (a)': 'Concubino (a)'
+'Hermano (a)': 'Hermano (a)'
+### show.html.twig
+'Visitor': 'Visitante'
+## user
+### index.html.twig
+'User index': 'Índice de usuarios'
+'Search by Name or Username': 'Buscar por nombre o nombre de usuario'
+'Username': 'Nombre de usuario'
+'Roles': 'Permisos'
+### edit.html.twig
+'Edit User': 'Editar usuario'
+## registration
+### register.html.twig
+'Register': 'Registro'
+'Password': 'Contraseña'
+'Repeat Password': 'Confirmar contraseña'
+'User roles': 'Permisos de usuario'
+'Admin': 'Administrador'
+'Super Admin': 'Súper administrador'
+## security
+### login.html.twig
+'Sign in!': '¡Iniciar sesión!'
+'You are logged in as': 'Iniciaste sesión como'
+'Please sign in': 'Inicia sesión, por favor'
