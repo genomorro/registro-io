@@ -57,6 +57,7 @@ Hay un control de acceso a usuarios a nivel del controlador ilustrado en la sigu
 Actualmente, tengo rutas del tipo "/patient/19" donde el número es el ID de la base de datos. Quiero que en las rutas no se muestre esa información, ya sea que se omita o sea sustituía.
 
 ¿Que puedes implementar para este requerimiento?
+
 ***
 
 iFrame
@@ -66,39 +67,3 @@ Necesito que la URI del proyecto nunca cambie en el navegador y solo se muestre 
 Es decir, que siempre se muestre accesos.iner.gob.mx en la barra de navegación del navegador web, aunque la ruta del sistema sea, por ejemplo, accesos.iner.gob.mx/patient/19
 
 Hay una forma en la que symfony maneje ese comportamiento.
-
-***
-
-Puedes implementar el uso de un ID público para las URI.
-
-Quero que la ruta en el navegador, en lugar de que sea "/patient/19" cambie a algo similar de "/patient/550e8400-e29b-41d4-a716-446655440000".
-
-No quiero cambiar el ID interno de la base de datos ni modificar la DB porque importo datos de otra DB comúnmente, pero necesito el uso de UUID únicos en la URI.
-
-¿Podrías implementar algún tipo de hash para el id de cada entidad, el cual transforme dicho número sin tener que usar un segundo id "público"? O dame alguna otra alternativa que esté disponible en Symfony.
-
-
-***
-
-#[ORM\Column(length: 64, unique: true)]
-private string $publicId;
-
-
-
-
-
-
-use Symfony\Component\Uid\Uuid;
-
-$this->publicId = Uuid::v4()->toRfc4122();
-
-
-
-
-
-
-#[Route('/patient/{publicId}')]
-public function show(string $publicId, PatientRepository $repo)
-{
-    $patient = $repo->findOneBy(['publicId' => $publicId]);
-}
