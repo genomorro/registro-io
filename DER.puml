@@ -1,80 +1,108 @@
-@startuml ERD
-
-!theme vibrant
-hide circle
-skinparam linetype polyline
+@startuml DER
 
 ' Title
 title Entity-Relationship Diagram for Patient/Visitor System
 
 entity "User" as user {
-  + id: int
+  + id : integer <<PK>>
   --
-  * username: string
-  * roles: array
-  * password: string
-  * name: string
+  * username : string
+  * roles : json
+  * password : string
+  * name : string
 }
 
 entity "Patient" as patient {
-  + id: int
+  + id : integer <<PK>>
   --
-  * file: string
-  * name: string
-  * disability: bool
+  * file : string
+  * name : string
+  * disability : boolean
 }
 
 entity "Hospitalized" as hospitalized {
-  + id: int
+  + id : integer <<PK>>
   --
-  * service: string
-  * bed: string
-}
-
-entity "Visitor" as visitor {
-  + id: int
-  --
-  * name: string
-  phone: string
-  * dni: string
-  * tag: int
-  * destination: string
-  * checkInAt: DateTime
-  checkOutAt: DateTime
-  relationship: string
-  evidence: string
+  * service : string
+  * bed : string
+  * patient_id : integer <<FK>>
 }
 
 entity "Appointment" as appointment {
-  + id: int
+  + id : integer <<PK>>
   --
-  * agenda: string
-  * specialty: string
-  * location: string
-  * date_at: DateTime
-  * type: string
-  * status: string
+  * agenda : string
+  * specialty : string
+  * location : string
+  * date_at : datetime
+  * type : string
+  * status : string
+  * patient_id : integer <<FK>>
 }
 
 entity "Attendance" as attendance {
-  + id: int
+  + id : integer <<PK>>
   --
-  * checkInAt: DateTime
-  checkOutAt: DateTime
-  * tag: int
-  evidence: string
+  * check_in_at : datetime
+  check_out_at : datetime
+  * tag : integer
+  evidence : string
+  * patient_id : integer <<FK>>
+  * check_in_user_id : integer <<FK>>
+  check_out_user_id : integer <<FK>>
 }
 
-' Relationships
+entity "Visitor" as visitor {
+  + id : integer <<PK>>
+  --
+  * name : string
+  phone : string
+  * dni : string
+  * tag : integer
+  * destination : string
+  * check_in_at : datetime
+  check_out_at : datetime
+  relationship : string
+  evidence : string
+  * check_in_user_id : integer <<FK>>
+  check_out_user_id : integer <<FK>>
+}
 
-user ||--o{ attendance : "checkInUser"
-user ||--o{ attendance : "checkOutUser"
-user ||--o{ visitor : "checkInUser"
-user ||--o{ visitor : "checkOutUser"
+entity "Stakeholder" as stakeholder {
+  + id : integer <<PK>>
+  --
+  * name : string
+  * dni : string
+  * tag : integer
+  * subject : string
+  * destination : string
+  * check_in_at : datetime
+  check_out_at : datetime
+  evidence : string
+  sign : string
+  * check_in_user_id : integer <<FK>>
+  check_out_user_id : integer <<FK>>
+}
 
-patient ||--o{ appointment
-patient ||--o{ attendance
-patient }o--o{ visitor
-patient ||--|| hospitalized
+entity "visitor_patient" as visitor_patient {
+  * visitor_id : integer <<FK>>
+  * patient_id : integer <<FK>>
+}
+
+hospitalized ||--|| patient : "patient_id"
+patient ||--o{ appointment : "patient_id"
+patient ||--o{ attendance : "patient_id"
+
+visitor_patient }o--|| visitor
+visitor_patient }o--|| patient
+
+attendance }o--|| user : "check_in_user_id"
+attendance }o--o| user : "check_out_user_id"
+
+visitor }o--|| user : "check_in_user_id"
+visitor }o--o| user : "check_out_user_id"
+
+stakeholder }o--|| user : "check_in_user_id"
+stakeholder }o--o| user : "check_out_user_id"
 
 @enduml
