@@ -39,7 +39,38 @@
 
 ***
 
-## Salida de pacientes y visitantes
+## Entrada de otros involucrados
+### Requisitos
+1. Entregar identificación
+### Procedimiento
+1. Se indica que cada persona que ingresa debe registrarse
+2. Se solicita la identificación
+4. El involucrado se registra en la libreta de entrada
+5. El involucrado recibe un gafete
+6. El involucrado recibe indicaciones sobre su estancia en el hospital, por ejemplo, que mantengan su gafete visible
+### Datos registrados
+1. Nombre completo
+2. Número de gafete
+3. Empresa para la cual labora
+4. Área del hospital que visita
+5. Asunto
+6. Firma
+7. Hora de entrada
+8. Hora de salida
+
+Existen diferentes tipos de involucrados, solo tratan de forma distinta a los provedores, otros visitantes tienen distintos asuntos:
+
+- Cultura
+- Medio de comunicación
+- Estudiante
+- Escuela
+- Expositor
+- Trabajo
+- Documentación
+
+***
+
+## Salida de pacientes, visitantes y otros involucrados
 ### Requisitos
 1. Gafete
 ### Procedimiento
