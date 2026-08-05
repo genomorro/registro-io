@@ -1,23 +1,20 @@
-PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username VARCHAR(180) NOT NULL, roles CLOB NOT NULL --(DC2Type:json)
-        , password VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL);
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (1,'iner','["ROLE_USER","ROLE_ADMIN","ROLE_SUPER_ADMIN"]','$2y$13$qB6pSIFpMa7MDo63bBVv4umNDPpbzWd/S6khhc/V1DS/Z0qlK.i8O','Coordinación de sistemas');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (2,'genomorro','["ROLE_USER","ROLE_ADMIN"]','$2y$13$DeHdtjMyujp6IezLDHX/..CTIq7rY88Ql6sJszZPt4IK7FfUE.t8O','Edgar Uriel Domínguez Espinoza');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (3,'oficial','["ROLE_USER"]','$2y$13$LmrxC1kW003N.b.Bq5P.H.l/QabK0NPoa7FWZ5.08PPNAvN8qp9FW','Oficial de Vigilancia');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (4,'Coordinacion','["ROLE_USER","ROLE_ADMIN"]','$2y$13$tp9VG3ATeywYEp511mvuFuWUK57WELdgn2OD6Bp28TRSYx0hr0kqC','Coordinación de Seguridad y Vigilancia');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (5,'Jefe_Servicio','["ROLE_USER"]','$2y$13$ayzvOKNVDswnT8QTjnLJR.f1AGbjRe2.KbMs2iI8pPuqNyToihY56','Juan Jose Mejia Lozada');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (6,'Jefa_Turno_A','["ROLE_USER"]','$2y$13$qg3k5qDNEzdYHM7UXQxfM.GX3b/zdTn6/bO8jmbcMMS2XUf9IyF6K','Laura Berenice Romero Tejada');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (7,'Jefa_Turno_B','["ROLE_USER"]','$2y$13$qwVlHfw8Vli.Bm6DzMkvZuBFn.bmFXmfJnVQEMS1DHoAats1is3sG','Maria Cruz Hernandez Galicia');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (8,'eduardo.arvizu.01','["ROLE_USER"]','$2y$13$qta8s/Bs2AUiDnChEGcrp.kChgCR1ZT.pVOizB8JnTXQ6c8eN.i3S','Arvizu Herrejón Diego Eduardo');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (9,'ivan.arvizu.02','["ROLE_USER"]','$2y$13$M4iQi5CPaWTUVXS79ia63eA0Dot9uNvY.OXOYqOehQhY2plFInFiS','Arvizu Herrejón Diego Iván');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (10,'araceli.gonzalez.03','["ROLE_USER"]','$2y$13$th70tDHjt7cR39/D3VFF9OuoWvSEOSlFrW1EE25wxOOqUn5Mdsvke','González Carmona Araceli');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (11,'Erika.hernandez.04','["ROLE_USER"]','$2y$13$GXgohiZAhpTk2OkgAp36/.hXx2epV.k8Zs5ABZ64Dq6DhdwqTdFR2','Hernández Jiménez Erika Andrea');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (12,'juana.juarez.05','["ROLE_USER"]','$2y$13$fb3z1dJTT/Oq.NNF92RSf.72mYJLsnof7DJW2zrQsiH8T0IK/JWu2','Juárez Bernal Juana');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (13,'mariana.mecalco.06','["ROLE_USER"]','$2y$13$BMFawU/c4AyLaoUViDp88eWYkNGEzUBCFSLTmYEKdx9c63Pynzw/K','Mecalco López Mariana');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (14,'kateryn.ramirez.07','["ROLE_USER"]','$2y$13$be8pwLYkWGdWX5WtKnZvueRfSlAFMttL3zmKA6hrqkidRlalXsKyK','Ramírez Romero Kateryn');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (15,'Ilie.rosas.08','["ROLE_USER"]','$2y$13$KelXINLoQV8M.uMYsqADEOF9lj6ZvtLxRW0yVac9DqZoh3TVgipl.','Rosas Reyna Ilie Jhorcaef');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (16,'Juan.valencia.09','["ROLE_USER"]','$2y$13$LoH1Y06qNYPRzLaO5dHj/uCuhWjDfy55R7O2h3tedTxhgMKxsDXom','Valencia Arias Juan Manuel');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (17,'sara.vazquez.10','["ROLE_USER"]','$2y$13$nsQYmE0nhj240k/Y.EFiweZ9/PCBe1TfmmCX2DC4OW/EqbOyaoCza','Vázquez Bustos Sara');
-INSERT INTO "user" ("id","username","roles","password","name") VALUES (18,'Laura.Granada.12','["ROLE_USER"]','$2y$13$58.dabJ9qryA75igb4XSk.VcbvEiZFlYnXZGSUNMo6U05BwFUJOvO','Laura Granda Alarcón');
+INSERT INTO "user" ("id","username","roles","password","name") VALUES (1,'iner','["ROLE_USER","ROLE_ADMIN","ROLE_SUPER_ADMIN"]','$2y$13$qB6pSIFpMa7MDo63bBVv4umNDPpbzWd/S6khhc/V1DS/Z0qlK.i8O','Coordinación de sistemas'),
+ (2,'genomorro','["ROLE_USER","ROLE_ADMIN"]','$2y$13$DeHdtjMyujp6IezLDHX/..CTIq7rY88Ql6sJszZPt4IK7FfUE.t8O','Edgar Uriel Domínguez Espinoza'),
+ (3,'oficial','["ROLE_USER"]','$2y$13$LmrxC1kW003N.b.Bq5P.H.l/QabK0NPoa7FWZ5.08PPNAvN8qp9FW','Oficial de Vigilancia'),
+ (4,'Coordinacion','["ROLE_USER","ROLE_ADMIN"]','$2y$13$tp9VG3ATeywYEp511mvuFuWUK57WELdgn2OD6Bp28TRSYx0hr0kqC','Coordinación de Seguridad y Vigilancia'),
+ (5,'Michel.Cervantes.13','["ROLE_USER"]','$2y$13$MaRRigCL2liVdsXCY2WjVucrpfD5C2dNFQi3Op4K8VFLhWoT2NE/i','Cervantes de la Cruz Michel'),
+ (6,'Jefa_Turno_A','["ROLE_USER"]','$2y$13$nDgLwU/WF2rI4pxPsr1/ROFd55iyITCn1NJg7d15Kue6h/iFqhSHC','Laura Berenice Romero Tejada'),
+ (7,'Karla.Campos.03','["ROLE_USER"]','$2y$13$OPrc9UJuvR6lIUs6nta9OOYH8qCLN7ybFGHbGQ/reVz5BFRsfTUT6','Karla Itzel Gómez Campos'),
+ (8,'Laura.Granda.12','["ROLE_USER"]','$2y$13$lYfLYCFDtVvwDgiWyDbXK.lN.LxC5U.NdPNI6R.WAd3Wp8YPsAt.W','Laura Granda Alarcón'),
+ (9,'Martha.Hernandez02','["ROLE_USER"]','$2y$13$pNgvVAUW520XtzmFmZDpkukmGVXIGIwa/PTLruigEKnjpnYwFX9EC','Hernández Hernández Martha Elizabeth'),
+ (10,'araceli.gonzalez.03','["ROLE_USER"]','$2y$13$vfxsc2lQu9tgCqOJ8mQPEOrWaUnLz8rL6J4uaQzZ6.tQseSBixSA2','González Carmona Araceli'),
+ (11,'Seleste.Valencia.04','["ROLE_USER"]','$2y$13$Vbzhes/yumDz0.pAIM2Vk./VeAgjNI.h9J0MmxaukpJIaZ8J.tQCC','Valencia Arias María Seleste'),
+ (12,'Jesenia.Martínez.03','["ROLE_USER"]','$2y$13$2oQ29tWwyHbJv6EruHV2fOB82WYrngVoGDz0FV6JX5GUS9HTwlnC.','Jesenia Martínez López'),
+ (13,'Julián.Felipe.06','["ROLE_USER"]','$2y$13$PErM2wbjBE2ZvfCwNEbsTOK5Q7ljtZbD9vHua40Iz8gxlC07vers.','Julián Felipe Jorge'),
+ (14,'Esmeralda.Ruiz.07','["ROLE_USER"]','$2y$13$iew1Q7F7ZeSA72UviTYEq.wy1PdcEecAjgKXoyTmuex4GT1s6DIq2','Ruiz Rosas Esmeralda'),
+ (15,'Maribel.martinez08','["ROLE_USER"]','$2y$13$s7QsipNDhNB6qBgpV.lQDOGJZcoRWI5YAL3iKUiLY.nYnPoE6v8aa','Martínez Herrera Maribel'),
+ (16,'Juan.valencia.09','["ROLE_USER"]','$2y$13$LoH1Y06qNYPRzLaO5dHj/uCuhWjDfy55R7O2h3tedTxhgMKxsDXom','Valencia Arias Juan Manuel'),
+ (17,'Mónica.Trinidad.10','["ROLE_USER"]','$2y$13$0hAEYoCFhJjfBMXsAhdVJu.vmimCBAbHlEhCDrdbYLpYlvgcjRqNm','Mónica Fabiola Ruíz Trinidad'),
+ (18,'Azul.Valencia.12','["ROLE_USER"]','$2y$13$iSVJ1GVR8WppEBErFxAVpOHdLVtKieA8Pij5gpZmz7Cf9txrKRPT6','Valencia Arias Azul Mariat');
 COMMIT;
