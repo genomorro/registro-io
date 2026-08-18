@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="https://www.gob.mx"><i class="icon icon-home"></i></a></li>
+        <li class="breadcrumb-item"><a href="{{ path('app_index') }}">{% trans %}Begin{% endtrans %}</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('app_report_index') }}">{% trans %}Report{% endtrans %}</a></li>
+    </ol>
+
+    <h1>{% trans %}Reports{% endtrans %}</h1>
+    <hr class="red">
+
+    <!-- Metabase Embed Dashboard Container -->
+    <div class="mb-5 p-3 border rounded bg-light" 
+         data-controller="metabase"
+         data-metabase-instance-url-value="https://accesos.iner.gob.mx/metabase"
+         data-metabase-is-guest-value="true"
+         data-metabase-preset-value="light">
+        <h3 class="mb-3">{% trans %}Metabase Dashboard{% endtrans %}</h3>
+        {% if metabaseToken is not empty %}
+            <metabase-dashboard token="{{ metabaseToken }}" with-title="true" with-downloads="true"></metabase-dashboard>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                {% trans %}Error: Could not generate Metabase token.{% endtrans %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
