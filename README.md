@@ -32,23 +32,23 @@ Actualmente existen cuatro entidades, Patient, Visitor, Appointment y Attendance
 
 Hay un control de acceso a usuarios a nivel del controlador ilustrado en la siguiente tabla de permisos, en los métodos indicados en la primera columna.
 
-|        | Appointment      | Attendance       | Patient          | Visitor          | User             | Stakeholder      |
-|--------|------------------|------------------|------------------|------------------|------------------|------------------|
-| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        |
-| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        |
-| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| edit   | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
+|        | Appointment      | Attendance       | Patient          | Visitor          | User             | Stakeholder      | Area             | Employee         |
+|--------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------|
+| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       |
+| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| edit   | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       |
+| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 En los templates, el control de acceso indica si un botón aparece o no para un usuario, de tal forma que puede ver la ruta.
 
-|        | Appointment      | Attendance       | Patient          | Visitor          | User             | Stakeholder      |
-|--------|------------------|------------------|------------------|------------------|------------------|------------------|
-| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        |
-| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        |
-| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| edit   | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN |
-| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
+|        | Appointment      | Attendance       | Patient          | Visitor          | User             | Stakeholder      | Area             | Employee         |
+|--------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------|
+| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       |
+| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| edit   | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_ADMIN       | ROLE_ADMIN       |
+| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 ## Diagrama entidad-relación
 ![Diagrama entidad-relación](DER.png)
@@ -442,6 +442,17 @@ Solicitudes de DTIC
 - [-] Validar hora de la cita con hora de ingreso, por cercanía de hora de la cita
 - [-] Usar dos bases de datos
 - [x] Ocultar id de la URI
+
+Solicitudes agosto 2026
+- [x] Mostrar una propiedad de comentarios en Visitor y Stakeholder
+- [x] Implementar el ingreso de áreas del instituto (Area) para incluir todas aquellas que sean necesarias
+- [x] Implementar un listado de trabajadores del instituto (Employee)
+- [x] Vincular trabajadores y áreas del instituto
+- [x] Vincular el campo destination de las entidades Visitor y Stakeholder con la nueva entidad Area
+- [x] Vincular la nueva entidad Employee con Visitor y Stakeholder por si estos últimos saben a quien van a ver
+- [x] Flexibilizar los reportes, se implementará un visor que use Metabase
+- [ ] Implementar lista de estudiantes por periodo de tiempo
+- [ ] Implementar pase de asistencia de la lista vigente de estudiantes
 
 ## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio [registro-io](https://gitlab.com/genomorro/registro-io) para cualquier tipo de documentación, usa [registro-io-code](https://gitlab.com/genomorro/registro-io-code) para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en [registro-io-code](https://gitlab.com/genomorro/registro-io-code/-/issues).
