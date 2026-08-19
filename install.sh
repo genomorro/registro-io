@@ -32,7 +32,7 @@ git checkout master
 echo "Instalando dependencias Composer…"
 sudo -u "$HTTPD_USER" git config --global --add safe.directory "$APP_ROOT"
 sudo -u "$HTTPD_USER" composer install --no-dev --optimize-autoloader --no-interaction
-sudo -u "$HTTPD_USER" composer require --no-interaction symfony/apache-pack
+# sudo -u "$HTTPD_USER" composer require --no-interaction symfony/apache-pack
 
 echo "Instalando framework Gob.mx"
 php bin/console app:gob-mx
