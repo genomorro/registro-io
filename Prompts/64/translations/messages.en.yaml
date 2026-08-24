@@ -1,0 +1,397 @@
+# src
+## Controller
+### AppointmentController.php
+'Appointment added successfully.': 'Appointment added successfully.'
+'Appointment updated successfully.': 'Appointment updated successfully.'
+'Appointment deleted successfully.': 'Appointment deleted successfully.'
+### AreaController.php
+'Area updated successfully.': 'Area updated successfully.'
+'Area added successfully.': 'Area added successfully.'
+'Area deleted successfully.': 'Area deleted successfully.'
+'Cannot delete area because it is associated with stakeholders, visitors or employees.': 'Cannot delete area because it is associated with stakeholders, visitors or employees.'
+### AttendanceController.php
+'Attendance added successfully.': 'Attendance added successfully.'
+'Attendance updated successfully.': 'Attendance updated successfully.'
+'Attendance deleted successfully.': 'Attendance deleted successfully.'
+### EmployeeController.php
+'Employee added successfully.': 'Employee added successfully.'
+'Employee updated successfully.': 'Employee updated successfully.'
+'Employee deleted successfully.': 'Employee deleted successfully.'
+'Cannot delete employee because it is associated with visitors or stakeholders.': 'Cannot delete employee because it is associated with visitors or stakeholders.'
+### HospitalizedController.php
+'Patient hospitalized added successfully.': 'Patient hospitalized added successfully.'
+'Hospitalized updated successfully.': 'Hospitalized updated successfully.'
+'Hospitalized deleted successfully.': 'Hospitalized deleted successfully.'
+### PatientController.php
+'Patient added successfully.': 'Patient added successfully.'
+'Patient updated successfully.': 'Patient updated successfully.'
+'Patient deleted successfully.': 'Patient deleted successfully.'
+'Cannot delete patient because it is associated with appointments, attendances or visitors.': 'Cannot delete patient because it is associated with appointments, attendances or visitors.'
+'A numeric tag is required to check in.': 'A numeric tag is required to check in.'
+'Patient check in successfully.': 'Patient check in successfully.'
+'Patient check out successfully.': 'Patient check out successfully.'
+### RegistrationController.php
+'User added successfully.': 'User added successfully.'
+### SearchController.php
+'Patient not found': 'Patient not found'
+'Improve the search criteria': 'Improve the search criteria' 
+'Patient not found for the given name.': 'Patient not found for the given name.'
+'Patient nor Visitor not found for the given tag.': 'Patient nor Visitor not found for the given tag.'
+### StakeholderController.php
+'Stakeholder added successfully.': 'Stakeholder added successfully.'
+'Stakeholder updated successfully.': 'Stakeholder updated successfully.'
+'Stakeholder deleted successfully.': 'Stakeholder deleted successfully.'
+### UserController.php
+'User updated successfully.': 'User updated successfully.'
+'User deleted successfully.': 'User deleted successfully.'
+'Cannot delete user because it is associated with attendances, stakeholders or visitors.': 'Cannot delete user because it is associated with attendances, stakeholders or visitors.'
+### VisitorController.php
+'Visitor added successfully.': 'Visitor added successfully.'
+'Visitor updated successfully.': 'Visitor updated successfully.'
+'Visitor deleted successfully.': 'Visitor deleted successfully.'
+'Visitor check out successfully.': 'Visitor check out successfully.'
+# templates
+## about.html.twig
+'About': 'About'
+'Version': 'Version'
+'for': 'for'
+'License': 'License'
+license:
+  paragraph:
+    one: 'This software is part of'
+    three: 'is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.'
+    four: 'is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.'
+    five:
+      one: 'You should have received a copy of the GNU General Public License along with'
+      two: 'if not, see'
+      three: 'or write to'
+'Symfony Information': 'Symfony Information'
+'Created by': 'Created by'
+## base.html.twig
+'Patient and visitor check-in and check-out system': 'Patient and visitor check-in and check-out system'
+## index.html.twig
+welcome:
+  title: 'Welcome!'
+  sysname: 'Patient and Visitor Check-In and Check-Out System'
+  paragraph:
+    one: 'You have entered the'
+    two: 'To use this website, please note the following navigation elements'
+    ul:
+      one:
+        title: 'Main Menu'
+        desc: 'Located at the top, just below the website header. It allows you to find the different sections available in the system. It is red and contains these elements at this moment'
+        ul:
+          search: 'Link to search'
+          sub: 'Submenu'
+          link: 'Link to'
+          lang: 'Change language'
+          user: 'User options'
+      two:
+        title: 'Browsing path menu'
+        desc: 'This is the first content element you see on the website. It shows your location within directories and subdirectories, and can also allow for faster navigation. It looks like this'
+      three: 'The Home icon'
+      four: 'will always link to the main Mexican Government website. The other elements are links to pages on this website. The last element, always in'
+      five: 'bold'
+      six: 'indicates the page you are currently viewing'
+session:
+  title: 'Sign in'
+  paragraph:
+    one: 'To log in, yout must go to the'
+    user: 'user button'
+    two: 'Clicking it will display the option'
+    three: 'Once you have logged in, the'
+    four: 'will have the following options'
+    five: 'If you do not have a user account for this website, you will need to request one from your supervisor in the corresponding work area.'
+    six: 'You can change the language of this website. Press the'
+    lang: 'language button'
+    seven: 'and select your preference. English and Spanish are currently available.'
+## menu.html.twig
+'Search': 'Search'
+'Patients': 'Patients'
+'All Patients': 'All Patients'
+'Hospitalized': 'Hospitalized'
+'Appointments': 'Appointments'
+'Attendances': 'Attendances'
+'Visitors': 'Visitors'
+'Stakeholders': 'Stakeholders'
+'Areas': 'Areas'
+'Employees': 'Employees'
+'Reports': 'Reports'
+'Language': 'Language'
+'User': 'User'
+'Users': 'Users'
+'Sign in': 'Sign in'
+'Log out': 'Log out'
+'Profile': 'Profile'
+## appointment
+### _delete_form.html.twig
+'Are you sure you want to delete this item?': 'Are you sure you want to delete this item?'
+'Delete': 'Delete'
+### edit.html.twig
+'Edit Appointment': 'Edit Appointment'
+'Choose a type of appointment': 'Choose a type of appointment'
+'Patient': 'Patient'
+'Search by name or by file': 'Search by name or by file'
+'Date at': 'Date at'
+'Agenda': 'Agenda'
+'Type': 'Type'
+'Apertura/Primera vez': 'Opening/First Time'
+'Estudios': 'Analisys'
+'Preconsulta': 'Pre-consultation'
+'Primera vez y subsecuente': 'First and Subsequent Time'
+'Primera vez': 'Fisrt Time'
+'Subsecuente': 'Subsequent Time'
+'Terapia de infusión': 'Infusion Therapy'
+'Agendada': 'Scheduled'
+'Cancelada': 'Cancelled'
+'Choose a status': 'Choose a status'
+'Update': 'Update'
+'Back to list': 'Back to list'
+'Begin': 'Begin'
+### index.html.twig
+'Search by Name, Agenda or Date': 'Search by Name, Agenda or Date'
+'Total Records': 'Total Records'
+'Id': 'Id'
+'actions': 'actions'
+'Appointment index': 'Appointment index'
+'Location': 'Location'
+'Show': 'Show'
+'Edit': 'Edit'
+'no records found': 'no records found'
+'Create new': 'Create new'
+'Specialty': 'Specialty'
+'Status': 'Status'
+### new.html.twig
+'New': 'New'
+'New Appointment': 'New Appointment'
+'Create new Appointment': 'Create new Appointment'
+'Save': 'Save'
+'Reset': 'Reset'
+### show.html.twig
+'Appointment': 'Appointment'
+'Patient name': 'Patient name'
+'Patient file': 'Patient file'
+## area
+### edit.html.twig
+'Edit Area': 'Edit Area'
+'Area': 'Area'
+'Building': 'Building'
+'Choose a building': 'Choose a building'
+'Edificio 1 (Edificio de Gobierno)': 'Building 1 (Administration Building)'
+'Edificio 2 (Kiosco)': 'Building 2 (Kiosk)'
+'Edificio 3 (Antigua consulta externa)': 'Building 3 (Former Outpatient Clinic)'
+'Edificio 4 (Enseñanza)': 'Building 4 (Education)'
+'Edificio 5 (Dirección médica)': 'Building 5 (Medical Directorate)'
+'Edificio 6 (Auditorio Dr. M. Jiménez)': 'Building 6 (Dr. M. Jiménez Auditorium)'
+'Edificio 7 (Tanque de agua)': 'Building 7 (Water Tank)'
+'Edificio 8 (Caja de cobro general)': 'Building 8 (General Cashier)'
+'Edificio 9 (SC 1 y 2)': 'Building 9 (SC 1 and 2)'
+'Edificio 10 (SC 3 y 4)': 'Building 10 (SC 3 and 4)'
+'Edificio 11 (SC 5 y 6)': 'Building 11 (SC 5 and 6)'
+'Edificio 12 (SC 7 a 11)': 'Building 12 (SC 7 to 11)'
+'Edificio 13 (Comedor)': 'Building 13 (Cafeteria)'
+'Edificio 14 (Tabaquismo y EPOC)': 'Building 14 (Smoking and COPD)'
+'Edificio 15 (Patología)': 'Building 15 (Pathology)'
+'Edificio 16 (Almacén de desechos biológico-infecciosos)': 'Building 16 (Bio-infectious Waste Storage)'
+'Edificio 17 (Almacén)': 'Building 17 (Warehouse)'
+'Edificio 18 (Mantenimiento)': 'Building 18 (Maintenance)'
+'Edificio 19 (Bioterio)': 'Building 19 (Animal Facility)'
+'Edificio 20 (Investigación)': 'Building 20 (Research)'
+'Edificio 21 (Antigua unidad de investigación)': 'Building 21 (Former Research Unit)'
+'Edificio 22': 'Building 22'
+'Edificio 23 (CIENI)': 'Building 23 (CIENI)'
+'Edificio 24 (Auditorio Dr. Rébora)': 'Building 24 (Dr. Rébora Auditorium)'
+'Edificio 25 (Pediatría)': 'Building 25 (Pediatrics)'
+'Edificio 26 (Consulta Externa)': 'Building 26 (Outpatient Clinic)'
+'Edificio 27 (Comunicación social)': 'Building 27 (Social Communication)'
+'Edificio 28 (Laboratorio)': 'Building 28 (Laboratory)'
+'Edificio 29 (ENEO)': 'Building 29 (ENEO)'
+'Edificio 30 (Auditorio Donato G. Alarcón)': 'Building 30 (Donato G. Alarcón Auditorium)'
+'Edificio 31 (Almacén de farmacia)': 'Building 31 (Pharmacy Warehouse)'
+'Edificio 32 (Aulas)': 'Building 32 (Classrooms)'
+'Edificio 33 (Cafetería)': 'Building 33 (Cafeteria)'
+'Edificio 34 (Subestación de la Unidad de neumología pediátrica)': 'Building 34 (Pediatric Pulmonology Unit Substation)'
+'Edificio 35 (Subestación DIENI)': 'Building 35 (DIENI Substation)'
+'Edificio 36 (Transformador Imagenología)': 'Building 36 (Imaging Transformer)'
+'Edificio 37 (Cardiología)': 'Building 37 (Cardiology)'
+'Edificio 38': 'Building 38'
+'Edificio 39': 'Building 39'
+'Edificio 40': 'Building 40'
+'Edificio 41': 'Building 41'
+'Unit': 'Unit'
+'Extension': 'Extension'
+### index.html.twig
+'Area index': 'Area index'
+'Search by Unit': 'Search by Unit'
+### new.html.twig
+'New Area': 'New Area'
+'Create new Area': 'Create new Area'
+## attendance
+### edit.html.twig
+'Edit Attendance': 'Edit Attendance'
+'Tag': 'Tag'
+'Check in': 'Check in'
+'Check out': 'Check out'
+### index.html.twig
+'Attendance index': 'Attendance index'
+'Search by Name or Tag': 'Search by Name or Tag'
+'Are you sure you want to check out?': 'Are you sure you want to check out?'
+### new.html.twig
+'New Attendance': 'New Attendance'
+'Create new Attendance': 'Create new Attendance'
+'Your browser does not support the <video> tag': 'Your browser does not support the <video> tag'
+'Flip Camera': 'Flip Camera'
+### show.html.twig
+'Attendance': 'Attendance'
+'User who checked in': 'User who checked in'
+'User who checked out': 'User who checked out'
+## hospitalized
+### edit.html.twig
+'Edit Hospitalized': 'Edit Hospitalized'
+'Service': 'Service'
+'Bed': 'Bed'
+### index.html.twig
+'Hospitalized index': 'Hospitalized index'
+'Search by File or Name': 'Search by File or Name'
+### new.html.twig
+'New Hospitalized': 'New Hospitalized'
+'Create new Hospitalized': 'Create new Hospitalized'
+## employee
+### edit.html.twig
+'Choose an Area': 'Choose an Area'
+'Edit Employee': 'Edit Employee'
+'Employee': 'Employee'
+'Is active?': 'Is active?'
+'Work number': 'Work number'
+### index.html.twig
+'Active': 'Active'
+'Employee index': 'Employee index'
+'Search by Name or Work Number': 'Search by Name or Work Number'
+'Work Number': 'Work Number'
+### new.html.twig
+'New Employee': 'New Employee'
+'Create new Employee': 'Create new Employee'
+## patient
+### edit.html.twig
+'File': 'File'
+'Name': 'Name'
+'Disability': 'Disability'
+'Edit Patient': 'Edit Patient'
+### index.html.twig
+'Patient index': 'Patient index'
+'Cancel': 'Cancel'
+'Confirm': 'Confirm'
+'Confirmation': 'Confirmation'
+### new.html.twig
+'Create new Patient': 'Create new Patient'
+'New Patient': 'New Patient'
+### show.html.twig
+"Today's Attendance": "Today's Attendance"
+'Are you sure you want to check in?': 'Are you sure you want to check in?'
+'Is the patient accompanied?': 'Is the patient accompanied?'
+'Register visitor': 'Register visitor'
+"Today's Appointments": "Today's Appointments"
+'No appointments for today.': 'No appointments for today.'
+'Other Appointments': 'Other Appointments'
+'No other appointments.': 'No other appointments.'
+"Today's Visitors": "Today's Visitors"
+'No visitors for today.': 'No visitors for today.'
+'Date': 'Date'
+'Yes': 'Yes'
+'No': 'No'
+## report
+'Report': 'Report'
+'Report Dashboard': 'Report Dashboard'
+'Error: Could not generate token.': 'Error: Could not generate token.'
+## search
+### index.html.twig
+'Search Patient by File': 'Search Patient by File'
+'Search Options': 'Search Options'
+'Search by Tag': 'Search by Tag'
+### check_out.html.twig
+'Check Out List': 'Check Out List'
+'Check Out by Tag': 'Check Out by Tag'
+### name.html.twig
+'Check Out by Name': 'Check Out by Name'
+'Search by Name': 'Search by Name'
+## stakeholder
+### edit.html.twig
+'Choose a subject': 'Choose a subject'
+'Clear Signature': 'Clear Signature'
+'Company': 'Company'
+'Host': 'Host'
+'Choose an Employee': 'Choose an Employee'
+'Edit Stakeholder': 'Edit Stakeholder'
+'Evidence': 'Evidence'
+'Signature': 'Signature'
+'Subject': 'Subject'
+'Comment': 'Comment'
+### index.html.twig
+'Stakeholder index': 'Stakeholder index'
+### new.html.twig
+'Create new Stakeholder': 'Create new Stakeholder'
+'New Stakeholder': 'New Stakeholder'
+'Cultura': 'Culture'
+'Documentación': 'Documentation'
+'Escuela': 'School'
+'Estudiante': 'Student'
+'Expositor': 'Exhibitor'
+'Medio de comunicación': 'Comunication media'
+'Proveedor': 'Supplier'
+'Trabajo': 'Work'
+### show.html.twig
+'Stakeholder': 'Stakeholder'
+'Stakeholder Details': 'Stakeholder Details'
+## visitor
+### edit.html.twig
+'Edit Visitor': 'Edit Visitor'
+'Phone number': 'Phone number'
+'DNI': 'DNI'
+'Destination': 'Destination'
+'Hospitalización': 'Hospitalization'
+'Relationship': 'Relationship'
+### index.html.twig
+'Visitor index': 'Visitor index'
+'Phone': 'Phone'
+### new.html.twig
+'New Visitor': 'New Visitor'
+'Create new Visitor': 'Create new Visitor'
+'Choose a DNI': 'Choose a DNI'
+'Other DNI': 'Other DNI'
+'INE': 'INE'
+'Pasaporte': 'Passport'
+'Cédula profesional': 'Professional License'
+"Licencia de conducir": "Driver's License"
+'INAPAM': 'INAPAM'
+'Otro': 'Other'
+'Choose a relationship': 'Choose a relationship'
+'Paciente': 'Patient'
+'Padre': 'Father'
+'Madre': 'Mother'
+'Hijo (a)': 'Daughter/Son'
+'Cónyuge': 'Spouse'
+'Concubino (a)': 'Concubine'
+'Hermano (a)': 'Sibling'
+### show.html.twig
+'Visitor': 'Visitor'
+## user
+### index.html.twig
+'User index': 'User index'
+'Search by Name or Username': 'Search by Name or Username'
+'Username': 'Username'
+'Roles': 'Roles'
+### edit.html.twig
+'Edit User': 'Editar usuario'
+## registration
+### register.html.twig
+'Register': 'Register'
+'Password': 'Password'
+'Repeat Password': 'Repeat Password'
+'User roles': 'User roles'
+'Admin': 'Admin'
+'Super Admin': 'Super Admin'
+## security
+### login.html.twig
+'Sign in!': 'Sign in!'
+'You are logged in as': 'You are logged in as'
+'Please sign in': 'Please sign in'

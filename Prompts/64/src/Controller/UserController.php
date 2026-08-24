@@ -1,0 +1,119 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\User;
+use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
+#[Route('/user')]
+final class UserController extends AbstractController
+{
+    #[Route(name: 'app_user_index', methods: ['GET'])]
+    public function index(
+	UserRepository $userRepository,
+	PaginatorInterface $paginator,
+	Request $request
+    ): Response {
+	$this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $filter = $request->query->get('filter');
+        $query = $userRepository->paginateUser($filter);
+
+        $users = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        return $this->render('user/index.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_user_show', methods: ['GET'], requirements: ['id' => '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'])]
+    public function show(User $user): Response
+    {
+        if (!$this->isGranted('ROLE_ADMIN') && $this->getUser()->getId() !== $user->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'], requirements: ['id' => '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'])]
+    public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    {
+        if (!$this->isGranted('ROLE_SUPER_ADMIN') && in_array('ROLE_SUPER_ADMIN', $user->getRoles(), true)) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if (!$this->isGranted('ROLE_ADMIN') && $this->getUser()->getId() !== $user->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $form = $this->createForm(RegistrationFormType::class, $user, [
+	    'is_edit' => true,
+	]);
+	$flash = $translator->trans('User updated successfully.');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var ?string $plainPassword */
+            $plainPassword = $form->get('plainPassword')->getData();
+
+            if ($plainPassword) {
+                // encode the plain password
+                $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            }
+
+            $entityManager->flush();
+
+	    $this->addFlash('primary', $flash);
+            return $this->redirectToRoute('app_user_show', ['id' => $user->getUuid()]);
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'user' => $user,
+            'registrationForm' => $form,
+	    'title' => 'Edit User',
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'], requirements: ['id' => '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'])]
+    public function delete(Request $request, User $user, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    {
+	$this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
+        if (
+            !$user->getAttendancesCheckIn()->isEmpty() ||
+            !$user->getAttendancesCheckOut()->isEmpty() ||
+            !$user->getVisitorsCheckIn()->isEmpty() ||
+            !$user->getVisitorsCheckOut()->isEmpty() ||
+            !$user->getStakeholdersCheckIn()->isEmpty() ||
+            !$user->getStakeholdersCheckOut()->isEmpty()
+        ) {
+            $this->addFlash('danger', $translator->trans('Cannot delete user because it is associated with attendances, stakeholders or visitors.'));
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+	$flash = $translator->trans('User deleted successfully.');
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+            $this->addFlash('danger', $flash);
+        }
+
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+}
