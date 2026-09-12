@@ -32,23 +32,23 @@ Actualmente existen ocho entidades: Patient, Visitor, Appointment, Attendance, H
 
 Hay un control de acceso a usuarios a nivel del controlador ilustrado en la siguiente tabla de permisos, en los métodos indicados en la primera columna.
 
-|        | Appointment      | Attendance       | Patient          | Hospitalized     | Visitor          | User             | Stakeholder      | Area             | Employee         |
-|--------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------|
-| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       |
-| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| edit   | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       |
-| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
+|        | Appointment      | Attendance       | Patient          | Hospitalized     | Visitor          | User             | Stakeholder      | Area             | Employee         | Scheduled        |
+|--------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------|
+| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       | ROLE_ADMIN       |
+| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| edit   | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       | ROLE_ADMIN       |
+| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 En los templates, el control de acceso indica si un botón aparece o no para un usuario, de tal forma que puede ver la ruta.
 
-|        | Appointment      | Attendance       | Patient          | Hospitalized     | Visitor          | User             | Stakeholder      | Area             | Employee         |
-|--------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------|
-| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       |
-| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
-| edit   | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_ADMIN       | ROLE_ADMIN       |
-| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
+|        | Appointment      | Attendance       | Patient          | Hospitalized     | Visitor          | User             | Stakeholder      | Area             | Employee         | Scheduled        |
+|--------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------|
+| index  | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| new    | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_ADMIN       | ROLE_USER        | ROLE_ADMIN       | ROLE_ADMIN       | ROLE_ADMIN       |
+| show   | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        | ROLE_USER        |
+| edit   | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_USER        | ROLE_SUPER_ADMIN | ROLE_ADMIN       | ROLE_ADMIN       | ROLE_ADMIN       |
+| delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 ## Diagrama entidad-relación
 ![Diagrama entidad-relación](DER.png)
