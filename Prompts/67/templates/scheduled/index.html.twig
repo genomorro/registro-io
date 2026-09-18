@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Scheduled index{% endtrans %}{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="https://www.gob.mx"><i class="icon icon-home"></i></a></li>
+	<li class="breadcrumb-item"><a href="{{ path('app_index') }}">{% trans %}Begin{% endtrans %}</a></li>
+	<li class="breadcrumb-item active" aria-current="page"><a href="{{ path('app_scheduled_index') }}">{% trans %}Scheduled{% endtrans %}</a></li>
+    </ol>
+
+    <h1>{% trans %}Scheduled index{% endtrans %}</h1>
+    <hr class="red">
+
+    {% for label, messages in app.flashes %}
+	{% for message in messages %}
+	    <div class="alert alert-{{ label }}">
+		{{ message|trans }}
+	    </div>
+	{% endfor %}
+    {% endfor %}
+
+    <div class="row">
+	<div class="col-12 col-md-6 d-flex justify-content-start">
+	    <form class="w-100" method="get" action="{{ path('app_scheduled_index') }}">
+		<div class="input-group mb-3">
+		    <input type="text" name="filter" class="form-control input-sm w-75" placeholder="{% trans %}Search by Label or by Name{% endtrans %}" value="{{ app.request.query.get('filter') }}">
+		    <button class="btn btn-sm btn-info" type="submit">
+			<span class="icon-search" aria-hidden="true"></span>
+		    </button>
+		</div>
+	    </form>
+	</div>
+
+
+	<div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-start mt-2 mt-md-0">
+	    {% trans %}Total Records{% endtrans %}: {{ scheduleds.getTotalItemCount }}
+	</div>
+    </div>
+
+    <div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+		{% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <th scope="col">{{ knp_pagination_sortable(scheduleds, 'Id'|trans, 's.id') }}</th>
+		{% endif %}
+                <th scope="col">{{ knp_pagination_sortable(scheduleds, 'Label'|trans, 's.label') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(scheduleds, 'Name'|trans, 's.name') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(scheduleds, 'Begin'|trans, 's.beginAt') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(scheduleds, 'End'|trans, 's.endAt') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(scheduleds, 'Check in'|trans, 'sa.checkInAt') }}</th>
+                <th scope="col">{% trans %}actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for scheduled in scheduleds %}
+            {% set todays_attendance = scheduled.scheduledAttendances|filter(sa => sa.checkInAt|date('Y-m-d') == "now"|date('Y-m-d'))|first %}
+            <tr>
+		{% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <td>{{ scheduled.id }}</td>
+		{% endif %}
+                <td>{{ scheduled.label }}</td>
+                <td>{{ scheduled.name }}</td>
+                <td>{{ scheduled.beginAt ? scheduled.beginAt|date('Y-m-d') : '' }}</td>
+                <td>{{ scheduled.endAt ? scheduled.endAt|date('Y-m-d') : '' }}</td>
+                <td>
+                    {% if todays_attendance %}
+                        {{ todays_attendance.checkInAt|date('Y-m-d H:i:s') }}
+                    {% elseif scheduled.isWithinDateRange() %}
+                        <form method="post"
+                              action="{{ path('app_scheduled_check_in', {'id': scheduled.uuid}) }}"
+                              class="d-inline-block"
+                              data-controller="modal-confirm"
+                              data-modal-confirm-message-value="{% trans %}Are you sure you want to check in?{% endtrans %}"
+                              data-modal-confirm-title-value="{% trans %}Check in{% endtrans %}"
+                              data-action="submit->modal-confirm#confirm">
+                            <input type="hidden" name="redirect_route" value="app_scheduled_index">
+                            <button type="submit" class="btn btn-sm btn-success">{% trans %}Check in{% endtrans %}</button>
+                        </form>
+                    {% else %}
+                        <button type="button" class="btn btn-sm btn-secondary" disabled>{% trans %}Check in{% endtrans %}</button>
+                    {% endif %}
+                </td>
+                <td>
+                    <a class="btn btn-link" href="{{ path('app_scheduled_show', {'id': scheduled.uuid}) }}">{% trans %}Show{% endtrans %}</a>
+		    {% if is_granted('ROLE_ADMIN') %}
+			<a class="btn btn-secondary" href="{{ path('app_scheduled_edit', {'id': scheduled.uuid}) }}">{% trans %}Edit{% endtrans %}</a>
+		    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">{% trans %}no records found{% endtrans %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(scheduleds) }}
+    </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+	<div class="btn-group" role="group" aria-label="Add">
+	    <a class="btn btn-primary mx-2 my-2" href="{{ path('app_scheduled_new') }}">{% trans %}Create new{% endtrans %}</a>
+            <a class="btn btn-primary mx-2 my-2" href="{{ path('app_scheduled_import') }}">{% trans %}Import{% endtrans %} CSV/XLSX</a>
+	</div>
+    {% endif %}
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		<div class="modal-header">
+		    <h5 class="modal-title" id="confirmModalLabel" data-default-title="{% trans %}Confirmation{% endtrans %}">{% trans %}Confirmation{% endtrans %}</h5>
+		    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		    <!-- Message will be injected here -->
+		</div>
+		<div class="modal-footer">
+		    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans %}Cancel{% endtrans %}</button>
+		    <button type="button" class="btn btn-primary btn-confirm">{% trans %}Confirm{% endtrans %}</button>
+		</div>
+	    </div>
+	</div>
+    </div>
+{% endblock %}
