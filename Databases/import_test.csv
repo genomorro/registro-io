@@ -1,0 +1,10 @@
+area_id,label,name,institution,subject,begin_at,end_at
+1,label1,Nombre 1,Instituto 1,Cultura,2026-09-14,2026-09-14
+2,label2,Nombre 2,Instituto 2,Estudiante,2026-09-14,2027-09-15
+3,label3,Nombre 3,Instituto 3,Estudiante,2026-09-14,2026-09-16
+4,label4,Nombre 4,Instituto 4,Expositor,2026-09-14,2026-09-17
+5,label5,Nombre 5,Instituto 5,Trabajo,2026-09-14,2026-09-18
+6,label6,Nombre 6,Instituto 6,Proveedor,2026-09-18,2026-09-18
+1,label1,Nombre 1,Instituto 1,Cultura,2026-09-14,2026-09-14
+7,label7,Nombre 7,Instituto 7,Documentación,2026-09-10,2027-09-10
+8,label8,Nombre 8,Instituto 8,Inválido,2026-09-15,2026-12-25
