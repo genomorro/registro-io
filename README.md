@@ -28,7 +28,7 @@ Con esto se permitirá el ingreso al instituto.
 
 ## ACL
 
-Actualmente existen ocho entidades: Patient, Visitor, Appointment, Attendance, Hospitalized, Stakeholder, Area y Employee; cada una tiene sus templates CRUD creados. También hay una entidad User para control de usuarios. La jerarquía de permisos es la siguiente, de menos permisos a más permisos: ROLE_USER, ROLE_ADMIN, ROLE_SUPER_ADMIN
+Actualmente existen ocho entidades: Patient, Visitor, Appointment, Attendance, Hospitalized, Stakeholder, Area, Employee, Scheduled, ScheduledAttendance; cada una tiene sus templates CRUD creados. También hay una entidad User para control de usuarios. La jerarquía de permisos es la siguiente, de menos permisos a más permisos: ROLE_USER, ROLE_ADMIN, ROLE_SUPER_ADMIN
 
 Hay un control de acceso a usuarios a nivel del controlador ilustrado en la siguiente tabla de permisos, en los métodos indicados en la primera columna.
 
@@ -51,7 +51,7 @@ En los templates, el control de acceso indica si un botón aparece o no para un 
 | delete | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN |
 
 ## Diagrama entidad-relación
-![Diagrama entidad-relación](DER.png)
+[![](https://mermaid.ink/img/pako:eNrNV1tv2jAU_iuRn6FqWi6FN1QyFZUCKmHSKiTkxC64S2xkO6yM8t9nBxJIHCBb-7A8-fKdc77jc7GzAT5DGLQB5l0C5xyGU2qpbzJ2nq3Nbqw_QqVFkDV6PCwJyQmdW5HAnMIQW5OjvTfBqMVZgIWBX0IhfjGOjA2t5LDoMSUNqQV9SVb79e2U7gadZ6dTjp0XkQCpgUmbEplVgN8lpoIwmjPmPI36wx-Oc8GgXqJR6GH-D54lCiDHcKYUf3vMkRh13J4zcMs5_UqCbDjO8kBEQI8ERK5zNh-G41HP7fR7L063nGGVCiviYzMKGGXFl1ASTOXO1cok721nNBr2Bu5TaY_hHFMETT5L7BMYJJ4d7QTMVxSSWOsPQYklUXmsBzMoDRG5XpqeCQllJM44l_fMdZ1BtzO4v5ROKR1_gf2fM0IzlHK7LJKZba1PQjPp8YogTH18kW-ylRrXVX4aoO3nEanL33vjnjss2U2yKZq0jAWj5iqi5IzHnzq_vQWOgzhJxIIsS5ylVB3E8lkYqsPMMkNYSEJjXV98ygliwURxwo3dzqPzMOx3nc9E4PxZ70HK9SWkZq2JyHvDvvza2JjHn1gjc_q_x-T-welO-mW7agA9HFzu5_tFQpVfMso2t3ORUN15XhACS3VUo6mcvJ9Sl2Zf1OG0gFA7KAow-qsAZV8JHx_VKtscLvG2NQULKKbAxCSNSkOOssN6ZbwIflxZZUXSwB_RyL0yCsjoREoZ54F5Gik4-3CI0R_ZO13DSao4g9xk7uDcoeWRh4ifAG6Z4dOKCCIxsrz1gWv86CxWGkdbqMAnqi9jVWkWgY9JnNVaADyhMh-Cs2pPgE-pLqorw0a-rVwS3ocIVMCcEwTakke4AkLMQ6inIC7cKZALrBoM0BJcFeJ71WfBLrG3SlT1-hfGwkSas2i-AO1XGAg1i5a6vPe_FClEtRTM71lEJWjbNTvWAdob8K6m9caVbd-0bmp1-_ru9q55VwFr0K7aduPqut5Q83qreVur1WvbCvgd27WvrlutRvOmdttoKm1qsP0D5hDH-Q?type=png)](https://mermaid.live/edit#pako:eNrNV1tv2jAU_iuRn6Fqyp03VDIVlQIqYdIqJGRiF9wlNrIdVkb577MDCSQOkK19WJ58-c453_G52NkCjyEM2gDzLoELDoMptdQ3GTvP1nY_1h-h0iLIGj0el4TkhC6sUGBOYYCtycnem2DU4szHwsCvoBC_GEfGhlZyXJwzJQ2pBT1J1of13ZTuB51np1OM3TwkPlIDkzYlMq0Av0tMBWE0Y8x5GvWHPxznikG9RMNgjvk_eBYrgBzDmVL87TFDYtRxe87ALeb0K_HT4bjIAxEB58QncpOx-TAcj3pup997cbrFDKtUWBMPm1HAKC2-gpJgKveuliZZbzuj0bA3cJ8KewwXmCJo8llhj0A_9uxkx2eeohDHWn8ISiyJymM9mEFpiMjNyvRMSChDccG5rGeu6wy6ncH9tXRK6HhL7P2cEZqilNlloUxta30SmkmP1wRh6uGrfOOtxLiu8vMAbT-LSFz-3hv33GHBbpJO0bhlLBk1VxElFzz-1PkdLHDsR0kilmRV4Cyl6iCWx4JAHWaaGcJCEhrp-uJTjhFLJvITbux2Hp2HYb_rfCYCl8_6AFKuryA1a02E8zfsya-NjXn8sTWyoP97TO4fnO6kX7Sr-nCO_ev9_LBIqPJLhunmdikSqjsvckJgqY5qNJWz91Pi0uyLOpwWEGoHhT5GfxWg9Cvh46NcZtvjJd62pmAJxRSYmLhRachJdlivjOfBTyurqEgS-BMamVdGDhmdSAnjLDBLIwGnHw4R-iN9p2s4SRSnkNvUHZw5tCzyGPEzwB0zfFoTQSRG1nxz5Bo9OvOVRtEWKvCx6utYVZp54FMSF7XmAM-ozIbgotoz4HOq8-rKsJFtK9eEDyECJbDgBIG25CEugQDzAOopiAp3CuQSqwYDtARXhfhe9pi_T-ydElW9_oWxIJbmLFwsQfsV-kLNwpUu78MvRQJRLQXzexZSCdp2pRHpAO0teFfTWv3Gtu9ad9WafdusNBvNEtiAdtm26ze3tbqa11qNSrVaq-5K4Hdk1765bbXqjbtqq1ZpNO1ao777A-gOyA4)
 
 ## Development
 El sistema esta elaborado en Symfony 7.4 LTS:
@@ -451,8 +451,9 @@ Solicitudes agosto 2026
 - [x] Vincular el campo destination de las entidades Visitor y Stakeholder con la nueva entidad Area
 - [x] Vincular la nueva entidad Employee con Visitor y Stakeholder por si estos últimos saben a quien van a ver
 - [x] Flexibilizar los reportes, se implementará un visor que use Metabase
-- [ ] Implementar lista de estudiantes por periodo de tiempo
-- [ ] Implementar pase de asistencia de la lista vigente de estudiantes
+- [x] Implementar lista de estudiantes por periodo de tiempo
+- [x] Implementar importar lista de estudiantes mediante archivo externo
+- [x] Implementar pase de asistencia de la lista vigente de estudiantes
 
 ## Soporte y contribuciones
 Si planeas contribuir a este proyecto, por favor usa el repositorio [registro-io](https://gitlab.com/genomorro/registro-io) para cualquier tipo de documentación, usa [registro-io-code](https://gitlab.com/genomorro/registro-io-code) para contribución de código fuente. Cualquier error o bug sobre el código, debe ser reportado en [registro-io-code](https://gitlab.com/genomorro/registro-io-code/-/issues).
