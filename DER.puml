@@ -1,116 +1,133 @@
-@startuml DER
-!theme reddress-darkblue
+@startuml database_diagram
+skinparam classAttributeIconSize 0
 
-' Title
-title Entity-Relationship Diagram for Patient/Visitor System
-
-entity "area" as area {
+entity "User" as user {
   * id : INTEGER <<PK>>
   --
-  * building : VARCHAR(255)
-    unit : VARCHAR(255)
-    extension : INTEGER
+  username : VARCHAR(180) <<UNIQUE>>
+  roles : JSON
+  password : VARCHAR(255)
+  name : VARCHAR(255)
+  active : BOOLEAN
 }
 
-entity "employee" as employee {
+entity "Area" as area {
   * id : INTEGER <<PK>>
   --
-  * area_id : INTEGER <<FK>>
-  * number : INTEGER
-  * name : VARCHAR(255)
-  * active : BOOLEAN
+  building : VARCHAR(255)
+  unit : VARCHAR(255)
+  extension : INTEGER
 }
 
-entity "user" as user {
+entity "Employee" as employee {
   * id : INTEGER <<PK>>
   --
-  * username : VARCHAR(180) <<UNIQUE>>
-  * roles : CLOB (JSON)
-  * password : VARCHAR(255)
-  * name : VARCHAR(255)
-  * active : BOOLEAN
+  number : INTEGER
+  name : VARCHAR(255)
+  active : BOOLEAN
+  area_id : INTEGER <<FK>>
 }
 
-entity "patient" as patient {
+entity "Patient" as patient {
   * id : INTEGER <<PK>>
   --
-  * file : VARCHAR(12) <<UNIQUE>>
-  * name : VARCHAR(255)
-  * disability : BOOLEAN
+  file : VARCHAR(12) <<UNIQUE>>
+  name : VARCHAR(255)
+  disability : BOOLEAN
 }
 
-entity "hospitalized" as hospitalized {
+entity "Hospitalized" as hospitalized {
   * id : INTEGER <<PK>>
   --
-  * patient_id : INTEGER <<FK, UNIQUE>>
-  * service : VARCHAR(255)
-  * bed : VARCHAR(255)
+  service : VARCHAR(255)
+  bed : VARCHAR(255)
+  patient_id : INTEGER <<FK, UNIQUE>>
 }
 
-entity "appointment" as appointment {
+entity "Appointment" as appointment {
   * id : INTEGER <<PK>>
   --
-  * patient_id : INTEGER <<FK>>
-  * agenda : VARCHAR(255)
-  * specialty : VARCHAR(255)
-  * location : VARCHAR(255)
-  * date_at : DATETIME
-  * type : VARCHAR(255)
-  * status : VARCHAR(255)
+  agenda : VARCHAR(255)
+  specialty : VARCHAR(255)
+  location : VARCHAR(255)
+  date_at : DATETIME
+  type : VARCHAR(255)
+  status : VARCHAR(255)
+  patient_id : INTEGER <<FK>>
 }
 
-entity "attendance" as attendance {
+entity "Attendance" as attendance {
   * id : INTEGER <<PK>>
   --
-  * patient_id : INTEGER <<FK>>
-  * check_in_user_id : INTEGER <<FK>>
-    check_out_user_id : INTEGER <<FK>>
-  * check_in_at : DATETIME
-    check_out_at : DATETIME
-  * tag : INTEGER
-    evidence : VARCHAR(255)
+  check_in_at : DATETIME
+  check_out_at : DATETIME
+  tag : INTEGER
+  evidence : VARCHAR(255)
+  patient_id : INTEGER <<FK>>
+  check_in_user_id : INTEGER <<FK>>
+  check_out_user_id : INTEGER <<FK>>
 }
 
-entity "visitor" as visitor {
+entity "Visitor" as visitor {
   * id : INTEGER <<PK>>
   --
-  * destination_id : INTEGER <<FK>>
-  * check_in_user_id : INTEGER <<FK>>
-    check_out_user_id : INTEGER <<FK>>
-    host_id : INTEGER <<FK>>
-  * name : VARCHAR(255)
-    phone : VARCHAR(255)
-  * dni : VARCHAR(255)
-  * tag : INTEGER
-  * check_in_at : DATETIME
-    check_out_at : DATETIME
-    relationship : VARCHAR(255)
-    evidence : VARCHAR(255)
-    comment : CLOB
-}
-
-entity "stakeholder" as stakeholder {
-  * id : INTEGER <<PK>>
-  --
-  * destination_id : INTEGER <<FK>>
-  * check_in_user_id : INTEGER <<FK>>
-    check_out_user_id : INTEGER <<FK>>
-    host_id : INTEGER <<FK>>
-  * name : VARCHAR(255)
-  * dni : VARCHAR(255)
-  * tag : INTEGER
-  * company : VARCHAR(255)
-  * subject : VARCHAR(255)
-  * check_in_at : DATETIME
-    check_out_at : DATETIME
-    evidence : VARCHAR(255)
-    sign : VARCHAR(255)
-    comment : CLOB
+  name : VARCHAR(255)
+  phone : VARCHAR(255)
+  dni : VARCHAR(255)
+  tag : INTEGER
+  check_in_at : DATETIME
+  check_out_at : DATETIME
+  relationship : VARCHAR(255)
+  evidence : VARCHAR(255)
+  comment : TEXT
+  destination_id : INTEGER <<FK>>
+  check_in_user_id : INTEGER <<FK>>
+  check_out_user_id : INTEGER <<FK>>
+  host_id : INTEGER <<FK>>
 }
 
 entity "visitor_patient" as visitor_patient {
-  * visitor_id : INTEGER <<PK, FK>>
-  * patient_id : INTEGER <<PK, FK>>
+  * visitor_id : INTEGER <<FK>>
+  * patient_id : INTEGER <<FK>>
+}
+
+entity "Stakeholder" as stakeholder {
+  * id : INTEGER <<PK>>
+  --
+  name : VARCHAR(255)
+  dni : VARCHAR(255)
+  tag : INTEGER
+  company : VARCHAR(255)
+  subject : VARCHAR(255)
+  check_in_at : DATETIME
+  check_out_at : DATETIME
+  evidence : VARCHAR(255)
+  sign : VARCHAR(255)
+  comment : TEXT
+  destination_id : INTEGER <<FK>>
+  check_in_user_id : INTEGER <<FK>>
+  check_out_user_id : INTEGER <<FK>>
+  host_id : INTEGER <<FK>>
+}
+
+entity "Scheduled" as scheduled {
+  * id : INTEGER <<PK>>
+  --
+  label : VARCHAR(255) <<UNIQUE>>
+  name : VARCHAR(255)
+  institution : VARCHAR(255)
+  subject : VARCHAR(255)
+  begin_at : DATE
+  end_at : DATE
+  area_id : INTEGER <<FK>>
+}
+
+entity "ScheduledAttendance" as scheduled_attendance {
+  * id : INTEGER <<PK>>
+  --
+  check_in_at : DATETIME
+  scheduled_id : INTEGER <<FK>>
+  check_in_user_id : INTEGER <<FK>>
 }
 
 ' Relationships
@@ -118,21 +135,26 @@ entity "visitor_patient" as visitor_patient {
 area ||--o{ employee : "has"
 area ||--o{ visitor : "destination for"
 area ||--o{ stakeholder : "destination for"
+area ||--o{ scheduled : "has"
 
 employee ||--o{ visitor : "hosts"
 employee ||--o{ stakeholder : "hosts"
 
-patient ||--o| hospitalized : "hospitalized as"
+patient ||--o| hospitalized : "has"
 patient ||--o{ appointment : "has"
-patient ||--o{ attendance : "records"
-patient ||--o{ visitor_patient : "visited in"
-visitor ||--o{ visitor_patient : "visits"
+patient ||--o{ attendance : "has"
 
-user ||--o{ attendance : "check-in user"
-user ||--o{ attendance : "check-out user"
-user ||--o{ visitor : "check-in user"
-user ||--o{ visitor : "check-out user"
-user ||--o{ stakeholder : "check-in user"
-user ||--o{ stakeholder : "check-out user"
+visitor }|--|| visitor_patient : ""
+patient }|--|| visitor_patient : ""
+
+user ||--o{ attendance : "checks in"
+user ||--o{ attendance : "checks out"
+user ||--o{ visitor : "checks in"
+user ||--o{ visitor : "checks out"
+user ||--o{ stakeholder : "checks in"
+user ||--o{ stakeholder : "checks out"
+user ||--o{ scheduled_attendance : "checks in"
+
+scheduled ||--o{ scheduled_attendance : "has"
 
 @enduml
