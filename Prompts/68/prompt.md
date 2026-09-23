@@ -1,4 +1,4 @@
-# Scheduleds Attendance
+# New User role
 
 Este es un proyecto de Synfony 7.4, requiere instalar PHP 8.4 y MariaDB 11 o SQLite3 como base de datos. Se usan dos comandos php principalmente, composer y symfony. Los datos de conexión a la base de datos puedes colocarlos en el archivo `.env` agregando una línea como:
 ```.env
@@ -54,18 +54,20 @@ Hay un control de acceso a usuarios a nivel del controlador ilustrado en la sigu
 | edit   | ROLE_ADMIN           | ROLE_ADMIN       | ROLE_USER        | ROLE_USER           | ROLE_USER        | ROLE_ADMIN              |
 | delete | ROLE_SUPER_ADMIN     | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN    | ROLE_SUPER_ADMIN | ROLE_SUPER_ADMIN        |
 
-Acabo de crear una entidad nueva: ScheduledAttendance, la cual debe registrar la asistencia de los registros de Scheduled. Esto es análogo a lo que se encuentra implementado entre Patient y Attendance.
+La tabla anterior no debería tener errores, sin embargo, te pido que revises el control de accesos y documentes en un archivo de markdown lo que realmente está implementado en el sistema.
 
-Ya se ha implementado el check in en ScheduledAttendance, sin embargo, han surgido algunos cambios. Te pido que, basado en el código existente y la relación existente entre Patient y Attendance, implementes las siguientes características para las entidades Scheduled y ScheduledAttendance:
+Posteriormente, tengo una necesidad al respecto que debes implementar:
 
-1. La ruta `app_scheduled_index` contiene una tabla, con la columna "Check in" donde se muestra el atributo `checkInAt` de la entidad ScheduledAttendance, siempre que haya un registro con `checkInAt` del día de hoy, entre las horas 00:00:00 hasta las 23:59:59.
-2. Si no hay un valor de `checkInAt` del día de hoy muestra un botón "Check in" que registre una nueva ScheduledAttendance.
-3. Para cumplir el punto anterior (2), debe existir un método en el controlador ScheduledController con la ruta `/{id}/check-in` y nombre `app_scheduled_check_in`
-4. Verifica esta validación pues se han detectado falsos positivos: solo los Scheduled con valores de los atributos `beginAt` y `endAt` en un rango válido pueden registrar un ScheduledAttendance. Por ejemplo, si el Scheduled tiene beginAt igual a 15 de septiembre de 2026 y endAt igual a 30 de septiembre de 2026 y la fecha actual es 17 de septiembre de 2026, entonces ese Scheduled puede asociarse a un nuevo ScheduledAttendance. Pero si la fecha actual es, por ejemplo, 1 de septiembre de 2026 o 1 de octubre de 2026, no podrá registrar una ScheduledAttendance, pues la fecha actual está fuera del rango entre `beginAt` y `endAt`.
-5. Si un Scheduled tiene fechas fuera de rango, como se explicó en el punto anterior (4), en la tabla de `app_scheduled_index` debe mostrarse el botón "Check in" como deshabilitado y tampoco debe aparecer en el formulario de `app_scheduled_attendance_new` ni `app_scheduled_attendance_edit`
-6. La entidad ScheduledAttendance tiene una propiedad llamada `scheduledAttendances`, ahora debe renombrarse a `scheduledAttendancesCheckIn`, esta propiedad se usa para establecer el "Check In", por lo que se debe verificar que los puntos 1 al 5 sigan funcionando correctamente.
-7. La ruta `app_scheduled_index`contiene una tabla, debe agregarse una columna "Check out" donde se muestra el atributo `checkOutAt` de la entidad ScheduledAttendance, siempre que ya exista un registro de ScheduledAttendance con `checkInAt` y `checkOutAt` del día de hoy.
-8. Si el registro de ScheduledAttendance tiene un valor `checkInAt` del día de hoy pero un `checkOutAt` vacío, deberá mostrarse un botón "Check out" que registre el valor de `checkOutAt` en el registro de ScheduledAttendance. Si no existe un registro ScheduledAttendance del día de hoy, el botón deberá aparecer deshabilitado.
-9. Para cumplir el punto anterior, (8), debe existir un método en el controlador ScheduledController con la ruta `/{id}/check-out` y nombre `app_scheduled_check_out` que además vincule directamente el valor de `checkOutUser` con el usuario actual.
+1. Debe existir un nuevo rol de usuario llamado `ROLE_IMPORT_USER`, el cual tiene las siguientes vistas:
 
-Si tienes alguna duda al implementar lo que solicito, por favor pregunta, antes de continuar.
+|        | Scheduled | Area |
+| index  | SI        | SI   |
+| show   | SI        | SI   |
+| new    | SI        | SI   |
+| edit   | SI        | SI   |
+| delete | NO        | NO   |
+| import | SI        | ---- |
+
+2. Este rol `ROLE_IMPORT_USER` no puede crear otros usuarios, está a la par del rol `ROLE_USER` en jerarquía, solo que se crea para realizar las acciones específicas descritas en la tabla de arriba.
+3. Un usuario con rol `ROLE_ADMIN` podría crear y modificar este tipo de usuario, tal cual lo puede hacer ahora con el `ROLE_USER`. 
+4. Implementa el rol a nivel controlador, y si es necesario, en los templates correspondientes.
