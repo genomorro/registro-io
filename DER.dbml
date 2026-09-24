@@ -118,6 +118,8 @@ Table Scheduled {
 Table ScheduledAttendance {
   id integer [pk, increment]
   check_in_at datetime [not null]
+  check_out_at datetime
   scheduled_id integer [not null, ref: > Scheduled.id]
   check_in_user_id integer [not null, ref: > User.id]
+  check_out_user_id integer [ref: > User.id]
 }
