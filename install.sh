@@ -2,7 +2,7 @@
 
 # ===========================================
 # Script de despliegue para Symfony (prod)
-# Fedora 41 + Apache
+# Fedora 41 / 42 + Apache
 # ===========================================
 
 GIT_ROOT=$(pwd)
@@ -26,45 +26,49 @@ git submodule update
 
 echo "Despliegue Symfony iniciado…"
 cd "$APP_ROOT" || exit 1
-git config --global --add safe.directory "$APP_ROOT"
+git config --system --add safe.directory "$APP_ROOT" 2>/dev/null || git config --global --add safe.directory "$APP_ROOT"
 git checkout master
-
-echo "Instalando dependencias Composer…"
-sudo -u "$HTTPD_USER" git config --global --add safe.directory "$APP_ROOT"
-sudo -u "$HTTPD_USER" composer install --no-dev --optimize-autoloader --no-interaction
-# sudo -u "$HTTPD_USER" composer require --no-interaction symfony/apache-pack
-
-echo "Instalando framework Gob.mx"
-php bin/console app:gob-mx
-
-echo "Ejecutando migraciones Doctrine…"
-php bin/console make:migration --no-interaction
-php bin/console doctrine:migrations:migrate --no-interaction
-
-echo "Habilitando entorno de producción…"
-sqlite3 "$VAR_DIR/data_dev.db" ".read $GIT_ROOT/Databases/SQLite/user.sql"
-cp "$VAR_DIR/data_dev.db" "$VAR_DIR/data_prod.db"
-sudo -u "$HTTPD_USER" composer dump-env prod
-
-echo "Limpiando y regenerando cache…"
-php bin/console cache:clear --env=prod
-php bin/console cache:warmup --env=prod
-
-echo "Cargando assets…"
-php bin/console asset-map:compile
-APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/ 403 404 500 502 503
-
-# ==========================================
-# Setup SELinux + permisos para Symfony
-# Fedora 41 / Apache / PHP-FPM
-# ==========================================
 
 echo "Crear directorios var y uploads si no existen…"
 [ ! -d "$VAR_DIR" ] && mkdir -p "$VAR_DIR"
 [ ! -d "$UPLOADS_DIR" ] && mkdir -p "$UPLOADS_DIR"
 
+echo "Habilitando entorno de producción…"
+export APP_ENV=prod
+export COMPOSER_ALLOW_SUPERUSER=1
+
+echo "Instalando dependencias Composer…"
+composer install --no-dev --optimize-autoloader --no-interaction
+composer dump-env prod
+
+echo "Ejecutando migraciones Doctrine…"
+php bin/console doctrine:migrations:migrate --no-interaction
+
+echo "Inicializando datos de usuarios en base de datos SQLite…"
+if [ -f "$GIT_ROOT/Databases/SQLite/user.sql" ]; then
+    sqlite3 "$VAR_DIR/data_prod.db" ".read $GIT_ROOT/Databases/SQLite/user.sql" 2>/dev/null || true
+    cp "$VAR_DIR/data_prod.db" "$VAR_DIR/data_dev.db" 2>/dev/null || true
+fi
+
+echo "Instalando framework Gob.mx…"
+php bin/console app:gob-mx
+
+echo "Limpiando y regenerando cache…"
+php bin/console cache:clear --env=prod
+php bin/console cache:warmup --env=prod
+
+echo "Cargando assets e importmap…"
+php bin/console importmap:install
+php bin/console asset-map:compile
+php bin/console error:dump var/cache/prod/error_pages/ 403 404 500 502 503
+
+# ==========================================
+# Setup SELinux + permisos para Symfony
+# Fedora / Apache / PHP-FPM
+# ==========================================
+
 echo "Corrigiendo permisos…"
-chown -R apache:apache "$APP_ROOT"
+chown -R "$HTTPD_USER:$HTTPD_USER" "$APP_ROOT"
 chmod -R 775 "$VAR_DIR"
 chmod -R 775 "$UPLOADS_DIR"
 
@@ -85,17 +89,19 @@ setsebool -P httpd_can_network_connect on
 
 echo "Instalando servicios…"
 cd "$GIT_ROOT" || exit 1
-cp services/symfony-messenger.service /etc/systemd/system/symfony-messenger.service
-cp services/symfony-scheduler.service /etc/systemd/system/symfony-scheduler.service
+if [ -d "/etc/systemd/system" ]; then
+    cp services/symfony-messenger.service /etc/systemd/system/symfony-messenger.service 2>/dev/null || true
+    cp services/symfony-scheduler.service /etc/systemd/system/symfony-scheduler.service 2>/dev/null || true
 
-systemctl daemon-reload
-systemctl enable --now symfony-messenger.service
-systemctl enable --now symfony-scheduler.service
+    systemctl daemon-reload 2>/dev/null || true
+    systemctl enable --now symfony-messenger.service 2>/dev/null || true
+    systemctl enable --now symfony-scheduler.service 2>/dev/null || true
 
-echo "Reiniciando servicios…"
-systemctl restart httpd
-systemctl restart symfony-messenger
-systemctl restart symfony-scheduler
+    echo "Reiniciando servicios…"
+    systemctl restart httpd 2>/dev/null || true
+    systemctl restart symfony-messenger 2>/dev/null || true
+    systemctl restart symfony-scheduler 2>/dev/null || true
+fi
 
 echo
 echo "CONFIGURACIÓN COMPLETA"
