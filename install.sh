@@ -41,13 +41,17 @@ echo "Instalando dependencias Composer…"
 composer install --no-dev --optimize-autoloader --no-interaction
 composer dump-env prod
 
-echo "Ejecutando migraciones Doctrine…"
-php bin/console doctrine:migrations:migrate --no-interaction
+echo "Inicializando base de datos SQLite…"
+if [ -f "$GIT_ROOT/Databases/SQLite/data_dev.db" ]; then
+    [ ! -f "$VAR_DIR/data_prod.db" ] && cp "$GIT_ROOT/Databases/SQLite/data_dev.db" "$VAR_DIR/data_prod.db"
+    [ ! -f "$VAR_DIR/data_dev.db" ] && cp "$GIT_ROOT/Databases/SQLite/data_dev.db" "$VAR_DIR/data_dev.db"
+fi
 
-echo "Inicializando datos de usuarios en base de datos SQLite…"
-if [ -f "$GIT_ROOT/Databases/SQLite/user.sql" ]; then
-    sqlite3 "$VAR_DIR/data_prod.db" ".read $GIT_ROOT/Databases/SQLite/user.sql" 2>/dev/null || true
-    cp "$VAR_DIR/data_prod.db" "$VAR_DIR/data_dev.db" 2>/dev/null || true
+if compgen -G "$APP_ROOT/migrations/Version*.php" > /dev/null 2>&1; then
+    echo "Ejecutando migraciones Doctrine…"
+    php bin/console doctrine:migrations:migrate --no-interaction
+else
+    echo "No se encontraron migraciones registradas en migrations/, omitiendo."
 fi
 
 echo "Instalando framework Gob.mx…"
