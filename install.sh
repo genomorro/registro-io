@@ -52,3 +52,12 @@ echo "Cargando assets…"
 php bin/console importmap:install
 php bin/console asset-map:compile
 APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/ 403 404 500 502 503
+
+echo
+echo "CONFIGURACIÓN COMPLETA"
+echo "Symfony se ha configurado correctamente."
+echo
+echo
+echo "Próximos pasos:"
+echo "  - Realiza las migraciones necesarias sobre la base de datos, deberían estar en el directorio data_wrangling/ "
+echo "  - Ejecuta el script permissions.sh para ajustar los permisos sobre los archivos del proyecto Symfony."
