@@ -30,13 +30,13 @@ cd "$APP_ROOT" || exit 1
 git checkout master
 
 echo "Instalando dependencias Composer…"
-composer install --no-interaction
+composer install --no-dev --optimize-autoloader --no-interaction
 
 echo "Instalando framework Gob.mx"
 php bin/console app:gob-mx
 
 echo "Ejecutando migraciones Doctrine…"
-php bin/console make:migration
+#php bin/console make:migration
 php bin/console doctrine:migrations:migrate --no-interaction
 
 echo "Habilitando entorno de producción…"
