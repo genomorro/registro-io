@@ -1,16 +1,13 @@
-;;; .dir-locals.el --- Configuración local para Emacs en el proyecto registro-io
-
-;; Para más información sobre archivos .dir-locals.el en Emacs:
-;; Info node `(emacs) Directory Variables'
+;;; .dir-locals.el --- Configuración local para Emacs 30 (project.el) en el proyecto registro-io
 
 ((nil . ((indent-tabs-mode . nil)
          (fill-column . 100)
          (coding . utf-8)
-         ;; Configuración de proyectos para project.el (mantiene los submódulos integrados)
+         ;; Configuración de project.el para Emacs 30
          (project-vc-merge-submodules . nil)))
 
  ;; =========================================================================
- ;; Submódulo public_html: Proyecto Symfony 7.4 + PHP + Composer
+ ;; Submódulo public_html: Proyecto Symfony 7.4 + PHP + Composer + Twig
  ;; =========================================================================
  ("public_html/"
   . ((php-mode
@@ -29,6 +26,15 @@
       . ((web-mode-markup-indent-offset . 2)
          (web-mode-css-indent-offset . 2)
          (web-mode-code-indent-offset . 4)
+         (web-mode-engines-alist . (("twig" . "\\.twig\\'")))
+         (indent-tabs-mode . nil)))
+
+     (css-mode
+      . ((css-indent-offset . 2)
+         (indent-tabs-mode . nil)))
+
+     (css-ts-mode
+      . ((css-indent-offset . 2)
          (indent-tabs-mode . nil)))
 
      (yaml-mode
@@ -43,19 +49,22 @@
       . ((js-indent-level . 2)
          (indent-tabs-mode . nil)))
 
+     (json-ts-mode
+      . ((json-ts-mode-indent-offset . 2)
+         (indent-tabs-mode . nil)))
+
      (nil
-      . ((compile-command . "cd public_html && symfony server:start")
-         ;; Soporte para Projectile
-         (projectile-project-name . "registro-io-public_html")
-         (projectile-project-type . symfony)
-         (projectile-project-run-cmd . "symfony server:start")
-         (projectile-project-compilation-cmd . "cd public_html && php bin/console")))))
+      . ((compile-command . "cd public_html && symfony server:start")))))
 
  ;; =========================================================================
- ;; Submódulo data_wrangling: Scripts de Python / Procesamiento de datos
+ ;; Submódulo data_wrangling: Scripts en Python, Org-mode y CSVs
  ;; =========================================================================
  ("data_wrangling/"
-  . ((python-mode
+  . ((org-mode
+      . ((org-adapt-indentation . t)
+         (org-edit-src-content-indentation . 2)))
+
+     (python-mode
       . ((python-indent-offset . 4)
          (indent-tabs-mode . nil)))
 
@@ -63,6 +72,5 @@
       . ((python-indent-offset . 4)
          (indent-tabs-mode . nil)))
 
-     (nil
-      . ((projectile-project-name . "registro-io-data_wrangling")
-         (projectile-project-type . python))))))
+     (csv-mode
+      . ((csv-separators . (",")))))))
