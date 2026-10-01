@@ -30,7 +30,7 @@ cd "$APP_ROOT" || exit 1
 git checkout master
 
 echo "Instalando dependencias Composer…"
-composer install --no-dev --optimize-autoloader --no-interaction
+composer install --optimize-autoloader --no-interaction
 
 echo "Instalando framework Gob.mx"
 php bin/console app:gob-mx
