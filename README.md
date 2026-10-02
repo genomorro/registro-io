@@ -163,7 +163,7 @@ Al descargar los repositorios, lo primero es entrar en `public_html` y ejecutar:
 ```bash
 composer install
 ```
-Si se usa Apache como Web Server, se debe instalar apache-pack:
+Si se usa Apache como Web Server, se debe instalar apache-pack (ya integrado desde v0.9648533212331):
 ```bash
 composer require symfony/apache-pack
 ```
@@ -237,6 +237,13 @@ Los ejemplos, asumen que el dominio será [accesos.iner.gob.mx](accesos.iner.gob
 ```Apache2
 # /etc/apache2/conf.d/accesos.iner.gob.mx.conf
 <VirtualHost *:80>
+  ServerName accesos.iner.gob.mx
+  ServerAlias www.accesos.iner.gob.mx
+
+  Redirect permanent / https://accesos.iner.gob.mx
+</VirtualHost>
+
+<VirtualHost *:443>
     ServerName accesos.iner.gob.mx
     ServerAlias www.accesos.iner.gob.mx
 
@@ -247,7 +254,7 @@ Los ejemplos, asumen que el dominio será [accesos.iner.gob.mx](accesos.iner.gob
 
     <FilesMatch \.php$>
         # when using PHP-FPM as a unix socket
-        SetHandler proxy:unix:/var/run/php/php-fpm.sock|fcgi://dummy
+        SetHandler proxy:unix:/run/php-fpm/www.sock|fcgi://dummy
 
         # when PHP-FPM is configured to use TCP
         # SetHandler proxy:fcgi://127.0.0.1:9000
@@ -274,8 +281,14 @@ Los ejemplos, asumen que el dominio será [accesos.iner.gob.mx](accesos.iner.gob
     #     FallbackResource disabled
     # </Directory>
 
-    ErrorLog /var/log/apache2/accesos_error.log
-    CustomLog /var/log/apache2/accesos_access.log combined
+    ErrorLog /var/log/httpd/testing_error.log
+    CustomLog /var/log/httpd/testing_access.log combined
+
+    SSLEngine on
+    SSLCertificateFile /etc/httpd/ssl/2026-accesos.iner.gob.mx.cert.pem
+    SSLCertificateKeyFile /etc/httpd/ssl/2026-accesos.iner.gob.mx.key.pem
+    SSLCertificateChainFile /etc/httpd/ssl/ca.cert.pem
+
 </VirtualHost>
 ```
 ```Nginx
@@ -324,7 +337,7 @@ server {
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         fastcgi_param DOCUMENT_ROOT $realpath_root;
         # Prevents URIs that include the front controller. This will 404:
-        # http://io.iner.gob.mx/index.php/some-path
+        # http://accesos.iner.gob.mx/index.php/some-path
         # Remove the internal directive to allow URIs like this
         internal;
     }
@@ -339,11 +352,116 @@ server {
     access_log /var/log/nginx/io_access.log;
 }
 ```
+## Metabase
+Para la implementación de reportes se instaló una instancia de [Metabase](https://www.metabase.com/ "Metabase"), se optó por colocarla en una subcarpeta del dominio principal:
+```/etc/apache2/conf.d/accesos.iner.gob.mx.conf
+# /etc/apache2/conf.d/accesos.iner.gob.mx.conf
+<VirtualHost *:80>
+  ServerName accesos.iner.gob.mx
+  ServerAlias www.accesos.iner.gob.mx
+
+  Redirect permanent / https://accesos.iner.gob.mx
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName accesos.iner.gob.mx
+    ServerAlias www.accesos.iner.gob.mx
+
+    # Uncomment the following line to force Apache to pass the Authorization
+    # header to PHP: required for "basic_auth" under PHP-FPM and FastCGI
+    #
+    # SetEnvIfNoCase ^Authorization$ "(.+)" HTTP_AUTHORIZATION=$1
+
+    <FilesMatch \.php$>
+        # when using PHP-FPM as a unix socket
+        SetHandler proxy:unix:/run/php-fpm/www.sock|fcgi://dummy
+
+        # when PHP-FPM is configured to use TCP
+        # SetHandler proxy:fcgi://127.0.0.1:9000
+    </FilesMatch>
+
+    DocumentRoot /var/www/registro-io/public_html/public
+    <Directory /var/www/registro-io/public_html/public>
+        AllowOverride None
+        Require all granted
+        FallbackResource /index.php
+    </Directory>
+
+    # uncomment the following lines if you install assets as symlinks
+    # or run into problems when compiling LESS/Sass/CoffeeScript assets
+    # <Directory /var/www/registro-io/public_html/public>
+    #     Options FollowSymlinks
+    # </Directory>
+
+    # optionally disable the fallback resource for the asset directories
+    # which will allow Apache to return a 404 error when files are
+    # not found instead of passing the request to Symfony
+    # <Directory /var/www/registro-io/public_html/public/bundles>
+    #     DirectoryIndex disabled
+    #     FallbackResource disabled
+    # </Directory>
+
+    # ==========================================
+    # CONFIGURACIÓN DEL PROXY PARA METABASE
+    # ==========================================
+    # 1. Indicamos a Apache que NO use el FallbackResource de Symfony para la ruta /metabase
+    <Location /metabase>
+        FallbackResource disabled
+    </Location>
+
+    # 2. Configuramos el Proxy Reverso hacia el puerto interno 3000
+    ProxyPreserveHost On
+    
+    # Es muy importante el orden y el manejo de las barras diagonales (/)
+    ProxyPass /metabase http://127.0.0.1:3000
+    ProxyPassReverse /metabase http://127.0.0.1:3000
+
+    # 3. Encabezados necesarios para que Metabase reconozca HTTPS y las IPs correctas
+    RequestHeader set X-Forwarded-Proto "https"
+    RequestHeader set X-Forwarded-Port "443"
+
+    # ==========================================
+
+    ErrorLog /var/log/httpd/accesos_error.log
+    CustomLog /var/log/httpd/accesos_access.log combined
+
+    SSLEngine on
+    SSLCertificateFile /etc/httpd/ssl/2026-accesos.iner.gob.mx.cert.pem
+    SSLCertificateKeyFile /etc/httpd/ssl/2026-accesos.iner.gob.mx.key.pem
+    SSLCertificateChainFile /etc/httpd/ssl/ca.cert.pem
+</VirtualHost>
+```
+Tambien podría ser un VirtualHost independiente:
+```/etc/apache2/conf.d/metabase.iner.gob.mx.conf
+<VirtualHost *:80>
+
+    ServerName metabase.iner.gob.mx
+
+    ProxyPreserveHost On
+
+    ProxyPass / http://127.0.0.1:3000/
+    ProxyPassReverse / http://127.0.0.1:3000/
+
+    RequestHeader set X-Forwarded-Proto "http"
+
+    ErrorLog /var/log/httpd/metabase_iner_gob_mx_error.log
+    CustomLog /var/log/httpd/metabase_iner_gob_mx_access.log combined
+
+</VirtualHost>
+```
+Metabase está configurado con los siguientes parámetros desde la interfaz gráfica:
+
+- Volver a ejecutar consultas para exploraciones simples
+- Sincronización de base de datos: Diario 12:00 AM
+- Escaneando valores de filtros: Semanal en domingo 12:00 AM
+- Volver a analizar periódicamente las tablas
+
+Estos parámetros podrían ralentizar una base de datos SQLite, por lo que si hay problemas en el uso del sistema, hay que considerar ajustar estos valores.
+
 ## Respaldo
 Los archivos y directorios a respaldar son las carpetas dentro de `public/uploads` que contienen las imágenes del sistema y si la base de datos es SQLite3, también deben guardarse los archivos con extensión `.db` ubicados en la carpeta `var/`.
 
 ## Comandos
-
 Existen cinco comandos dentro del sistema que sirven para hacer tareas de mantenimiento.
 
 1. Sincronización con el Expediente Clínico Electrónico:
